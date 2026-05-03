@@ -1,0 +1,333 @@
+/* =========================================================
+   pencil.nu — Sketchbook (Variant B)
+   ========================================================= */
+
+:root {
+  --font-display: "Fraunces", "Times New Roman", serif;
+  --font-body: "Inter", ui-sans-serif, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-hand: "Caveat", "Patrick Hand", cursive;
+  --font-pencil: "Special Elite", "Courier Prime", "JetBrains Mono", monospace;
+  --magenta: #66023c;
+  --magenta-2: #4a012b;
+  --magenta-soft: #fdf2f8;
+  --magenta-edge: #f0d4e2;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: #66023c; color: #fff; }
+
+/* Common screen mocks */
+.mock-frame {
+  background: #fffaf3;
+  border: 1px solid #d9cab4;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 30px 50px -40px rgba(26,20,22,0.35);
+  font-family: ui-sans-serif, -apple-system, "Segoe UI", sans-serif;
+}
+.mock-bar {
+  display: flex; align-items: center; gap: 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e3d6c4;
+  margin-bottom: 12px;
+}
+.mock-dots { display: flex; gap: 5px; }
+.mock-dots span { width: 9px; height: 9px; border-radius: 50%; background: #e3d6c4; }
+.mock-url {
+  flex: 1; background: #f7f1ea; border-radius: 6px;
+  padding: 5px 10px;
+  font-family: var(--font-mono);
+  font-size: 11px; color: #6b5d62;
+}
+
+/* ============================================================
+   VARIANT B — PENCIL / SKETCHBOOK
+   Graph paper, hand-drawn underlines, pencil texture, Caveat accents.
+   ============================================================ */
+.vb {
+  --ink: #1d1a18;
+  --ink-2: #4a443f;
+  --ink-3: #7a6f66;
+  --paper: #f6f1e6;
+  --rule: #d6c8b1;
+  --accent: #c92a48;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+/* Graph paper grid */
+.vb::before {
+  content: "";
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(38,30,20,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(38,30,20,0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.vb::after {
+  content: "";
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px);
+  background-size: 3px 3px;
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+}
+.vb .wrap { max-width: 1120px; margin: 0 auto; padding: 0 80px; position: relative; z-index: 1; }
+
+.vb .topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 28px 0 22px;
+}
+.vb .brand {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-pencil);
+  font-size: 24px; letter-spacing: -0.01em;
+}
+.vb .brand svg { display: block; }
+.vb .topnav {
+  display: flex; gap: 24px; font-family: var(--font-pencil);
+  font-size: 14px; color: var(--ink-2);
+}
+.vb .topnav a { text-decoration: none; color: inherit; }
+.vb .topnav a:hover { color: var(--accent); }
+.vb .top-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 18px; background: var(--ink); color: var(--paper);
+  text-decoration: none; font-family: var(--font-pencil); font-size: 14px;
+  border-radius: 4px;
+  box-shadow: 3px 3px 0 var(--accent);
+}
+
+.vb .hero { padding: 72px 0 56px; }
+.vb .hero-grid { display: grid; grid-template-columns: 1fr; gap: 28px; }
+.vb .vb-tag {
+  font-family: var(--font-hand); font-size: 22px;
+  color: var(--accent); transform: rotate(-1.5deg);
+  display: inline-block; margin-bottom: 12px;
+}
+.vb h1 {
+  font-family: var(--font-pencil);
+  font-weight: 400; font-size: 96px;
+  line-height: 0.94; letter-spacing: -0.04em;
+  margin: 0 0 24px; max-width: 16ch;
+}
+.vb h1 .underline {
+  position: relative; display: inline-block;
+}
+.vb h1 .underline::after {
+  content: ""; position: absolute; left: -4px; right: -4px; bottom: -6px;
+  height: 12px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2,8 Q50,2 100,7 T198,5' stroke='%23c92a48' stroke-width='3' fill='none' stroke-linecap='round'/></svg>");
+  background-repeat: no-repeat; background-size: 100% 100%;
+}
+.vb h1 .circle {
+  position: relative; display: inline-block; padding: 0 14px;
+}
+.vb h1 .circle::before {
+  content: ""; position: absolute; inset: -8px -4px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 100' preserveAspectRatio='none'><path d='M20,50 Q20,15 120,15 T220,50 Q220,85 120,85 T20,50' stroke='%23c92a48' stroke-width='3' fill='none' stroke-linecap='round' stroke-dasharray='1 0'/></svg>");
+  background-repeat: no-repeat; background-size: 100% 100%;
+}
+.vb .lede { font-size: 19px; color: var(--ink-2); max-width: 600px; margin: 0 0 28px; line-height: 1.55; }
+.vb .lede mark { background: rgba(201, 42, 72, 0.18); color: var(--ink); padding: 0 4px; }
+
+.vb .hero-ctas { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.vb .btn-pencil {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 22px; background: var(--ink); color: var(--paper);
+  text-decoration: none; font-family: var(--font-pencil);
+  font-size: 15px; border-radius: 4px;
+  box-shadow: 4px 4px 0 var(--accent);
+  border: none; cursor: pointer;
+}
+.vb .btn-ghost-pencil {
+  font-family: var(--font-pencil); font-size: 15px;
+  text-decoration: underline; color: var(--ink-2);
+}
+
+.vb .scribble-arrow {
+  font-family: var(--font-hand); color: var(--accent);
+  transform: rotate(-2deg); display: inline-block;
+  font-size: 20px;
+}
+
+.vb .pillars-margin {
+  margin-top: 64px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  border-top: 2px dashed var(--rule); padding-top: 32px;
+  position: relative;
+}
+.vb .pillar {
+  padding: 20px 24px; border-right: 1px dashed var(--rule);
+  position: relative;
+}
+.vb .pillar:last-child { border-right: none; }
+.vb .pillar .pnum {
+  font-family: var(--font-hand); font-size: 36px; color: var(--accent);
+  line-height: 1; margin-bottom: 8px;
+}
+.vb .pillar h4 {
+  margin: 0 0 6px; font-family: var(--font-pencil); font-weight: 400;
+  font-size: 18px; line-height: 1.25;
+}
+.vb .pillar p {
+  margin: 0; font-size: 13px; line-height: 1.5; color: var(--ink-2);
+}
+
+.vb section { padding: 96px 0; position: relative; z-index: 1; }
+.vb .sec-mark {
+  font-family: var(--font-hand); font-size: 48px;
+  color: var(--accent); transform: rotate(-3deg);
+  display: inline-block; margin-bottom: 8px;
+}
+.vb .sec-title {
+  font-family: var(--font-pencil); font-weight: 400;
+  font-size: 64px; line-height: 1; letter-spacing: -0.02em;
+  margin: 0 0 24px; max-width: 18ch;
+}
+.vb .sec-title i { font-style: italic; color: var(--accent); }
+.vb .sec-blurb {
+  font-size: 17px; color: var(--ink-2); margin: 0 0 56px;
+  max-width: 680px; line-height: 1.55;
+}
+
+/* Sketchbook rollout */
+.vb .sb-rollout {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+}
+.vb .sb-card {
+  background: rgba(255,253,247,0.85); border: 2px solid var(--ink);
+  border-radius: 8px; padding: 28px;
+  position: relative;
+  box-shadow: 6px 6px 0 var(--ink);
+  transform: rotate(-0.5deg);
+}
+.vb .sb-card:nth-child(2) { transform: rotate(0.7deg); box-shadow: 6px 6px 0 var(--accent); }
+.vb .sb-card:nth-child(3) { transform: rotate(-0.3deg); }
+.vb .sb-bucket-h {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 14px;
+}
+.vb .sb-bucket {
+  font-family: var(--font-pencil); font-size: 56px; line-height: 1;
+  color: var(--accent);
+}
+.vb .sb-stamp {
+  font-family: var(--font-pencil); font-size: 11px; letter-spacing: 0.16em;
+  text-transform: uppercase; padding: 4px 8px;
+  border: 1.5px solid currentColor; border-radius: 4px;
+  transform: rotate(3deg);
+}
+.vb .sb-stamp.live { color: #2a7a4a; }
+.vb .sb-stamp.next { color: var(--accent); }
+.vb .sb-stamp.queued { color: var(--ink-3); }
+.vb .sb-name { font-family: var(--font-hand); font-size: 22px; color: var(--ink-2); margin-bottom: 8px; }
+.vb .sb-date {
+  font-family: var(--font-pencil); font-size: 18px; margin-bottom: 18px;
+  padding-bottom: 14px; border-bottom: 2px dashed var(--rule);
+}
+.vb .sb-cd {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
+}
+.vb .sb-cd .cell { text-align: center; }
+.vb .sb-cd .n {
+  font-family: var(--font-pencil); font-size: 32px; line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.vb .sb-cd .l {
+  font-family: var(--font-hand); font-size: 13px; color: var(--ink-3); margin-top: 2px;
+}
+.vb .sb-cd.live .n { color: #2a7a4a; }
+
+/* Sketchbook features */
+.vb .sb-features {
+  display: flex; flex-direction: column; gap: 80px;
+}
+.vb .sb-feat {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;
+}
+.vb .sb-feat.flip { direction: rtl; }
+.vb .sb-feat.flip > * { direction: ltr; }
+.vb .sb-feat .copy h3 {
+  font-family: var(--font-pencil); font-weight: 400;
+  font-size: 40px; line-height: 1.05; letter-spacing: -0.02em;
+  margin: 0 0 16px;
+}
+.vb .sb-feat .copy h3 .marker {
+  background: linear-gradient(transparent 60%, rgba(201, 42, 72, 0.3) 60%);
+  padding: 0 4px;
+}
+.vb .sb-feat .copy p { font-size: 16px; line-height: 1.55; color: var(--ink-2); margin: 0 0 14px; max-width: 460px; }
+.vb .sb-feat .feat-num {
+  font-family: var(--font-hand); font-size: 80px; color: var(--accent);
+  line-height: 1; margin-bottom: -10px; display: inline-block;
+}
+.vb .sb-feat .bullets {
+  list-style: none; padding: 0; margin: 16px 0 0;
+  display: flex; flex-direction: column; gap: 8px;
+  font-family: var(--font-pencil); font-size: 14px; color: var(--ink-2);
+}
+.vb .sb-feat .bullets li::before {
+  content: "✓"; color: var(--accent); margin-right: 10px; font-weight: 600;
+}
+
+/* Sketchbook safety */
+.vb .sb-safety {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px;
+}
+.vb .sb-safety-card {
+  background: rgba(255,253,247,0.9); border: 2px solid var(--ink);
+  border-radius: 8px; padding: 22px;
+  box-shadow: 4px 4px 0 var(--ink);
+  display: flex; flex-direction: column; gap: 10px;
+}
+.vb .sb-safety-card.big {
+  grid-column: span 6; background: var(--ink); color: var(--paper);
+  box-shadow: 6px 6px 0 var(--accent);
+}
+.vb .sb-safety-card.med { grid-column: span 3; }
+.vb .sb-safety-card.sm { grid-column: span 2; }
+.vb .ssc-h {
+  font-family: var(--font-hand); font-size: 18px; color: var(--accent);
+}
+.vb .sb-safety-card.big .ssc-h { color: #ffb6cc; }
+.vb .sb-safety-card h4 {
+  margin: 0; font-family: var(--font-pencil); font-weight: 400;
+  font-size: 22px; line-height: 1.2;
+}
+.vb .sb-safety-card p { margin: 0; font-size: 13px; line-height: 1.5; color: var(--ink-2); }
+.vb .sb-safety-card.big p { color: rgba(255,255,255,.82); }
+.vb .ssc-num {
+  font-family: var(--font-pencil); font-size: 40px; letter-spacing: -0.02em; line-height: 1;
+}
+.vb .ssc-num small {
+  display: block; font-family: var(--font-hand); font-size: 14px;
+  color: var(--ink-3); margin-top: 4px;
+}
+.vb .sb-safety-card.big .ssc-num small { color: rgba(255,255,255,.7); }
+
+.vb footer { padding: 64px 0 32px; border-top: 2px dashed var(--rule); position: relative; z-index: 1; }
+.vb .vb-foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+.vb .vb-foot-brand .b {
+  font-family: var(--font-pencil); font-size: 36px;
+}
+.vb .vb-foot-brand p { font-family: var(--font-hand); font-size: 18px; color: var(--ink-2); max-width: 320px; }
+.vb .vb-foot-col h5 { margin: 0 0 12px; font-family: var(--font-hand); font-size: 18px; color: var(--accent); }
+.vb .vb-foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; font-family: var(--font-pencil); font-size: 14px; }
+.vb .vb-foot-col a { text-decoration: none; color: var(--ink); }
+.vb .vb-foot-meta {
+  margin-top: 40px; padding-top: 20px; border-top: 1px dashed var(--rule);
+  display: flex; justify-content: space-between;
+  font-family: var(--font-hand); font-size: 16px; color: var(--ink-3);
+}
