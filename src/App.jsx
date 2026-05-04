@@ -4,7 +4,7 @@ const TWEAKS = {
   nextReleaseISO: "2026-05-12T17:00:00",
   bucketLabel: "I–P",
   chromeUrl: "https://chromewebstore.google.com/",
-  githubUrl: "https://github.com/pencil-nu/pencil",
+  githubUrl: "https://github.com/kev1n/better-caesar",
   contactEmail: "team@pencil.nu",
   creator1: "Built by NU students",
   creator2: "Open-source · MIT licensed",
