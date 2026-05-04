@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNow, diffParts, fmt, formatDate, buildSchedule } from "./utils.js";
 import { MockSeats, MockNav, MockCtec } from "./Mocks.jsx";
 
@@ -38,7 +39,7 @@ function PencilLogo() {
 
 export default function Sketchbook({ tweaks }) {
   const schedule = buildSchedule(tweaks.nextReleaseISO, tweaks.bucketLabel);
-  const now = Date.now();
+  const [now] = useState(() => Date.now());
   return (
     <>
       <header className="topbar wrap">
