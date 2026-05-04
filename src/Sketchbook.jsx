@@ -17,10 +17,21 @@ function Countdown({ iso }) {
 function PencilLogo() {
   return (
     <svg width="42" height="42" viewBox="0 0 42 42" fill="none" aria-hidden="true">
-      <path d="M6 34 L8 28 L28 8 L34 14 L14 34 Z" stroke="#1d1a18" strokeWidth="2" strokeLinejoin="round" fill="#fef4a8" />
-      <path d="M28 8 L34 14" stroke="#1d1a18" strokeWidth="2" />
-      <path d="M30 10 L32 12" stroke="#c92a48" strokeWidth="2" />
-      <path d="M6 34 L10 30" stroke="#1d1a18" strokeWidth="1.5" />
+      <g transform="rotate(-40 21 21)" stroke="#2a2a2e" strokeWidth="1.2" strokeLinejoin="round">
+        {/* eraser */}
+        <rect x="2" y="16" width="6" height="10" rx="1.6" fill="#ef8da6" />
+        {/* ferrule (silver) with grooves */}
+        <rect x="8" y="16" width="5" height="10" fill="#c2c7cb" />
+        <line x1="9.7" y1="16.4" x2="9.7" y2="25.6" stroke="#7d848a" strokeWidth="0.55" />
+        <line x1="11.3" y1="16.4" x2="11.3" y2="25.6" stroke="#7d848a" strokeWidth="0.55" />
+        {/* yellow body */}
+        <rect x="13" y="16" width="17" height="10" fill="#f5c842" />
+        {/* exposed wood */}
+        <polygon points="30,16 35,16 35,26 30,26" fill="#d4a373" />
+        {/* graphite tip */}
+        <polygon points="35,16 40,21 35,26" fill="#2a2a2e" stroke="none" />
+        <polygon points="35,16 40,21 35,26" fill="none" stroke="#2a2a2e" strokeWidth="1.2" />
+      </g>
     </svg>
   );
 }
