@@ -40,7 +40,7 @@ export default function Sketchbook({ tweaks }) {
   const schedule = buildSchedule(tweaks.nextReleaseISO, tweaks.bucketLabel);
   const now = Date.now();
   return (
-    <div className="vb">
+    <>
       <header className="topbar wrap">
         <div className="brand"><PencilLogo /> pencil.nu</div>
         <nav className="topnav">
@@ -53,7 +53,7 @@ export default function Sketchbook({ tweaks }) {
       </header>
 
       <section className="hero wrap">
-        <div className="vb-tag">— a small project for shopping week —</div>
+        <div className="tag">— a small project for shopping week —</div>
         <h1>
           paper.nu and CAESAR,{" "}
           <span className="circle">sharpened</span>
@@ -237,31 +237,31 @@ export default function Sketchbook({ tweaks }) {
 
       <footer>
         <div className="wrap">
-          <div className="vb-foot-grid">
-            <div className="vb-foot-brand">
+          <div className="foot-grid">
+            <div className="foot-brand">
               <div className="b">pencil.nu</div>
               <p>an unofficial open-source extension. drawn by NU students. not affiliated with the university.</p>
             </div>
-            <div className="vb-foot-col"><h5>get it</h5><ul>
+            <div className="foot-col"><h5>get it</h5><ul>
               <li><a href={tweaks.chromeUrl}>chrome web store</a></li>
               <li><a href={tweaks.githubUrl}>github</a></li>
             </ul></div>
-            <div className="vb-foot-col"><h5>trust</h5><ul>
+            <div className="foot-col"><h5>trust</h5><ul>
               <li><a href="#safe">safety mechanisms</a></li>
               <li><a href={tweaks.githubUrl + "/issues"}>report an issue</a></li>
             </ul></div>
-            <div className="vb-foot-col"><h5>say hi</h5><ul>
+            <div className="foot-col"><h5>say hi</h5><ul>
               <li>{tweaks.creator1}</li>
               <li>{tweaks.creator2}</li>
               <li><a href={`mailto:${tweaks.contactEmail}`}>{tweaks.contactEmail}</a></li>
             </ul></div>
           </div>
-          <div className="vb-foot-meta">
+          <div className="foot-meta">
             <span>~ © 2026 pencil.nu · MIT ~</span>
             <span>made in Evanston</span>
           </div>
         </div>
       </footer>
-    </div>
+    </>
   );
 }
