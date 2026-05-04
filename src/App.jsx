@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react';
 import Sketchbook from "./Sketchbook.jsx";
 
 const TWEAKS = {
@@ -11,5 +12,10 @@ const TWEAKS = {
 };
 
 export default function App() {
-  return <Sketchbook tweaks={TWEAKS} />;
+  return (
+    <>
+      <Sketchbook tweaks={TWEAKS} />
+      <Analytics />
+    </>
+  );
 }
