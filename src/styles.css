@@ -28,7 +28,7 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-::selection { background: #66023c; color: #fff; }
+::selection { background: #f5c842; color: #2a2a2e; }
 
 /* Common screen mocks */
 .mock-frame {
@@ -59,12 +59,19 @@ body {
    Graph paper, hand-drawn underlines, pencil texture, Caveat accents.
    ============================================================ */
 .vb {
-  --ink: #1d1a18;
-  --ink-2: #4a443f;
-  --ink-3: #7a6f66;
-  --paper: #f6f1e6;
-  --rule: #d6c8b1;
-  --accent: #c92a48;
+  /* Ticonderoga #2 palette */
+  --ink: #2a2a2e;             /* graphite */
+  --ink-2: #4a4d52;           /* mid graphite */
+  --ink-3: #7d8088;           /* light graphite */
+  --paper: #faf4dc;           /* warm cream, gently yellow-tinted */
+  --rule: #c8c0a4;            /* soft pencil-line */
+  --accent: #e57a90;          /* eraser pink */
+  --accent-2: #d05f78;        /* eraser pink, deeper */
+  --pencil-yellow: #f5c842;   /* Ticonderoga yellow */
+  --pencil-yellow-soft: #fbe89a;
+  --silver: #b8bdc1;          /* ferrule */
+  --silver-2: #8a9095;        /* ferrule shadow */
+  --tan: #d4a373;             /* exposed wood */
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
@@ -135,7 +142,7 @@ body {
 .vb h1 .underline::after {
   content: ""; position: absolute; left: -4px; right: -4px; bottom: -6px;
   height: 12px;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2,8 Q50,2 100,7 T198,5' stroke='%23c92a48' stroke-width='3' fill='none' stroke-linecap='round'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2,8 Q50,2 100,7 T198,5' stroke='%23e57a90' stroke-width='3' fill='none' stroke-linecap='round'/></svg>");
   background-repeat: no-repeat; background-size: 100% 100%;
 }
 .vb h1 .circle {
@@ -143,11 +150,11 @@ body {
 }
 .vb h1 .circle::before {
   content: ""; position: absolute; inset: -8px -4px;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 100' preserveAspectRatio='none'><path d='M20,50 Q20,15 120,15 T220,50 Q220,85 120,85 T20,50' stroke='%23c92a48' stroke-width='3' fill='none' stroke-linecap='round' stroke-dasharray='1 0'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 100' preserveAspectRatio='none'><path d='M20,50 Q20,15 120,15 T220,50 Q220,85 120,85 T20,50' stroke='%23e57a90' stroke-width='3' fill='none' stroke-linecap='round' stroke-dasharray='1 0'/></svg>");
   background-repeat: no-repeat; background-size: 100% 100%;
 }
 .vb .lede { font-size: 19px; color: var(--ink-2); max-width: 600px; margin: 0 0 28px; line-height: 1.55; }
-.vb .lede mark { background: rgba(201, 42, 72, 0.18); color: var(--ink); padding: 0 4px; }
+.vb .lede mark { background: rgba(245, 200, 66, 0.55); color: var(--ink); padding: 0 4px; }
 
 .vb .hero-ctas { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
 .vb .btn-pencil {
@@ -275,7 +282,7 @@ body {
   margin: 0 0 16px;
 }
 .vb .sb-feat .copy h3 .marker {
-  background: linear-gradient(transparent 60%, rgba(201, 42, 72, 0.3) 60%);
+  background: linear-gradient(transparent 58%, rgba(245, 200, 66, 0.65) 58%);
   padding: 0 4px;
 }
 .vb .sb-feat .copy p { font-size: 16px; line-height: 1.55; color: var(--ink-2); margin: 0 0 14px; max-width: 460px; }
@@ -311,7 +318,7 @@ body {
 .vb .ssc-h {
   font-family: var(--font-hand); font-size: 18px; color: var(--accent);
 }
-.vb .sb-safety-card.big .ssc-h { color: #ffb6cc; }
+.vb .sb-safety-card.big .ssc-h { color: #f5c842; }
 .vb .sb-safety-card h4 {
   margin: 0; font-family: var(--font-pencil); font-weight: 400;
   font-size: 22px; line-height: 1.2;
