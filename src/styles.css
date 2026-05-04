@@ -15,8 +15,8 @@
   /* Responsive breakpoints (referenced in @media blocks at end of file) */
   --bp-md: 960px;
   --bp-sm: 640px;
-  /* Fluid wrap padding: 20px on tiny screens, scales up to 80px on desktop */
-  --wrap-pad: clamp(20px, 5vw, 80px);
+  /* Fluid wrap padding: 28px on tiny screens, scales up to 80px on desktop */
+  --wrap-pad: clamp(28px, 6vw, 80px);
 }
 
 * { box-sizing: border-box; }
@@ -100,10 +100,10 @@ body {
 
 .vb .topbar {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 28px 0 22px;
+  padding-top: 28px; padding-bottom: 22px;
 }
 .vb .brand {
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center; gap: 4px;
   font-family: var(--font-pencil);
   font-size: 24px; letter-spacing: -0.01em;
 }
@@ -122,7 +122,7 @@ body {
   box-shadow: 3px 3px 0 var(--accent);
 }
 
-.vb .hero { padding: 72px 0 56px; }
+.vb .hero { padding-top: 72px; padding-bottom: 56px; }
 .vb .hero-grid { display: grid; grid-template-columns: 1fr; gap: 28px; }
 .vb .vb-tag {
   font-family: var(--font-hand); font-size: 22px;
@@ -132,9 +132,10 @@ body {
 .vb h1 {
   font-family: var(--font-pencil);
   font-weight: 400;
-  font-size: clamp(40px, 8vw, 96px);
-  line-height: 0.94; letter-spacing: -0.04em;
+  font-size: clamp(34px, 7.5vw, 96px);
+  line-height: 0.98; letter-spacing: -0.04em;
   margin: 0 0 24px; max-width: 16ch;
+  overflow-wrap: break-word;
 }
 .vb h1 .underline {
   position: relative; display: inline-block;
@@ -198,7 +199,7 @@ body {
   margin: 0; font-size: 13px; line-height: 1.5; color: var(--ink-2);
 }
 
-.vb section { padding: 96px 0; position: relative; z-index: 1; }
+.vb section { padding-top: 96px; padding-bottom: 96px; position: relative; z-index: 1; }
 .vb .sec-mark {
   font-family: var(--font-hand);
   font-size: clamp(32px, 5vw, 48px);
@@ -360,8 +361,8 @@ body {
 /* ----- md: tablet (≤960px) ----- */
 @media (max-width: 960px) {
   /* Section vertical rhythm tightens. */
-  .vb section { padding: 72px 0; }
-  .vb .hero { padding: 56px 0 40px; }
+  .vb section { padding-top: 72px; padding-bottom: 72px; }
+  .vb .hero { padding-top: 56px; padding-bottom: 40px; }
 
   /* Pillars: 4 → 2 columns, swap right-dividers for bottom-dividers
      so the dashed grid still reads on a wrapped row. */
@@ -400,21 +401,24 @@ body {
 @media (max-width: 640px) {
   /* Topbar: hide secondary nav (sections still reachable from
      in-page links), keep brand + primary CTA. */
-  .vb .topbar { padding: 20px 0 16px; gap: 12px; }
+  .vb .topbar { padding-top: 20px; padding-bottom: 16px; gap: 12px; }
   .vb .topnav { display: none; }
   .vb .top-cta { padding: 8px 14px; font-size: 13px; }
   .vb .brand { font-size: 20px; }
-  .vb .brand svg { width: 34px; height: 34px; }
+  .vb .brand svg { width: 10px; height: 30px; }
 
   /* Hero: tighten and let CTAs wrap onto their own lines. */
-  .vb .hero { padding: 40px 0 32px; }
-  .vb .hero-ctas { flex-direction: column; align-items: flex-start; gap: 12px; }
-  .vb .scribble-arrow { font-size: 18px; }
+  .vb .hero { padding-top: 32px; padding-bottom: 28px; }
+  .vb h1 { max-width: 100%; }
+  .vb .hero-ctas { flex-direction: column; align-items: stretch; gap: 12px; }
+  .vb .btn-pencil { justify-content: center; }
+  .vb .btn-ghost-pencil { text-align: center; }
+  .vb .scribble-arrow { font-size: 18px; align-self: center; }
   .vb .vb-tag { font-size: 18px; }
   .vb .lede { font-size: 16px; line-height: 1.55; }
 
   /* Sections collapse vertical rhythm further. */
-  .vb section { padding: 56px 0; }
+  .vb section { padding-top: 56px; padding-bottom: 56px; }
   .vb .sec-blurb { font-size: 15px; margin-bottom: 36px; }
 
   /* Single-column grids across the board. */

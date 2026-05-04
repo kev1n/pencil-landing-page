@@ -16,8 +16,8 @@ function Countdown({ iso }) {
 
 function PencilLogo() {
   return (
-    <svg width="42" height="42" viewBox="0 0 42 42" fill="none" aria-hidden="true">
-      <g transform="rotate(-40 21 21)" stroke="#2a2a2e" strokeWidth="1.2" strokeLinejoin="round">
+    <svg width="14" height="42" viewBox="14 0 14 42" fill="none" aria-hidden="true">
+      <g transform="rotate(90 21 21)" stroke="#2a2a2e" strokeWidth="1.2" strokeLinejoin="round">
         {/* eraser */}
         <rect x="2" y="16" width="6" height="10" rx="1.6" fill="#ef8da6" />
         {/* ferrule (silver) with grooves */}
