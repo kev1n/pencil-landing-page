@@ -1,4 +1,3 @@
-import { Analytics } from '@vercel/analytics/react';
 import Sketchbook from "./Sketchbook.jsx";
 
 // Schedule is now grad-year-based (replacing the old A–H / I–P / Q–Z buckets).
@@ -40,10 +39,5 @@ const TWEAKS = {
 };
 
 export default function App() {
-  return (
-    <>
-      <Sketchbook tweaks={TWEAKS} />
-      <Analytics />
-    </>
-  );
+  return <Sketchbook tweaks={TWEAKS} />;
 }
