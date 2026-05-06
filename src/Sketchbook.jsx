@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { usePostHog } from "@posthog/react";
 import { useNow, diffParts, fmt, formatDate } from "./utils.js";
 import {
   MockSeats,
@@ -100,6 +101,7 @@ function PencilLogo() {
 }
 
 export default function Sketchbook({ tweaks }) {
+  const posthog = usePostHog();
   const [menuOpen, setMenuOpen] = useState(false);
   const closeMenu = () => setMenuOpen(false);
   // Inline navigation list — section anchors + GitHub. Feedback and the
@@ -126,12 +128,16 @@ export default function Sketchbook({ tweaks }) {
           <nav className="topnav">
             {desktopNavLinks.map((l) => (
               <a key={l.href} href={l.href}
-                {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
+                {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                onClick={() => {
+                  if (l.label === "feedback") posthog?.capture("feedback_clicked", { location: "top_nav" });
+                  if (l.label === "github") posthog?.capture("github_clicked", { location: "top_nav" });
+                }}>
                 {l.label}
               </a>
             ))}
           </nav>
-          <a className="top-cta" href={tweaks.chromeUrl}>add to chrome →</a>
+          <a className="top-cta" href={tweaks.chromeUrl} onClick={() => posthog?.capture("chrome_install_clicked", { location: "top_nav" })}>add to chrome →</a>
           {/* Compact CTAs that stay visible alongside the hamburger on
               mobile — feedback (ghost) and add-to-chrome (filled). The
               full-size .top-cta above is hidden in the mobile media query. */}
@@ -141,10 +147,11 @@ export default function Sketchbook({ tweaks }) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="leave feedback"
+            onClick={() => posthog?.capture("feedback_clicked", { location: "top_nav_mobile" })}
           >
             feedback
           </a>
-          <a className="top-cta-mobile" href={tweaks.chromeUrl}>
+          <a className="top-cta-mobile" href={tweaks.chromeUrl} onClick={() => posthog?.capture("chrome_install_clicked", { location: "top_nav_mobile" })}>
             + chrome
           </a>
           <button
@@ -170,14 +177,14 @@ export default function Sketchbook({ tweaks }) {
               href={tweaks.feedbackUrl}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={closeMenu}
+              onClick={() => { posthog?.capture("feedback_clicked", { location: "mobile_menu" }); closeMenu(); }}
             >
               leave feedback ↗
             </a>
             <a
               className="mobile-cta"
               href={tweaks.chromeUrl}
-              onClick={closeMenu}
+              onClick={() => { posthog?.capture("chrome_install_clicked", { location: "mobile_menu" }); closeMenu(); }}
             >
               add to chrome →
             </a>
@@ -200,11 +207,11 @@ export default function Sketchbook({ tweaks }) {
           No new dashboard.
         </p>
         <div className="hero-ctas">
-          <a className="btn-pencil" href={tweaks.chromeUrl}>
+          <a className="btn-pencil" href={tweaks.chromeUrl} onClick={() => posthog?.capture("chrome_install_clicked", { location: "hero" })}>
             Add to Chrome
             <span className="btn-pencil-free">free!</span>
           </a>
-          <a className="btn-ghost-pencil" href="#sched">when does mine unlock?</a>
+          <a className="btn-ghost-pencil" href="#sched" onClick={() => posthog?.capture("schedule_section_viewed", { location: "hero" })}>when does mine unlock?</a>
           <span className="scribble-arrow">↙ unlock by grad year</span>
         </div>
 
@@ -294,7 +301,7 @@ export default function Sketchbook({ tweaks }) {
               <div className="paper-mark-stack">
                 <div className="sec-mark paper-mark-line">— on paper.nu —</div>
                 <div className="paper-mark-sub">
-                  <a href={tweaks.paperUrl} target="_blank" rel="noopener noreferrer">paper.nu ↗</a> · the schedule planner you already use
+                  <a href={tweaks.paperUrl} target="_blank" rel="noopener noreferrer" onClick={() => posthog?.capture("paper_nu_link_clicked", { location: "paper_section" })}>paper.nu ↗</a> · the schedule planner you already use
                 </div>
               </div>
             </div>
@@ -518,14 +525,14 @@ export default function Sketchbook({ tweaks }) {
               <p>free · MIT-licensed · open source. an unofficial extension drawn by NU students. not affiliated with the university. not affiliated with paper.nu either — we just love it.</p>
             </div>
             <div className="foot-col"><h5>get it</h5><ul>
-              <li><a href={tweaks.chromeUrl}>chrome web store</a></li>
-              <li><a href={tweaks.githubUrl}>github</a></li>
-              <li><a href={tweaks.feedbackUrl} target="_blank" rel="noopener noreferrer">leave feedback ↗</a></li>
+              <li><a href={tweaks.chromeUrl} onClick={() => posthog?.capture("chrome_install_clicked", { location: "footer" })}>chrome web store</a></li>
+              <li><a href={tweaks.githubUrl} onClick={() => posthog?.capture("github_clicked", { location: "footer" })}>github</a></li>
+              <li><a href={tweaks.feedbackUrl} target="_blank" rel="noopener noreferrer" onClick={() => posthog?.capture("feedback_clicked", { location: "footer" })}>leave feedback ↗</a></li>
             </ul></div>
             <div className="foot-col"><h5>trust</h5><ul>
               <li><a href="#safe">safety mechanisms</a></li>
               <li><a href={tweaks.githubUrl + "/issues"}>report an issue</a></li>
-              <li><a href={tweaks.paperUrl} target="_blank" rel="noopener noreferrer">paper.nu ↗</a></li>
+              <li><a href={tweaks.paperUrl} target="_blank" rel="noopener noreferrer" onClick={() => posthog?.capture("paper_nu_link_clicked", { location: "footer" })}>paper.nu ↗</a></li>
             </ul></div>
             <div className="foot-col"><h5>built by</h5><ul>
               {tweaks.creators.map((c) => (

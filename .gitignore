@@ -30,3 +30,4 @@ dist-ssr
 # demand, and the canonical copy of the marquee lives in the pencil.nu
 # repo's README.
 chrome-store-assets/out/
+.env
