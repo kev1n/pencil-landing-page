@@ -1,0 +1,149 @@
+/* Shared visual language for every Chrome-store asset.
+   Mirrors the landing page palette so the listing matches the site. */
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..800&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&family=Caveat:wght@400;600;700&family=Special+Elite&display=swap");
+
+:root {
+  --ink: #2a2a2e;
+  --ink-2: #4a4d52;
+  --ink-3: #7d8088;
+  --paper: #f6ecc0;
+  --rule: #c8c0a4;
+  --accent: #e57a90;
+  --accent-2: #d05f78;
+  --pencil-yellow: #f5c842;
+  --pencil-yellow-soft: #fbe89a;
+  --silver: #b8bdc1;
+  --tan: #d4a373;
+  --link: #1d4ed8;
+  --font-display: "Fraunces", "Times New Roman", serif;
+  --font-body: "Inter", ui-sans-serif, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --font-hand: "Caveat", cursive;
+  --font-pencil: "Special Elite", "Courier Prime", monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* The body is sized to the asset's exact pixel dimensions and the page
+   never scrolls — Chrome headless captures the whole body at 1× DPR. */
+.canvas {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(900px 400px at 88% 8%, rgba(245, 200, 66, 0.18), transparent 70%),
+    var(--paper);
+}
+.canvas::before {
+  content: "";
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(38,30,20,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(38,30,20,0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+  z-index: 0;
+}
+.canvas::after {
+  content: "";
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 3px 3px;
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+  z-index: 0;
+}
+.inner { position: relative; z-index: 1; width: 100%; height: 100%; }
+
+/* Eraser-pink "free!" pill */
+.free-pill {
+  display: inline-block;
+  font-family: var(--font-hand);
+  color: var(--accent);
+  background: var(--paper);
+  border: 1.5px solid var(--accent);
+  border-radius: 999px;
+  padding: 0 12px 2px;
+  transform: rotate(8deg);
+  box-shadow: 1px 1px 0 var(--accent);
+}
+
+.tag-line {
+  font-family: var(--font-hand);
+  color: var(--accent);
+  transform: rotate(-1.5deg);
+  display: inline-block;
+}
+
+.brand {
+  font-family: var(--font-pencil);
+  letter-spacing: -0.01em;
+}
+
+.title {
+  font-family: var(--font-pencil);
+  font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+.title em { font-style: italic; color: var(--accent); }
+
+.title .marker {
+  background: linear-gradient(transparent 56%, rgba(245, 200, 66, 0.7) 56%);
+  padding: 0 4px;
+}
+
+.lede {
+  font-family: var(--font-body);
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-pencil);
+  font-size: 16px;
+  border-radius: 4px;
+  box-shadow: 4px 4px 0 var(--accent);
+}
+
+.kbd {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: rgba(40, 40, 46, 0.06);
+  border: 1px solid rgba(40, 40, 46, 0.16);
+  border-radius: 4px;
+  padding: 1px 6px;
+  color: var(--ink);
+}
+
+/* Simple sketch frame around mocks */
+.frame {
+  background: #fffaf3;
+  border: 1px solid #d9cab4;
+  border-radius: 14px;
+  box-shadow: 0 30px 50px -38px rgba(26,20,22,0.45), 6px 6px 0 var(--ink);
+}
+.frame-bar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px; border-bottom: 1px solid #e3d6c4;
+}
+.frame-dots { display: flex; gap: 5px; }
+.frame-dots span { width: 9px; height: 9px; border-radius: 50%; background: #e3d6c4; }
+.frame-url {
+  flex: 1; background: #f7f1ea; border-radius: 6px;
+  padding: 6px 10px;
+  font-family: var(--font-mono);
+  font-size: 12px; color: var(--ink-3);
+}

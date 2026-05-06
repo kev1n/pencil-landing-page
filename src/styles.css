@@ -95,7 +95,7 @@ body::after {
   font-size: 11px; color: #6b5d62;
 }
 
-.wrap { max-width: 1120px; margin: 0 auto; padding: 0 var(--wrap-pad); position: relative; z-index: 1; }
+.wrap { max-width: 1340px; margin: 0 auto; padding: 0 var(--wrap-pad); position: relative; z-index: 1; }
 
 /* Sticky header — backdrop-blur on the cream paper, dashed bottom rule
    that only shows once the user has scrolled (handled by .scrolled class
@@ -237,7 +237,30 @@ section[id] { scroll-margin-top: 72px; }
   box-shadow: 3px 3px 0 var(--accent);
 }
 
-.hero { padding-top: 72px; padding-bottom: 56px; }
+/* Compact mobile CTAs — sit between the brand and the hamburger on phones.
+   Hidden on desktop (the full .top-cta carries the action there). */
+.top-cta-mobile,
+.top-cta-mobile-ghost {
+  display: none;
+  font-family: var(--font-pencil);
+  font-size: 12px;
+  text-decoration: none;
+  padding: 8px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  border: 1.5px solid var(--ink);
+  line-height: 1;
+}
+.top-cta-mobile {
+  background: var(--ink); color: var(--paper);
+  box-shadow: 2px 2px 0 var(--accent);
+}
+.top-cta-mobile-ghost {
+  background: transparent; color: var(--ink);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.hero { padding-top: 48px; padding-bottom: 36px; }
 .hero-grid { display: grid; grid-template-columns: 1fr; gap: 28px; }
 .tag {
   font-family: var(--font-hand); font-size: 22px;
@@ -247,9 +270,9 @@ section[id] { scroll-margin-top: 72px; }
 h1 {
   font-family: var(--font-pencil);
   font-weight: 400;
-  font-size: clamp(34px, 7.5vw, 96px);
-  line-height: 0.98; letter-spacing: -0.04em;
-  margin: 0 0 24px; max-width: 16ch;
+  font-size: clamp(30px, 6.2vw, 76px);
+  line-height: 1.0; letter-spacing: -0.04em;
+  margin: 0 0 16px; max-width: 16ch;
   overflow-wrap: break-word;
 }
 h1 .underline {
@@ -291,6 +314,24 @@ h1 .circle::before {
   font-size: 15px; border-radius: 4px;
   box-shadow: 4px 4px 0 var(--accent);
   border: none; cursor: pointer;
+  position: relative;
+}
+/* Hand-drawn "free!" tag rotated and pinned to the corner of the
+   primary CTA so the price reads at a glance. */
+.btn-pencil-free {
+  position: absolute;
+  top: -14px; right: -22px;
+  font-family: var(--font-hand);
+  font-size: 22px;
+  color: var(--accent);
+  background: var(--paper);
+  border: 1.5px solid var(--accent);
+  border-radius: 999px;
+  padding: 0 10px 2px;
+  transform: rotate(8deg);
+  line-height: 1.1;
+  box-shadow: 1px 1px 0 var(--accent);
+  pointer-events: none;
 }
 .btn-ghost-pencil {
   font-family: var(--font-pencil); font-size: 15px;
@@ -304,19 +345,33 @@ h1 .circle::before {
 }
 
 .pillars-margin {
-  margin-top: 64px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
-  border-top: 2px dashed var(--rule); padding-top: 32px;
+  margin-top: 40px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  border-top: 2px dashed var(--rule); padding-top: 24px;
   position: relative;
 }
 .pillar {
-  padding: 20px 24px; border-right: 1px dashed var(--rule);
+  padding: 14px 20px; border-right: 1px dashed var(--rule);
   position: relative;
 }
 .pillar:last-child { border-right: none; }
+.pnum-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 8px; margin-bottom: 6px;
+}
 .pillar .pnum {
   font-family: var(--font-hand); font-size: 36px; color: var(--accent);
-  line-height: 1; margin-bottom: 8px;
+  line-height: 1;
 }
+.pillar-icon {
+  display: inline-flex;
+  /* Slight rotation so each glyph reads as sketched, not stamped. */
+  transform: rotate(-4deg);
+  transform-origin: center;
+  filter: drop-shadow(1px 2px 0 rgba(229, 122, 144, 0.25));
+}
+.pillar:nth-child(2) .pillar-icon { transform: rotate(3deg); }
+.pillar:nth-child(3) .pillar-icon { transform: rotate(-2deg); }
+.pillar:nth-child(4) .pillar-icon { transform: rotate(5deg); }
 .pillar h4 {
   margin: 0 0 6px; font-family: var(--font-pencil); font-weight: 400;
   font-size: 18px; line-height: 1.25;
@@ -325,23 +380,23 @@ h1 .circle::before {
   margin: 0; font-size: 13px; line-height: 1.5; color: var(--ink-2);
 }
 
-section { padding-top: 96px; padding-bottom: 96px; position: relative; z-index: 1; }
+section { padding-top: 56px; padding-bottom: 56px; position: relative; z-index: 1; }
 .sec-mark {
   font-family: var(--font-hand);
-  font-size: clamp(32px, 5vw, 48px);
+  font-size: clamp(28px, 4vw, 40px);
   color: var(--accent); transform: rotate(-3deg);
-  display: inline-block; margin-bottom: 8px;
+  display: inline-block; margin-bottom: 4px;
 }
 .sec-title {
   font-family: var(--font-pencil); font-weight: 400;
-  font-size: clamp(34px, 6vw, 64px);
+  font-size: clamp(30px, 5vw, 52px);
   line-height: 1; letter-spacing: -0.02em;
-  margin: 0 0 24px; max-width: 18ch;
+  margin: 0 0 16px; max-width: 18ch;
 }
 .sec-title i { font-style: italic; color: var(--accent); }
 .sec-blurb {
-  font-size: 17px; color: var(--ink-2); margin: 0 0 56px;
-  max-width: 680px; line-height: 1.55;
+  font-size: 16px; color: var(--ink-2); margin: 0 0 32px;
+  max-width: 680px; line-height: 1.5;
 }
 
 /* Sketchbook rollout */
@@ -404,18 +459,18 @@ section { padding-top: 96px; padding-bottom: 96px; position: relative; z-index: 
 
 /* Sketchbook features */
 .sb-features {
-  display: flex; flex-direction: column; gap: 80px;
+  display: flex; flex-direction: column; gap: 48px;
 }
 .sb-feat {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
 }
 .sb-feat.flip { direction: rtl; }
 .sb-feat.flip > * { direction: ltr; }
 .sb-feat .copy h3 {
   font-family: var(--font-pencil); font-weight: 400;
-  font-size: clamp(28px, 3.6vw, 40px);
+  font-size: clamp(24px, 3vw, 32px);
   line-height: 1.05; letter-spacing: -0.02em;
-  margin: 0 0 16px;
+  margin: 0 0 12px;
 }
 .sb-feat .copy h3 .marker {
   background: linear-gradient(transparent 58%, rgba(245, 200, 66, 0.65) 58%);
@@ -423,8 +478,8 @@ section { padding-top: 96px; padding-bottom: 96px; position: relative; z-index: 
 }
 .sb-feat .copy p { font-size: 16px; line-height: 1.55; color: var(--ink-2); margin: 0 0 14px; max-width: 460px; }
 .sb-feat .feat-num {
-  font-family: var(--font-hand); font-size: 80px; color: var(--accent);
-  line-height: 1; margin-bottom: -10px; display: inline-block;
+  font-family: var(--font-hand); font-size: 56px; color: var(--accent);
+  line-height: 1; margin-bottom: -6px; display: inline-block;
 }
 .sb-feat .bullets {
   list-style: none; padding: 0; margin: 16px 0 0;
@@ -450,7 +505,7 @@ section { padding-top: 96px; padding-bottom: 96px; position: relative; z-index: 
   border-top: 2px dashed var(--rule);
   border-bottom: 2px dashed var(--rule);
 }
-.paper-header { margin-bottom: 56px; }
+.paper-header { margin-bottom: 32px; }
 .paper-mark {
   display: flex; align-items: center; gap: 16px; margin-bottom: 12px;
 }
@@ -506,7 +561,7 @@ section { padding-top: 96px; padding-bottom: 96px; position: relative; z-index: 
 }
 .sb-safety-card.big .ssc-num small { color: rgba(255,255,255,.7); }
 
-footer { padding: 64px 0 32px; border-top: 2px dashed var(--rule); position: relative; z-index: 1; }
+footer { padding: 40px 0 24px; border-top: 2px dashed var(--rule); position: relative; z-index: 1; }
 .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
 .foot-brand .b {
   font-family: var(--font-pencil); font-size: 36px;
@@ -538,8 +593,8 @@ footer { padding: 64px 0 32px; border-top: 2px dashed var(--rule); position: rel
 /* ----- md: tablet (≤960px) ----- */
 @media (max-width: 960px) {
   /* Section vertical rhythm tightens. */
-  section { padding-top: 72px; padding-bottom: 72px; }
-  .hero { padding-top: 56px; padding-bottom: 40px; }
+  section { padding-top: 44px; padding-bottom: 44px; }
+  .hero { padding-top: 32px; padding-bottom: 24px; }
 
   /* Pillars: 4 → 2 columns, swap right-dividers for bottom-dividers
      so the dashed grid still reads on a wrapped row. */
@@ -558,9 +613,9 @@ footer { padding: 64px 0 32px; border-top: 2px dashed var(--rule); position: rel
   /* Feature rows: stack copy above mock. The `.flip` variant uses
      `direction: rtl` to reverse columns on desktop — we have to undo
      that here or stacking order ends up reversed visually. */
-  .sb-feat { grid-template-columns: 1fr; gap: 28px; }
+  .sb-feat { grid-template-columns: 1fr; gap: 20px; }
   .sb-feat.flip { direction: ltr; }
-  .sb-features { gap: 56px; }
+  .sb-features { gap: 36px; }
 
   /* Safety: 6-col grid → 2-col. Big stays full-bleed; med/sm
      each occupy half a row. */
@@ -576,28 +631,35 @@ footer { padding: 64px 0 32px; border-top: 2px dashed var(--rule); position: rel
 
 /* ----- sm: phone (≤640px) ----- */
 @media (max-width: 640px) {
-  /* Topbar: hide the inline nav and primary CTA — they move into the
-     hamburger drawer below the brand. */
-  .topbar { padding-top: 14px; padding-bottom: 12px; gap: 12px; }
+  /* Topbar: hide the inline desktop nav + the full CTA. Show the
+     compact feedback + chrome buttons inline alongside the hamburger
+     so the two primary actions stay one tap away even when the menu
+     is closed. */
+  .topbar { padding-top: 12px; padding-bottom: 10px; gap: 6px; }
   .topnav { display: none; }
   .top-cta { display: none; }
-  .hamburger { display: flex; }
-  .brand { font-size: 20px; }
+  .top-cta-mobile,
+  .top-cta-mobile-ghost { display: inline-flex; align-items: center; }
+  .hamburger { display: flex; width: 36px; height: 36px; }
+  .brand { font-size: 18px; flex: 1; min-width: 0; }
   .brand svg { width: 10px; height: 30px; }
 
   /* Hero: tighten and let CTAs wrap onto their own lines. */
-  .hero { padding-top: 32px; padding-bottom: 28px; }
-  h1 { max-width: 100%; }
-  .hero-ctas { flex-direction: column; align-items: stretch; gap: 12px; }
-  .btn-pencil { justify-content: center; }
+  .hero { padding-top: 20px; padding-bottom: 18px; }
+  h1 { max-width: 100%; margin-bottom: 14px; }
+  .hero-ctas { flex-direction: column; align-items: stretch; gap: 10px; }
+  .btn-pencil { justify-content: center; padding: 12px 18px; }
   .btn-ghost-pencil { text-align: center; }
-  .scribble-arrow { font-size: 18px; align-self: center; }
-  .tag { font-size: 18px; }
-  .lede { font-size: 16px; line-height: 1.55; }
+  .scribble-arrow { font-size: 16px; align-self: center; }
+  .tag { font-size: 16px; margin-bottom: 6px; }
+  .lede { font-size: 15px; line-height: 1.5; margin-bottom: 18px; }
 
   /* Sections collapse vertical rhythm further. */
-  section { padding-top: 56px; padding-bottom: 56px; }
-  .sec-blurb { font-size: 15px; margin-bottom: 36px; }
+  section { padding-top: 32px; padding-bottom: 32px; }
+  section[id] { scroll-margin-top: 60px; }
+  .sec-blurb { font-size: 14px; margin-bottom: 22px; }
+  .sb-features { gap: 28px; }
+  .pillars-margin { margin-top: 28px; padding-top: 18px; }
 
   /* Single-column grids across the board. */
   .pillars-margin { grid-template-columns: 1fr; padding-top: 24px; margin-top: 40px; }

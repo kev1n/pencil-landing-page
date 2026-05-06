@@ -9,14 +9,14 @@ const TWEAKS = {
   schedule: [
     {
       label: "≤ 2027",
-      name: "Seniors & grad",
+      name: "Rising seniors & grad",
       iso: "2026-05-06T00:00:00-05:00",
       live: true,
       note: "live now",
     },
     {
       label: "2028",
-      name: "Class of '28",
+      name: "Rising juniors",
       iso: "2026-05-09T09:00:00-05:00",
       note: "Sat · 9 AM CT",
     },
@@ -27,7 +27,8 @@ const TWEAKS = {
       note: "Mon · 9 AM CT",
     },
   ],
-  chromeUrl: "https://chromewebstore.google.com/",
+  chromeUrl:
+    "https://chromewebstore.google.com/detail/pencilnu/klgfglapoogiaggfghlbcbfjhhgebahf",
   githubUrl: "https://github.com/kev1n/better-caesar",
   paperUrl: "https://paper.nu",
   feedbackUrl:

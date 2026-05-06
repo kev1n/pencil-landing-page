@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8" />
+<link rel="stylesheet" href="common.css" />
+<style>
+  body { width: 1280px; height: 800px; }
+  .canvas { width: 1280px; height: 800px; }
+  .inner { display: grid; grid-template-columns: 1fr 1.15fr; padding: 56px 72px; gap: 48px; align-items: center; }
+  .copy .sec-mark { font-family: var(--font-hand); font-size: 36px; color: var(--accent); transform: rotate(-3deg); display: inline-block; margin-bottom: 6px; }
+  .copy h1 { font-family: var(--font-pencil); font-size: 60px; line-height: 1.0; letter-spacing: -0.03em; max-width: 13ch; margin-bottom: 18px; }
+  .copy h1 em { font-style: italic; color: var(--accent); }
+  .copy h1 .marker { background: linear-gradient(transparent 56%, rgba(245,200,66,0.7) 56%); padding: 0 4px; }
+  .copy p { font-size: 19px; line-height: 1.55; color: var(--ink-2); margin-bottom: 14px; max-width: 460px; }
+  .bullets { list-style: none; font-family: var(--font-pencil); font-size: 14px; color: var(--ink-2); }
+  .bullets li { padding: 4px 0 4px 22px; position: relative; line-height: 1.45; }
+  .bullets li::before { content: "✓"; color: var(--accent); position: absolute; left: 0; font-weight: 700; }
+  .stack { position: relative; height: 600px; }
+  .frame.chips { padding: 16px; transform: rotate(-2deg); position: absolute; top: 20px; left: 0; right: 60px; }
+  .frame.trend { padding: 16px; transform: rotate(2deg); position: absolute; bottom: 20px; left: 80px; right: 0; }
+  /* Schedule card */
+  .sched-card { background: #fff; border: 1px solid #ddd6cc; border-radius: 10px; padding: 14px; box-shadow: 0 4px 16px -10px rgba(0,0,0,.18); }
+  .sched-row1 { display: flex; justify-content: space-between; align-items: baseline; }
+  .sched-id { font-family: var(--font-display); font-weight: 600; font-size: 18px; }
+  .sched-id .num { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); font-weight: 400; }
+  .sched-comp { font-family: var(--font-mono); font-size: 10px; padding: 3px 7px; background: #fffbe6; border: 1px solid #f5e08a; border-radius: 4px; color: #5c4500; letter-spacing: 0.06em; }
+  .sched-title { font-size: 13px; color: var(--ink-2); margin-top: 2px; }
+  .sched-meta { font-family: var(--font-mono); font-size: 12px; color: var(--ink-2); margin-top: 6px; }
+  .chip-row { display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
+  .chip { font-family: var(--font-mono); font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 999px; display: inline-flex; gap: 4px; align-items: center; background: #fdf6ec; }
+  .chip .l { font-weight: 500; opacity: 0.7; }
+  .chip.green { color: #1c6b3a; border: 1px solid #1c6b3a33; }
+  .chip.amber { color: #a85a14; border: 1px solid #a85a1433; }
+  .chip.maroon { color: #66023c; border: 1px solid #66023c33; }
+  .agg-note { font-family: var(--font-hand); font-size: 14px; color: var(--ink-3); margin-top: 6px; }
+  /* Trend chart */
+  .t-h { font-family: var(--font-pencil); font-size: 16px; margin-bottom: 4px; }
+  .t-sub { font-family: var(--font-mono); font-size: 10px; color: var(--ink-3); margin-bottom: 10px; letter-spacing: 0.05em; }
+</style></head>
+<body>
+<div class="canvas"><div class="inner">
+  <div class="copy">
+    <div class="sec-mark">— on paper.nu —</div>
+    <h1>Chips on every card. <em>Trends</em> for every term.</h1>
+    <p>A compact CTEC pill strip lands on every schedule card the moment a course is dropped in. Click any chip to expand into trend lines spanning every term on record.</p>
+    <ul class="bullets">
+      <li>Hue-mapped chips: Instructor · Course · Lecture · Stim · Hours</li>
+      <li>Three display modes: numeric /6, percent, or stars</li>
+      <li>Per-metric trend lines with shaded zones and 5.0 reference</li>
+      <li>Response-count weighting so a tiny term doesn't yank the line</li>
+    </ul>
+  </div>
+  <div class="stack">
+    <div class="frame chips">
+      <div class="frame-bar"><div class="frame-dots"><span></span><span></span><span></span></div><div class="frame-url">paper.nu › schedule</div></div>
+      <div style="padding: 12px;">
+        <div class="sched-card">
+          <div class="sched-row1">
+            <div class="sched-id">COMP_SCI 311 <span class="num">· 21</span></div>
+            <div class="sched-comp">LEC</div>
+          </div>
+          <div class="sched-title">Theory of Computation · Riedl</div>
+          <div class="sched-meta">MoWeFr 10:00am–10:50am · TECH L160</div>
+          <div class="chip-row">
+            <span class="chip green"><span class="l">Instr</span><span>5.4</span></span>
+            <span class="chip green"><span class="l">Crse</span><span>5.1</span></span>
+            <span class="chip green"><span class="l">Lect</span><span>5.3</span></span>
+            <span class="chip amber"><span class="l">Stim</span><span>4.8</span></span>
+            <span class="chip maroon"><span class="l">Hours</span><span>9.2</span></span>
+          </div>
+          <div class="agg-note">aggregated · last 5 terms</div>
+        </div>
+      </div>
+    </div>
+    <div class="frame trend">
+      <div class="frame-bar"><div class="frame-dots"><span></span><span></span><span></span></div><div class="frame-url">paper.nu › CTEC › trend</div></div>
+      <div style="padding: 12px;">
+        <div class="t-h">Instructor rating · 9 terms</div>
+        <div class="t-sub">weighted by responses · zones shaded</div>
+        <svg viewBox="0 0 360 130" style="width:100%; display:block;">
+          <rect x="0" y="14" width="360" height="48" fill="#1c6b3a" fill-opacity="0.08" />
+          <rect x="0" y="62" width="360" height="48" fill="#c4644a" fill-opacity="0.06" />
+          <line x1="28" y1="110" x2="354" y2="110" stroke="#c8c0a4" stroke-width="1" />
+          <line x1="28" y1="62" x2="354" y2="62" stroke="#c8c0a4" stroke-width="0.6" stroke-dasharray="3 3" />
+          <text x="6" y="65" font-family="ui-monospace" font-size="10" fill="#7d8088">5.0</text>
+          <path d="M28,80 L68,84 L108,72 L148,52 L188,40 L228,58 L268,52 L308,28 L348,52 L348,110 L28,110 Z" fill="#1c6b3a" fill-opacity="0.15" />
+          <path d="M28,80 L68,84 L108,72 L148,52 L188,40 L228,58 L268,52 L308,28 L348,52" fill="none" stroke="#1c6b3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <g fill="#1c6b3a">
+            <circle cx="28" cy="80" r="3" /><circle cx="68" cy="84" r="3" /><circle cx="108" cy="72" r="3" />
+            <circle cx="148" cy="52" r="3" /><circle cx="188" cy="40" r="3" /><circle cx="228" cy="58" r="3" />
+            <circle cx="268" cy="52" r="3" /><circle cx="308" cy="28" r="3" /><circle cx="348" cy="52" r="3" />
+          </g>
+          <g font-family="ui-monospace" font-size="9" fill="#7d8088" text-anchor="middle">
+            <text x="28" y="124">F22</text><text x="68" y="124">W23</text><text x="108" y="124">S23</text>
+            <text x="148" y="124">F23</text><text x="188" y="124">W24</text><text x="228" y="124">S24</text>
+            <text x="268" y="124">F24</text><text x="308" y="124">W25</text><text x="348" y="124">S25</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body></html>

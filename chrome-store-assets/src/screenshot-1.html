@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8" />
+<link rel="stylesheet" href="common.css" />
+<style>
+  body { width: 1280px; height: 800px; }
+  .canvas { width: 1280px; height: 800px; }
+  .inner { display: grid; grid-template-columns: 1.05fr 1fr; padding: 48px 64px; gap: 40px; align-items: center; }
+  .left .brand { font-size: 48px; display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .left .pencil { width: 16px; height: 48px; }
+  .left .tag-line { font-size: 24px; margin-bottom: 12px; }
+  .left .title { font-size: 68px; max-width: 14ch; margin-bottom: 16px; }
+  .left .lede { font-size: 20px; max-width: 540px; margin-bottom: 22px; line-height: 1.45; }
+  .left .ctas { display: inline-flex; align-items: center; gap: 22px; position: relative; }
+  .free-pill { position: absolute; top: -22px; right: -28px; font-size: 26px; transform: rotate(8deg); }
+  .left .meta {
+    margin-top: 24px;
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--ink-3); letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .right { display: flex; align-items: center; justify-content: center; }
+  .stack { position: relative; width: 100%; max-width: 480px; }
+  .frame.modal { transform: rotate(-2deg); }
+  .frame.search { transform: rotate(3deg); position: absolute; top: 220px; left: -60px; width: 340px; }
+  /* Modal-ish content */
+  .m-head { padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed #d9cab4; }
+  .m-h-title { font-family: var(--font-display); font-weight: 600; font-size: 22px; }
+  .m-tabs { display: flex; gap: 4px; font-family: var(--font-pencil); font-size: 12px; }
+  .m-tab { padding: 5px 10px; border-radius: 4px; border: 1px solid #d9cab4; }
+  .m-tab.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .m-kpi { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; padding: 14px 16px; }
+  .m-kpi-cell { background: #f7f1ea; border: 1px solid #e3d6c4; border-radius: 8px; padding: 10px 6px; text-align: center; }
+  .m-kpi-v { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: #1c6b3a; }
+  .m-kpi-l { font-family: var(--font-mono); font-size: 9px; color: var(--ink-3); margin-top: 4px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .m-bars { padding: 0 16px 16px; }
+  .m-bars-h { font-family: var(--font-mono); font-size: 10px; color: var(--ink-3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+  .m-bar { display: flex; align-items: flex-end; gap: 4px; height: 50px; }
+  .m-bar div { flex: 1; background: var(--accent); border-radius: 2px 2px 0 0; }
+  /* Search mock */
+  .s-row { display: grid; grid-template-columns: 32px 1fr auto auto; gap: 8px; align-items: center; padding: 6px 10px; background: #f7f1ea; border: 1px solid #e3d6c4; border-radius: 6px; margin-bottom: 6px; font-size: 12px; }
+  .s-row .num { font-family: var(--font-mono); font-weight: 700; }
+  .s-row .meta { font-family: var(--font-mono); font-size: 10px; color: var(--ink-3); }
+  .pill-open { font-family: var(--font-mono); font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; color: #1c6b3a; background: #e6f4ec; letter-spacing: 0.06em; }
+  .btn-add { font-family: var(--font-pencil); font-size: 10px; padding: 3px 8px; background: var(--ink); color: var(--paper); border-radius: 4px; }
+</style></head>
+<body>
+<div class="canvas"><div class="inner">
+  <div class="left">
+    <div class="brand">
+      <svg class="pencil" viewBox="14 0 14 42" fill="none" aria-hidden="true">
+        <g transform="rotate(90 21 21)" stroke="#2a2a2e" stroke-width="1.2" stroke-linejoin="round">
+          <rect x="2" y="16" width="6" height="10" rx="1.6" fill="#ef8da6" />
+          <rect x="8" y="16" width="5" height="10" fill="#c2c7cb" />
+          <line x1="9.7" y1="16.4" x2="9.7" y2="25.6" stroke="#7d848a" stroke-width="0.55" />
+          <line x1="11.3" y1="16.4" x2="11.3" y2="25.6" stroke="#7d848a" stroke-width="0.55" />
+          <rect x="13" y="16" width="17" height="10" fill="#f5c842" />
+          <polygon points="30,16 35,16 35,26 30,26" fill="#d4a373" />
+          <polygon points="35,16 40,21 35,26" fill="#2a2a2e" />
+        </g>
+      </svg>
+      pencil.nu
+    </div>
+    <div class="tag-line">— free, open-source · for shopping week —</div>
+    <h1 class="title">paper.nu and CAESAR, <em>sharpened.</em></h1>
+    <p class="lede">A more powerful CTEC viewer inlined into paper.nu — ratings, trends, heatmaps, and sentiment-tagged comments. Plus a sharper class search built straight into CAESAR.</p>
+    <div class="ctas">
+      <span class="btn-cta">Add to Chrome →</span>
+      <span class="free-pill">free!</span>
+    </div>
+    <div class="meta">a Northwestern student project · MIT · pencil.nu</div>
+  </div>
+  <div class="right"><div class="stack">
+    <div class="frame modal">
+      <div class="frame-bar">
+        <div class="frame-dots"><span></span><span></span><span></span></div>
+        <div class="frame-url">paper.nu › CTEC viewer</div>
+      </div>
+      <div class="m-head">
+        <div>
+          <div class="m-h-title">COMP_SCI 311</div>
+          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--ink-3);">12 terms · 487 responses</div>
+        </div>
+        <div class="m-tabs"><div class="m-tab on">Overview</div><div class="m-tab">Terms</div><div class="m-tab">Comments</div></div>
+      </div>
+      <div class="m-kpi">
+        <div class="m-kpi-cell"><div class="m-kpi-v">5.2</div><div class="m-kpi-l">Global</div></div>
+        <div class="m-kpi-cell"><div class="m-kpi-v">5.4</div><div class="m-kpi-l">Instr</div></div>
+        <div class="m-kpi-cell"><div class="m-kpi-v">5.1</div><div class="m-kpi-l">Course</div></div>
+        <div class="m-kpi-cell"><div class="m-kpi-v" style="color:#a85a14">4.8</div><div class="m-kpi-l">Stim</div></div>
+        <div class="m-kpi-cell"><div class="m-kpi-v" style="color:#66023c">9.2</div><div class="m-kpi-l">Hours</div></div>
+      </div>
+      <div class="m-bars">
+        <div class="m-bars-h">hours / week density</div>
+        <div class="m-bar">
+          <div style="height: 24%"></div><div style="height: 42%"></div><div style="height: 64%"></div>
+          <div style="height: 92%"></div><div style="height: 78%"></div><div style="height: 48%"></div>
+          <div style="height: 22%"></div>
+        </div>
+      </div>
+    </div>
+    <div class="frame search">
+      <div class="frame-bar">
+        <div class="frame-dots"><span></span><span></span><span></span></div>
+        <div class="frame-url">caesar › sharper search</div>
+      </div>
+      <div style="padding: 12px;">
+        <div style="font-family: var(--font-mono); font-size: 11px; color: var(--ink-2); margin-bottom: 8px;">cs 31x · Spring 2026</div>
+        <div class="s-row"><span class="num">21</span><span class="meta">MoWeFr 10am · Riedl</span><span class="pill-open">OPEN</span><span class="btn-add">+ Add</span></div>
+        <div class="s-row"><span class="num">22</span><span class="meta">MoWeFr 1pm · Pardo</span><span class="pill-open" style="color:#a85a14;background:#faecd6">WAITLIST</span><span class="btn-add">+ Add</span></div>
+        <div class="s-row"><span class="num">23</span><span class="meta">TuTh 11am · Hartline</span><span class="pill-open">OPEN</span><span class="btn-add">+ Add</span></div>
+      </div>
+    </div>
+  </div></div>
+</div></div>
+</body></html>

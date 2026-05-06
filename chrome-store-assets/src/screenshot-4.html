@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8" />
+<link rel="stylesheet" href="common.css" />
+<style>
+  body { width: 1280px; height: 800px; }
+  .canvas { width: 1280px; height: 800px; }
+  .inner { display: grid; grid-template-columns: 1fr 1.25fr; padding: 56px 72px; gap: 56px; align-items: center; }
+  .copy .sec-mark { font-family: var(--font-hand); font-size: 36px; color: var(--accent); transform: rotate(-3deg); display: inline-block; margin-bottom: 6px; }
+  .copy h1 { font-family: var(--font-pencil); font-size: 60px; line-height: 1.0; letter-spacing: -0.03em; max-width: 12ch; margin-bottom: 18px; }
+  .copy h1 em { font-style: italic; color: var(--accent); }
+  .copy h1 .marker { background: linear-gradient(transparent 56%, rgba(245,200,66,0.7) 56%); padding: 0 4px; }
+  .copy p { font-size: 19px; line-height: 1.55; color: var(--ink-2); margin-bottom: 14px; max-width: 460px; }
+  .bullets { list-style: none; font-family: var(--font-pencil); font-size: 14px; color: var(--ink-2); }
+  .bullets li { padding: 4px 0 4px 22px; position: relative; line-height: 1.45; }
+  .bullets li::before { content: "✓"; color: var(--accent); position: absolute; left: 0; font-weight: 700; }
+  .mock { transform: rotate(-1deg); }
+  .body { display: grid; grid-template-columns: 200px 1fr; gap: 16px; padding: 18px; }
+  .rail { background: #f7f1ea; border: 1px solid #e3d6c4; border-radius: 8px; padding: 10px; }
+  .rail-h { font-family: var(--font-mono); font-size: 9px; color: var(--ink-3); letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 6px; }
+  .rail-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 8px; margin-bottom: 2px; border-radius: 4px; font-family: var(--font-mono); font-size: 11px; color: var(--ink-2); }
+  .rail-row.on { background: #fff; border: 1px solid var(--ink); color: var(--ink); font-weight: 700; }
+  .rail-row .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 6px; }
+  .rail-row .n { color: var(--ink-3); }
+  .topic-row { padding: 5px 8px; margin-bottom: 4px; border-radius: 4px; }
+  .topic-row.on { background: #fff; border: 1px solid var(--ink); }
+  .topic-row .head { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; color: var(--ink-2); font-weight: 600; margin-bottom: 4px; }
+  .topic-row.on .head { color: var(--ink); font-weight: 700; }
+  .topic-row .head .n { color: var(--ink-3); font-weight: 500; }
+  .stack { display: flex; height: 4px; border-radius: 2px; overflow: hidden; background: #eee9df; }
+  .seg-pos { background: #1c6b3a; } .seg-mix { background: #a85a14; } .seg-neu { background: #4a4d52; } .seg-neg { background: #7c2d12; }
+  .panel-toolbar { display: flex; gap: 6px; margin-bottom: 12px; }
+  .search-input { flex: 1; background: #f7f1ea; border: 1px solid #e3d6c4; border-radius: 8px; padding: 8px 12px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); }
+  .sort { background: #f7f1ea; border: 1px solid #e3d6c4; border-radius: 8px; padding: 8px 12px; font-family: var(--font-mono); font-size: 12px; }
+  .comment { background: #fffaf3; border: 1px solid #e3d6c4; border-radius: 8px; padding: 12px 14px; margin-bottom: 8px; }
+  .comment-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .badge { font-family: var(--font-mono); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.06em; }
+  .b-pos { color: #1c6b3a; background: #e6f4ec; }
+  .b-mix { color: #a85a14; background: #faecd6; }
+  .b-neg { color: #7c2d12; background: #fbe3da; }
+  .term { font-family: var(--font-mono); font-size: 10px; color: var(--ink-3); }
+  .comment .body-text { font-size: 14px; color: var(--ink); line-height: 1.5; font-style: italic; }
+</style></head>
+<body>
+<div class="canvas"><div class="inner">
+  <div class="copy">
+    <div class="sec-mark">— on paper.nu —</div>
+    <h1>Comments by <em><span class="marker">sentiment.</span></em></h1>
+    <p>Three rails — Sentiment, Frequent topics (extracted bigrams), and Term — cross-filter so you can find the comment you actually want to read.</p>
+    <ul class="bullets">
+      <li>Positive / Mixed / Neutral / Critical with live counts</li>
+      <li>Bigrams like "problem sets" and "office hours" with stacked sentiment bars</li>
+      <li>Filter by quarter — counts respect the other rails</li>
+      <li>Search inside comments, sort by newest or by tone</li>
+      <li>All classification runs locally, cached per course</li>
+    </ul>
+  </div>
+  <div class="mock"><div class="frame">
+    <div class="frame-bar"><div class="frame-dots"><span></span><span></span><span></span></div><div class="frame-url">paper.nu › CTEC › comments</div></div>
+    <div class="body">
+      <aside class="rail">
+        <div class="rail-h">sentiment</div>
+        <div class="rail-row"><span><span class="dot" style="background:#2a2a2e"></span>All</span><span class="n">142</span></div>
+        <div class="rail-row on"><span><span class="dot" style="background:#1c6b3a"></span>Positive</span><span class="n">91</span></div>
+        <div class="rail-row"><span><span class="dot" style="background:#a85a14"></span>Mixed</span><span class="n">28</span></div>
+        <div class="rail-row"><span><span class="dot" style="background:#4a4d52"></span>Neutral</span><span class="n">12</span></div>
+        <div class="rail-row"><span><span class="dot" style="background:#7c2d12"></span>Critical</span><span class="n">11</span></div>
+        <div class="rail-h" style="margin-top:14px;">frequent topics</div>
+        <div class="topic-row"><div class="head"><span>problem sets</span><span class="n">38</span></div><div class="stack"><div class="seg-pos" style="flex:22"></div><div class="seg-mix" style="flex:8"></div><div class="seg-neu" style="flex:4"></div><div class="seg-neg" style="flex:4"></div></div></div>
+        <div class="topic-row on"><div class="head"><span>office hours</span><span class="n">27</span></div><div class="stack"><div class="seg-pos" style="flex:23"></div><div class="seg-mix" style="flex:2"></div><div class="seg-neu" style="flex:1"></div><div class="seg-neg" style="flex:1"></div></div></div>
+        <div class="topic-row"><div class="head"><span>the midterm</span><span class="n">21</span></div><div class="stack"><div class="seg-pos" style="flex:6"></div><div class="seg-mix" style="flex:7"></div><div class="seg-neu" style="flex:3"></div><div class="seg-neg" style="flex:5"></div></div></div>
+        <div class="topic-row"><div class="head"><span>lecture pace</span><span class="n">18</span></div><div class="stack"><div class="seg-pos" style="flex:11"></div><div class="seg-mix" style="flex:4"></div><div class="seg-neu" style="flex:2"></div><div class="seg-neg" style="flex:1"></div></div></div>
+        <div class="topic-row"><div class="head"><span>study group</span><span class="n">14</span></div><div class="stack"><div class="seg-pos" style="flex:12"></div><div class="seg-mix" style="flex:1"></div><div class="seg-neu" style="flex:1"></div><div class="seg-neg" style="flex:0"></div></div></div>
+        <div class="rail-h" style="margin-top:14px;">term</div>
+        <div class="rail-row on"><span>All terms</span><span class="n">142</span></div>
+        <div class="rail-row"><span>F25</span><span class="n">32</span></div>
+        <div class="rail-row"><span>S25</span><span class="n">28</span></div>
+        <div class="rail-row"><span>W25</span><span class="n">26</span></div>
+      </aside>
+      <div>
+        <div class="panel-toolbar">
+          <div class="search-input">search comments…</div>
+          <div class="sort">newest ▾</div>
+        </div>
+        <div class="comment">
+          <div class="comment-head"><span class="badge b-pos">POSITIVE</span><span class="term">F25</span></div>
+          <div class="body-text">"Riedl is the best lecturer I've had at NU. Be ready to think hard, but lectures are gold. Office hours genuinely help."</div>
+        </div>
+        <div class="comment">
+          <div class="comment-head"><span class="badge b-mix">MIXED</span><span class="term">S25</span></div>
+          <div class="body-text">"Conceptually beautiful. Workload uneven — some weeks light, others brutal. Pick your study group well."</div>
+        </div>
+        <div class="comment">
+          <div class="comment-head"><span class="badge b-pos">POSITIVE</span><span class="term">W25</span></div>
+          <div class="body-text">"The problem sets are tough but the office hours culture is incredible. I learned more here than in any other CS class."</div>
+        </div>
+        <div class="comment">
+          <div class="comment-head"><span class="badge b-neg">CRITICAL</span><span class="term">W24</span></div>
+          <div class="body-text">"Curve was rough. Wished there were more practice problems before the midterm."</div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div></div>
+</body></html>

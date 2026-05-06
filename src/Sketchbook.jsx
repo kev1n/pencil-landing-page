@@ -28,6 +28,60 @@ function Countdown({ iso, live }) {
   );
 }
 
+// Small hand-drawn-ish glyphs sitting next to each hero pillar number.
+// Stroke-only line drawings tilted a few degrees so they look sketched
+// in pencil rather than dropped in from an icon set.
+const pillarIcons = {
+  // 1. Sharper class search — magnifying glass with a pencil tip
+  search: (
+    <svg viewBox="0 0 36 36" width="32" height="32" aria-hidden="true">
+      <g fill="none" stroke="var(--ink)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="15" cy="15" r="9" />
+        <line x1="22" y1="22" x2="30" y2="30" />
+        <line x1="11" y1="15" x2="19" y2="15" stroke="var(--accent)" strokeWidth="1.4" />
+        <line x1="15" y1="11" x2="15" y2="19" stroke="var(--accent)" strokeWidth="1.4" />
+      </g>
+    </svg>
+  ),
+  // 2. More powerful CTEC viewer — bar chart with a baseline tick
+  bars: (
+    <svg viewBox="0 0 36 36" width="32" height="32" aria-hidden="true">
+      <g fill="none" stroke="var(--ink)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="5" y1="29" x2="31" y2="29" />
+        <rect x="7" y="20" width="5" height="9" fill="var(--pencil-yellow-soft)" />
+        <rect x="15" y="14" width="5" height="15" fill="var(--accent)" fillOpacity="0.4" />
+        <rect x="23" y="9"  width="5" height="20" fill="none" />
+        <path d="M9 19 L17 13 L25 8" stroke="var(--accent)" strokeWidth="1.4" />
+        <circle cx="9" cy="19" r="1.4" fill="var(--accent)" stroke="none" />
+        <circle cx="17" cy="13" r="1.4" fill="var(--accent)" stroke="none" />
+        <circle cx="25" cy="8"  r="1.4" fill="var(--accent)" stroke="none" />
+      </g>
+    </svg>
+  ),
+  // 3. Respects fill-to-view — checked box with a pencil-mark check
+  check: (
+    <svg viewBox="0 0 36 36" width="32" height="32" aria-hidden="true">
+      <g fill="none" stroke="var(--ink)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="7" y="7" width="22" height="22" rx="3" />
+        <path d="M12 19 L16 23 L25 12" stroke="var(--accent)" strokeWidth="2" />
+      </g>
+    </svg>
+  ),
+  // 4. Your session, not our keys — shield with a tick
+  shield: (
+    <svg viewBox="0 0 36 36" width="32" height="32" aria-hidden="true">
+      <g fill="none" stroke="var(--ink)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <path
+          d="M18 5 L29 9 V18 C29 24 24 29 18 31 C12 29 7 24 7 18 V9 Z"
+          fill="var(--pencil-yellow-soft)"
+          fillOpacity="0.6"
+        />
+        <path d="M13 18 L16.5 21.5 L23 14" stroke="var(--accent)" strokeWidth="2" />
+      </g>
+    </svg>
+  ),
+};
+
 function PencilLogo() {
   return (
     <svg width="14" height="42" viewBox="14 0 14 42" fill="none" aria-hidden="true">
@@ -54,8 +108,8 @@ export default function Sketchbook({ tweaks }) {
   // the mobile drawer renders the buttons in their own CTA row below.
   const sectionLinks = [
     { href: "#sched",  label: "schedule" },
-    { href: "#caesar", label: "caesar" },
     { href: "#paper",  label: "paper.nu" },
+    { href: "#caesar", label: "caesar" },
     { href: "#safe",   label: "safety" },
     { href: tweaks.githubUrl, label: "github" },
   ];
@@ -78,6 +132,21 @@ export default function Sketchbook({ tweaks }) {
             ))}
           </nav>
           <a className="top-cta" href={tweaks.chromeUrl}>add to chrome →</a>
+          {/* Compact CTAs that stay visible alongside the hamburger on
+              mobile — feedback (ghost) and add-to-chrome (filled). The
+              full-size .top-cta above is hidden in the mobile media query. */}
+          <a
+            className="top-cta-mobile-ghost"
+            href={tweaks.feedbackUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="leave feedback"
+          >
+            feedback
+          </a>
+          <a className="top-cta-mobile" href={tweaks.chromeUrl}>
+            + chrome
+          </a>
           <button
             type="button"
             className="hamburger"
@@ -117,7 +186,7 @@ export default function Sketchbook({ tweaks }) {
       </header>
 
       <section className="hero wrap">
-        <div className="tag">— a small project for shopping week —</div>
+        <div className="tag">— free, open-source · a small project for shopping week —</div>
         <h1>
           paper.nu and CAESAR,{" "}
           <span className="circle">sharpened</span>
@@ -126,36 +195,51 @@ export default function Sketchbook({ tweaks }) {
         <p className="lede">
           A <mark>sharper class search</mark> built straight into CAESAR — type{" "}
           <code>cs 31x</code> and add sections to your cart in place. Plus a{" "}
-          <mark>full CTEC viewer inlined into paper.nu</mark> — ratings, trends,
+          <mark>more powerful CTEC viewer inlined into paper.nu</mark> — ratings, trends,
           heatmaps, and student comments classified by sentiment. One install.
           No new dashboard.
         </p>
         <div className="hero-ctas">
-          <a className="btn-pencil" href={tweaks.chromeUrl}>Add to Chrome</a>
+          <a className="btn-pencil" href={tweaks.chromeUrl}>
+            Add to Chrome
+            <span className="btn-pencil-free">free!</span>
+          </a>
           <a className="btn-ghost-pencil" href="#sched">when does mine unlock?</a>
           <span className="scribble-arrow">↙ unlock by grad year</span>
         </div>
 
         <div className="pillars-margin">
           <div className="pillar">
-            <div className="pnum">1.</div>
+            <div className="pnum-row">
+              <div className="pnum">1.</div>
+              <div className="pillar-icon">{pillarIcons.search}</div>
+            </div>
             <h4>Sharper class search</h4>
             <p>Replaces CAESAR's class search with a paper.nu-powered one. Whitespace-tokenized, digit wildcards, Add-to-cart in place.</p>
           </div>
           <div className="pillar">
-            <div className="pnum">2.</div>
-            <h4>Full CTEC viewer</h4>
+            <div className="pnum-row">
+              <div className="pnum">2.</div>
+              <div className="pillar-icon">{pillarIcons.bars}</div>
+            </div>
+            <h4>More powerful CTEC viewer</h4>
             <p>Ratings, trends, heatmaps, hours density, and sentiment-tagged comments — inlined into paper.nu's class drawer.</p>
           </div>
           <div className="pillar">
-            <div className="pnum">3.</div>
-            <h4>Permission-aware</h4>
-            <p>Only fetches CTECs you can already see. Goes through Northwestern's own SSO every time.</p>
+            <div className="pnum-row">
+              <div className="pnum">3.</div>
+              <div className="pillar-icon">{pillarIcons.check}</div>
+            </div>
+            <h4>Respects "fill to view"</h4>
+            <p>NU only shows CTECs to students who've filled their own out. We respect that — if you can't see a CTEC in the portal, we can't either.</p>
           </div>
           <div className="pillar">
-            <div className="pnum">4.</div>
-            <h4>No external servers</h4>
-            <p>Talks to NU and nowhere else. Cached on your laptop, in your browser.</p>
+            <div className="pnum-row">
+              <div className="pnum">4.</div>
+              <div className="pillar-icon">{pillarIcons.shield}</div>
+            </div>
+            <h4>Your session, not our keys</h4>
+            <p>Uses the CAESAR session already in your browser. We never see your NetID, password, or any credentials.</p>
           </div>
         </div>
       </section>
@@ -193,76 +277,15 @@ export default function Sketchbook({ tweaks }) {
           </div>
 
           <div className="sb-rollout-foot">
-            <span className="hand">↑</span> seniors and grad already in · 2028 wakes Saturday morning ·
-            everyone else (incl. global release) Monday morning, all Chicago time.
+            <span className="hand">↑</span> rising seniors and grad students already in ·
+            rising juniors wake Saturday morning · everyone else (incl. global
+            release) Monday morning, all Chicago time.
           </div>
         </div>
       </section>
 
       {/* ── On CAESAR ──────────────────────────────────────────────────── */}
-      <section id="caesar">
-        <div className="wrap">
-          <div className="sec-mark">— on CAESAR —</div>
-          <h2 className="sec-title">Three small <i>fixes</i> in CAESAR.</h2>
-          <p className="sec-blurb">
-            CAESAR isn't going anywhere. We layer on top of it — same forms, same SSO,
-            same shopping cart, just with the friction sanded down.
-          </p>
-
-          <div className="sb-features">
-            <div className="sb-feat">
-              <div className="copy">
-                <div className="feat-num">1.</div>
-                <h3>A <span className="marker">sharper</span> class search.</h3>
-                <p>
-                  Replaces the native CAESAR search with a paper.nu-powered one,
-                  toggleable from a tab at the top. Type the way you'd talk —{" "}
-                  <code>cs 311</code>, <code>stat 21x</code>, <code>machine learning</code> —
-                  and Add a section to your cart without ever leaving the page.
-                </p>
-                <ul className="bullets">
-                  <li>Subject shortcuts: <code>cs</code> → COMP_SCI, <code>bme</code> → BMD_ENG</li>
-                  <li>Digit wildcards: <code>31x</code> matches 311, 314, 319…</li>
-                  <li>Live status pills (open / waitlist / closed)</li>
-                  <li>Add-to-cart in place — runs Search → Select → Next in the background</li>
-                  <li>Persistent "✓ In cart" / "Enrolled" badges so you don't double-add</li>
-                </ul>
-              </div>
-              <div><MockSearch /></div>
-            </div>
-
-            <div className="sb-feat flip">
-              <div className="copy">
-                <div className="feat-num">2.</div>
-                <h3>Cart pages with <span className="marker">real seats.</span></h3>
-                <p>CAESAR tells you almost nothing about what's already in your cart. We fix that — with notes, requirements, attributes, and live seat counts.</p>
-                <ul className="bullets">
-                  <li>Live counts in under a second</li>
-                  <li>Color-coded urgency</li>
-                  <li>Updates after every CAESAR action</li>
-                </ul>
-              </div>
-              <div><MockSeats /></div>
-            </div>
-
-            <div className="sb-feat">
-              <div className="copy">
-                <div className="feat-num">3.</div>
-                <h3>Skip the <span className="marker">term picker.</span></h3>
-                <p>Same three clicks every time. We remember and skip — for every PeopleSoft sub-page.</p>
-                <ul className="bullets">
-                  <li>Default term per device</li>
-                  <li>One keystroke to switch</li>
-                  <li>Smoother redirects between enrollment screens</li>
-                </ul>
-              </div>
-              <div><MockNav /></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── On Paper.nu ────────────────────────────────────────────────── */}
+      {/* On Paper.nu (now lead — the headline product is the CTEC viewer). */}
       <section id="paper" className="paper-section">
         <div className="wrap">
           <div className="paper-header">
@@ -275,7 +298,7 @@ export default function Sketchbook({ tweaks }) {
                 </div>
               </div>
             </div>
-            <h2 className="sec-title">A full <i>CTEC viewer,</i> built into the page.</h2>
+            <h2 className="sec-title">A more powerful <i>CTEC viewer,</i> built into the page.</h2>
             <p className="sec-blurb">
               Paper.nu is great for sketching out a quarter. We graft Northwestern's
               entire CTEC archive onto its class drawer — so you never tab away to
@@ -364,6 +387,69 @@ export default function Sketchbook({ tweaks }) {
         </div>
       </section>
 
+      {/* On CAESAR (was the lead; now follows the paper.nu story). */}
+      <section id="caesar">
+        <div className="wrap">
+          <div className="sec-mark">— on CAESAR —</div>
+          <h2 className="sec-title">Three small <i>fixes</i> in CAESAR.</h2>
+          <p className="sec-blurb">
+            CAESAR isn't going anywhere. We layer on top of it — same forms, same SSO,
+            same shopping cart, just with the friction sanded down.
+          </p>
+
+          <div className="sb-features">
+            <div className="sb-feat">
+              <div className="copy">
+                <div className="feat-num">1.</div>
+                <h3>A <span className="marker">sharper</span> class search.</h3>
+                <p>
+                  Replaces the native CAESAR search with a paper.nu-powered one,
+                  toggleable from a tab at the top. Type the way you'd talk —{" "}
+                  <code>cs 311</code>, <code>stat 21x</code>, <code>machine learning</code> —
+                  and Add a section to your cart without ever leaving the page.
+                </p>
+                <ul className="bullets">
+                  <li>Subject shortcuts: <code>cs</code> → COMP_SCI, <code>bme</code> → BMD_ENG</li>
+                  <li>Digit wildcards: <code>31x</code> matches 311, 314, 319…</li>
+                  <li>Live status pills (open / waitlist / closed)</li>
+                  <li>Add-to-cart in place — runs Search → Select → Next in the background</li>
+                  <li>Persistent "✓ In cart" / "Enrolled" badges so you don't double-add</li>
+                </ul>
+              </div>
+              <div><MockSearch /></div>
+            </div>
+
+            <div className="sb-feat flip">
+              <div className="copy">
+                <div className="feat-num">2.</div>
+                <h3>Cart pages with <span className="marker">real seats.</span></h3>
+                <p>CAESAR tells you almost nothing about what's already in your cart. We fix that — with notes, requirements, attributes, and live seat counts.</p>
+                <ul className="bullets">
+                  <li>Live counts in under a second</li>
+                  <li>Color-coded urgency</li>
+                  <li>Updates after every CAESAR action</li>
+                </ul>
+              </div>
+              <div><MockSeats /></div>
+            </div>
+
+            <div className="sb-feat">
+              <div className="copy">
+                <div className="feat-num">3.</div>
+                <h3>Skip the <span className="marker">term picker.</span></h3>
+                <p>Same three clicks every time. We remember and skip — for every PeopleSoft sub-page.</p>
+                <ul className="bullets">
+                  <li>Default term per device</li>
+                  <li>One keystroke to switch</li>
+                  <li>Smoother redirects between enrollment screens</li>
+                </ul>
+              </div>
+              <div><MockNav /></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── Safety ─────────────────────────────────────────────────────── */}
       <section id="safe">
         <div className="wrap">
@@ -378,11 +464,17 @@ export default function Sketchbook({ tweaks }) {
           <div className="sb-safety">
             <div className="sb-safety-card big">
               <div className="ssc-h">★ the big one</div>
-              <h4>Only fetches CTECs for students who can already see them.</h4>
-              <p>Every request flows through Northwestern's federated SSO and NetID.
-                If you can't see it in the official portal, pencil can't fetch it either.
-                We never proxy, never cache cross-user, never bypass access checks.</p>
-              <div className="ssc-num">SSO<small>Northwestern federated auth</small></div>
+              <h4>We respect "fill out CTECs to see CTECs."</h4>
+              <p>
+                Northwestern only lets students view CTECs once they've filled
+                out their own. We don't bypass that — if the portal hides a
+                report from you, pencil can't fetch it either. Every CTEC
+                request goes through your own existing CAESAR / NetID browser
+                session: <strong>we never see your password, never collect your
+                NetID, and never proxy auth through our code or servers.</strong>{" "}
+                No cross-user caching, no shared credentials, ever.
+              </p>
+              <div className="ssc-num">your<small>session, your access</small></div>
             </div>
             <div className="sb-safety-card med">
               <div className="ssc-h">rate limit</div>
@@ -399,7 +491,7 @@ export default function Sketchbook({ tweaks }) {
             <div className="sb-safety-card sm">
               <div className="ssc-h">staggered</div>
               <h4>Waves by grad year.</h4>
-              <p>Seniors first, juniors Saturday, everyone else Monday. We pause if anything looks off.</p>
+              <p>Rising seniors and grad first, rising juniors Saturday, everyone else Monday. We pause if anything looks off.</p>
               <div className="ssc-num">3<small>release waves</small></div>
             </div>
             <div className="sb-safety-card sm">
@@ -423,7 +515,7 @@ export default function Sketchbook({ tweaks }) {
           <div className="foot-grid">
             <div className="foot-brand">
               <div className="b">pencil.nu</div>
-              <p>an unofficial open-source extension. drawn by NU students. not affiliated with the university. not affiliated with paper.nu either — we just love it.</p>
+              <p>free · MIT-licensed · open source. an unofficial extension drawn by NU students. not affiliated with the university. not affiliated with paper.nu either — we just love it.</p>
             </div>
             <div className="foot-col"><h5>get it</h5><ul>
               <li><a href={tweaks.chromeUrl}>chrome web store</a></li>

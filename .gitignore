@@ -24,3 +24,9 @@ dist-ssr
 *.sw?
 .gstack/
 .vercel
+
+# Chrome-store rendering output. Keep the HTML sources + build script;
+# ignore the rasterized binaries — they regenerate from `build.sh` on
+# demand, and the canonical copy of the marquee lives in the pencil.nu
+# repo's README.
+chrome-store-assets/out/

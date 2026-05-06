@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8" />
+<link rel="stylesheet" href="common.css" />
+<style>
+  body { width: 440px; height: 280px; }
+  .canvas { width: 440px; height: 280px; }
+  .inner { padding: 26px 28px; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+  .brand { font-size: 36px; display: flex; align-items: center; gap: 10px; }
+  .pencil { width: 14px; height: 42px; }
+  .tag { font-family: var(--font-hand); font-size: 22px; color: var(--accent); transform: rotate(-1.5deg); display: inline-block; margin-top: -2px; }
+  h1 { font-family: var(--font-pencil); font-size: 30px; line-height: 1.0; letter-spacing: -0.03em; max-width: 12ch; margin-top: 6px; }
+  h1 em { font-style: italic; color: var(--accent); }
+  .meta {
+    margin-top: 14px;
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--ink-3); letter-spacing: 0.06em; text-transform: uppercase;
+    display: flex; gap: 10px; align-items: center;
+  }
+  .free-pill { font-family: var(--font-hand); font-size: 18px; padding: 0 9px 1px; transform: rotate(6deg); }
+  .paper-plane { position: absolute; top: 22px; right: 24px; transform: rotate(-8deg); filter: drop-shadow(2px 3px 0 rgba(229,122,144,0.35)); }
+</style></head>
+<body>
+<div class="canvas"><div class="inner">
+  <svg class="paper-plane" width="60" height="60" viewBox="0 0 100 100" fill="none">
+    <path d="M14 44 L88 18 L70 84 L46 60 L36 68 L36 52 L70 28 L42 52 Z" stroke="#2a2a2e" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" fill="none" />
+  </svg>
+  <div class="brand">
+    <svg class="pencil" viewBox="14 0 14 42" fill="none">
+      <g transform="rotate(90 21 21)" stroke="#2a2a2e" stroke-width="1.2" stroke-linejoin="round">
+        <rect x="2" y="16" width="6" height="10" rx="1.6" fill="#ef8da6" />
+        <rect x="8" y="16" width="5" height="10" fill="#c2c7cb" />
+        <rect x="13" y="16" width="17" height="10" fill="#f5c842" />
+        <polygon points="30,16 35,16 35,26 30,26" fill="#d4a373" />
+        <polygon points="35,16 40,21 35,26" fill="#2a2a2e" />
+      </g>
+    </svg>
+    pencil.nu
+  </div>
+  <div class="tag">— a sharper paper.nu and CAESAR —</div>
+  <h1>CTEC viewer + sharper <em>class search.</em></h1>
+  <div class="meta">
+    <span class="free-pill">free!</span>
+    <span>NU students · open source</span>
+  </div>
+</div></div>
+</body></html>
