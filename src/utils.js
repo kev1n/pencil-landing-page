@@ -26,19 +26,15 @@ export function formatDate(iso) {
   const d = new Date(iso);
   return {
     long: d.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" }),
-    short: d.toLocaleDateString(undefined, { month: "long", day: "numeric", year: "numeric" }),
-    time: d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" }),
+    short: d.toLocaleDateString(undefined, {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+    }),
+    time: d.toLocaleTimeString(undefined, {
+      hour: "numeric",
+      minute: "2-digit",
+      timeZoneName: "short",
+    }),
   };
-}
-
-export function buildSchedule(nextISO, currentBucketLabel) {
-  const labels = ["A–H", "I–P", "Q–Z"];
-  const idx = Math.max(0, labels.indexOf(currentBucketLabel));
-  const next = new Date(nextISO).getTime();
-  const week = 7 * 86400000;
-  return labels.map((l, i) => ({
-    label: l,
-    iso: new Date(next + (i - idx) * week).toISOString(),
-    name: ["Bucket A", "Bucket B", "Bucket C"][i],
-  }));
 }
