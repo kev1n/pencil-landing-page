@@ -29,6 +29,7 @@ const TWEAKS = {
   chromeUrl:
     "https://chromewebstore.google.com/detail/pencilnu/klgfglapoogiaggfghlbcbfjhhgebahf",
   githubUrl: "https://github.com/kev1n/better-caesar",
+  discordUrl: "https://discord.gg/c5r8K2Ry",
   paperUrl: "https://paper.nu",
   feedbackUrl:
     "https://docs.google.com/forms/d/e/1FAIpQLSc34UX2cWyPx3jwgYDxyU7P7nx_--G91b1cepX1t1xS6tI7-w/viewform?usp=dialog",

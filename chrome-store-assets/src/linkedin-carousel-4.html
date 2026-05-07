@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8" />
+<link rel="stylesheet" href="common.css" />
+<style>
+  body { width: 1080px; height: 1350px; overflow: hidden; margin: 0; }
+  .canvas { width: 1080px; height: 1350px; }
+  .canvas::before {
+    background-image:
+      linear-gradient(rgba(38,30,20,0.09) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(38,30,20,0.09) 1px, transparent 1px) !important;
+  }
+  .canvas::after { opacity: 0.65 !important; }
+  .inner {
+    padding: 44px 64px 44px;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: 22px;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .main { min-height: 0; display: grid; align-content: center; gap: 14px; }
+  .footer { align-self: end; }
+
+  .tag {
+    font-family: var(--font-hand);
+    font-size: 34px;
+    color: var(--accent);
+    transform: rotate(-3deg);
+    display: inline-block;
+    margin-bottom: 4px;
+  }
+
+  h1.title {
+    font-family: var(--font-pencil);
+    font-size: 62px;
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  h1.title em { font-style: italic; color: var(--accent); }
+  h1.title .marker {
+    background: linear-gradient(transparent 56%, rgba(245, 200, 66, 0.7) 56%);
+    padding: 0 6px;
+  }
+
+  .lede {
+    font-family: var(--font-body);
+    font-size: 19px;
+    line-height: 1.4;
+    color: var(--ink-2);
+    max-width: 920px;
+    margin-bottom: 10px;
+  }
+
+  .stage {
+    position: relative;
+    flex: 0 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4px;
+    min-height: 0;
+  }
+
+  .frame {
+    background: #fffaf3;
+    border: 1px solid #d9cab4;
+    border-radius: 14px;
+    box-shadow: 0 24px 40px -32px rgba(26,20,22,0.45), 6px 6px 0 var(--ink);
+    width: 820px;
+  }
+  .frame.pink { box-shadow: 6px 6px 0 var(--accent); }
+  .frame-bar { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid #e3d6c4; }
+  .frame-dots { display: flex; gap: 5px; }
+  .frame-dots span { width: 9px; height: 9px; border-radius: 50%; background: #e3d6c4; }
+  .frame-url { flex: 1; background: #f7f1ea; border-radius: 6px; padding: 6px 10px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); }
+
+  .top-card { transform: rotate(-2deg); position: relative; }
+  .bot-card { transform: rotate(2deg); position: relative; }
+
+  .sched-body { padding: 10px 20px 12px; }
+  .sched-head { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 6px; border-bottom: 1px dashed #d9cab4; margin-bottom: 8px; }
+  .sched-id { font-family: var(--font-display); font-weight: 700; font-size: 24px; color: var(--ink); }
+  .sched-meta { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); margin-top: 3px; }
+  .sched-section { font-family: var(--font-mono); font-size: 12px; color: var(--ink-2); text-align: right; }
+  .sched-section .num { font-family: var(--font-pencil); font-size: 18px; color: var(--ink); display: block; }
+
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid;
+  }
+  .chip .lbl { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; font-weight: 500; }
+  .chip-green { color: #1c6b3a; background: #e6f4ec; border-color: #b8d8c2; }
+  .chip-amber { color: #a85a14; background: #faecd6; border-color: #e7c89a; }
+  .chip-maroon { color: #66023c; background: #f7dde9; border-color: #e0a9c4; }
+
+  .agg-note {
+    margin-top: 6px;
+    font-family: var(--font-hand);
+    font-size: 18px;
+    color: var(--accent);
+    transform: rotate(-1.5deg);
+    display: inline-block;
+  }
+
+  .connector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-hand);
+    font-size: 26px;
+    color: var(--accent);
+    transform: rotate(-2deg);
+  }
+
+  .trend-body { padding: 8px 20px 10px; }
+  .trend-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+  .trend-h { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); letter-spacing: 0.1em; text-transform: uppercase; }
+  .trend-val { font-family: var(--font-display); font-weight: 700; font-size: 20px; color: #1c6b3a; }
+  .trend-val .delta { font-family: var(--font-mono); font-size: 11px; color: #1c6b3a; margin-left: 6px; font-weight: 500; }
+  .trend-axis { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 9px; color: var(--ink-3); margin-top: 4px; padding: 0 22px; }
+
+  .bullets {
+    list-style: none;
+    font-family: var(--font-pencil);
+    font-size: 18px;
+    color: var(--ink-2);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 4px;
+  }
+  .bullets li { padding: 1px 0 1px 24px; position: relative; line-height: 1.35; }
+  .bullets li::before { content: "✓"; color: var(--accent); position: absolute; left: 0; font-weight: 700; }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    border-top: 1.5px dashed #c8c0a4;
+  }
+  .brand-mark {
+    font-family: var(--font-pencil);
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .page-num {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--ink-3);
+    letter-spacing: 0.12em;
+  }
+</style></head>
+<body>
+<div class="canvas"><div class="inner">
+
+  <div class="tag">— on paper.nu —</div>
+
+  <div class="main">
+  <h1 class="title">Chips on every card.<br/><span class="marker">Trends</span> for <em>every term.</em></h1>
+  <p class="lede">A compact CTEC pill strip lands on every schedule card the moment a course is dropped in. Click any chip to expand into trend lines spanning every term on record.</p>
+
+  <div class="stage">
+
+    <div class="top-card">
+      <div class="frame pink">
+        <div class="frame-bar">
+          <div class="frame-dots"><span></span><span></span><span></span></div>
+          <div class="frame-url">paper.nu › schedule › COMP_SCI 311</div>
+        </div>
+        <div class="sched-body">
+          <div class="sched-head">
+            <div>
+              <div class="sched-id">COMP_SCI 311</div>
+              <div class="sched-meta">Theory of Computation · MoWeFr 10am · Riedl</div>
+            </div>
+            <div class="sched-section"><span class="num">21</span>section</div>
+          </div>
+          <div class="chips">
+            <span class="chip chip-green"><span class="lbl">Instr</span>5.4</span>
+            <span class="chip chip-green"><span class="lbl">Crse</span>5.1</span>
+            <span class="chip chip-green"><span class="lbl">Lect</span>5.3</span>
+            <span class="chip chip-amber"><span class="lbl">Stim</span>4.8</span>
+            <span class="chip chip-maroon"><span class="lbl">Hours</span>9.2</span>
+          </div>
+          <div class="agg-note">aggregated · last 5 terms</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector">
+      <svg width="44" height="40" viewBox="0 0 44 40" fill="none">
+        <path d="M8 4 C 14 18, 22 22, 30 30" stroke="#e57a90" stroke-width="2.2" stroke-linecap="round" fill="none" stroke-dasharray="4 3" />
+        <path d="M24 32 L31 31 L29 24" stroke="#e57a90" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+      </svg>
+      <span>click chip →</span>
+    </div>
+
+    <div class="bot-card">
+      <div class="frame">
+        <div class="frame-bar">
+          <div class="frame-dots"><span></span><span></span><span></span></div>
+          <div class="frame-url">paper.nu › CTEC › trends</div>
+        </div>
+        <div class="trend-body">
+          <div class="trend-head">
+            <div class="trend-h">Instructor rating · 9 terms</div>
+            <div class="trend-val">5.4 <span class="delta">↑ 0.6 vs F21</span></div>
+          </div>
+          <svg viewBox="0 0 720 110" preserveAspectRatio="none" style="width:100%; height:54px; display:block;">
+            <rect x="22" y="8" width="676" height="22" fill="#1c6b3a" fill-opacity="0.10" />
+            <rect x="22" y="30" width="676" height="32" fill="#a85a14" fill-opacity="0.06" />
+            <rect x="22" y="62" width="676" height="22" fill="#7c2d12" fill-opacity="0.05" />
+            <line x1="22" y1="92" x2="698" y2="92" stroke="#c8c0a4" stroke-width="1" />
+            <line x1="22" y1="8" x2="22" y2="92" stroke="#e3d6c4" stroke-width="1" />
+            <text x="14" y="18" font-family="JetBrains Mono" font-size="9" fill="#7d8088" text-anchor="end">6.0</text>
+            <text x="14" y="62" font-family="JetBrains Mono" font-size="9" fill="#7d8088" text-anchor="end">4.5</text>
+            <text x="14" y="95" font-family="JetBrains Mono" font-size="9" fill="#7d8088" text-anchor="end">3.0</text>
+            <path d="M44,68 L128,74 L212,60 L296,38 L380,22 L464,52 L548,38 L632,12 L676,38"
+                  fill="none" stroke="#1c6b3a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+            <g fill="#1c6b3a">
+              <circle cx="44" cy="68" r="4" /><circle cx="128" cy="74" r="4" /><circle cx="212" cy="60" r="4" />
+              <circle cx="296" cy="38" r="4" /><circle cx="380" cy="22" r="4" /><circle cx="464" cy="52" r="4" />
+              <circle cx="548" cy="38" r="4" /><circle cx="632" cy="12" r="5" /><circle cx="676" cy="38" r="4" />
+            </g>
+            <g fill="#fffaf3" stroke="#1c6b3a" stroke-width="1.5">
+              <circle cx="632" cy="12" r="3" />
+            </g>
+          </svg>
+          <div class="trend-axis">
+            <span>F21</span><span>W22</span><span>S22</span><span>F22</span><span>W23</span><span>S23</span><span>F23</span><span>W24</span><span>S24</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="bullets">
+      <li>Hue-mapped: Instr · Crse · Lect · Stim · Hours</li>
+      <li>Response-count weighting so a tiny term doesn't yank the line</li>
+    </ul>
+
+  </div>
+  </div>
+
+  <div class="footer">
+    <div class="brand-mark">
+      <svg width="22" height="42" viewBox="14 0 14 42" fill="none" aria-hidden="true">
+        <g transform="rotate(90 21 21)" stroke="#2a2a2e" stroke-width="1.2" stroke-linejoin="round">
+          <rect x="2" y="16" width="6" height="10" rx="1.6" fill="#ef8da6" />
+          <rect x="8" y="16" width="5" height="10" fill="#c2c7cb" />
+          <line x1="9.7" y1="16.4" x2="9.7" y2="25.6" stroke="#7d848a" stroke-width="0.55" />
+          <line x1="11.3" y1="16.4" x2="11.3" y2="25.6" stroke="#7d848a" stroke-width="0.55" />
+          <rect x="13" y="16" width="17" height="10" fill="#f5c842" />
+          <polygon points="30,16 35,16 35,26 30,26" fill="#d4a373" />
+          <polygon points="35,16 40,21 35,26" fill="#2a2a2e" />
+        </g>
+      </svg>
+      pencil.nu
+    </div>
+    <div class="page-num">4 / 8</div>
+  </div>
+
+</div></div>
+</body></html>

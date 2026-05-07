@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8" />
+<title>pencil.nu — linkedin hero C</title>
+<link rel="stylesheet" href="common.css" />
+<style>
+  html, body { width: 1200px !important; height: 627px !important; margin: 0; overflow: hidden !important; }
+  .canvas { width: 1200px !important; height: 627px !important; overflow: hidden !important; max-height: 627px !important; position: relative !important; }
+  .canvas::before {
+    background-image:
+      linear-gradient(rgba(38,30,20,0.09) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(38,30,20,0.09) 1px, transparent 1px) !important;
+  }
+  .canvas::after { opacity: 0.65 !important; }
+  .inner {
+    padding: 22px 80px 22px !important;
+    width: 1200px !important;
+    height: 540px !important;
+    max-height: 540px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    position: relative !important;
+    display: grid !important;
+    grid-template-rows: auto 1fr auto !important;
+    row-gap: 0 !important;
+  }
+  .center-cluster {
+    align-self: center;
+    min-height: 0;
+  }
+
+  .top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .sticky-tag {
+    font-family: var(--font-pencil);
+    font-size: 13px;
+    color: var(--ink-3);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border-top: 1.5px dashed var(--rule);
+    border-bottom: 1.5px dashed var(--rule);
+    padding: 6px 0;
+  }
+  .stamp {
+    font-family: var(--font-hand);
+    font-size: 22px;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    padding: 4px 14px 6px;
+    border-radius: 6px;
+    transform: rotate(4deg);
+    line-height: 1;
+    box-shadow: 2px 2px 0 rgba(229,122,144,0.25);
+  }
+
+  .hand-headline {
+    font-family: var(--font-hand);
+    font-weight: 700;
+    font-size: 88px;
+    line-height: 0.92;
+    color: var(--ink);
+    transform: rotate(-2deg);
+    letter-spacing: -0.005em;
+    margin-top: 0;
+    position: relative;
+  }
+  .hand-headline .marker {
+    background: linear-gradient(transparent 58%, rgba(245, 200, 66, 0.72) 58%, rgba(245, 200, 66, 0.72) 92%, transparent 92%);
+    padding: 0 6px;
+  }
+  .hand-headline .built {
+    position: relative;
+    display: inline-block;
+  }
+  .doodle {
+    position: absolute;
+    left: -6px;
+    bottom: -26px;
+    pointer-events: none;
+  }
+
+  .sub-line {
+    font-family: var(--font-pencil);
+    font-size: 24px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .sub-line .em-dash { color: var(--ink-3); }
+  .free-pill {
+    font-family: var(--font-hand);
+    font-size: 20px;
+    padding: 0 12px 2px;
+    transform: rotate(6deg);
+    line-height: 1.1;
+  }
+
+  .body-line {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.45;
+    color: var(--ink-2);
+    margin-top: 10px;
+    max-width: 1040px;
+  }
+  .body-line .check {
+    display: inline-block;
+    color: var(--accent);
+    font-family: var(--font-hand);
+    font-size: 24px;
+    font-weight: 700;
+    transform: rotate(-8deg) translateY(2px);
+    margin-right: 4px;
+    line-height: 0;
+  }
+  .body-line .ink-strong { color: var(--ink); font-weight: 600; }
+
+  .signature-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    align-self: end;
+  }
+  .signature {
+    font-family: var(--font-hand);
+    font-size: 24px;
+    color: var(--accent);
+    transform: rotate(-1.5deg);
+  }
+  .wordmark {
+    font-family: var(--font-pencil);
+    font-size: 20px;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: -0.01em;
+  }
+
+  .plane {
+    position: absolute;
+    top: 16px;
+    right: 70px;
+    transform: rotate(-14deg);
+    filter: drop-shadow(3px 4px 0 rgba(229,122,144,0.4));
+  }
+</style></head>
+<body>
+<div class="canvas"><div class="inner">
+
+  <svg class="plane" width="58" height="58" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+    <path d="M14 44 L88 18 L70 84 L46 60 L36 68 L36 52 L70 28 L42 52 Z"
+          stroke="#2a2a2e" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" fill="none" />
+  </svg>
+
+  <div class="top-row">
+    <div class="sticky-tag">a note from the pencil.nu team</div>
+    <div class="stamp">hi NU!</div>
+  </div>
+
+  <div class="center-cluster">
+    <h1 class="hand-headline">
+      we got tired of <span class="marker">bad CTECs.</span><br />
+      so we <span class="built">built this.<svg class="doodle" width="320" height="36" viewBox="0 0 360 44" fill="none" aria-hidden="true">
+        <path d="M6 12 C 60 6, 130 18, 210 10 S 320 16, 348 8"
+              stroke="#e57a90" stroke-width="3.2" stroke-linecap="round" fill="none" />
+        <path d="M310 4 C 330 12, 348 16, 348 8 C 350 0, 338 -4, 326 0"
+              stroke="#e57a90" stroke-width="3" stroke-linecap="round" fill="none" />
+        <path d="M340 14 L 354 8 L 346 22"
+              stroke="#e57a90" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+      </svg></span>
+    </h1>
+
+    <div class="sub-line">
+      <span>pencil.nu</span>
+      <span class="em-dash">—</span>
+      <span>a free Chrome extension</span>
+      <span class="free-pill" style="font-family: var(--font-hand); color: var(--accent); background: var(--paper); border: 1.5px solid var(--accent); border-radius: 999px; box-shadow: 1px 1px 0 var(--accent);">free!</span>
+    </div>
+
+    <p class="body-line">
+      <span class="check">✓</span><span class="ink-strong">Better CTEC viewer in paper.nu.</span>
+      Sharper class search in CAESAR. By Northwestern students. MIT licensed. Runs in your browser.
+    </p>
+  </div>
+
+  <div class="signature-row">
+    <div class="signature">— shipped during shopping week, 2026 —</div>
+    <div class="wordmark">
+      <svg width="16" height="44" viewBox="14 0 14 42" fill="none" aria-hidden="true">
+        <g transform="rotate(90 21 21)" stroke="#2a2a2e" stroke-width="1.2" stroke-linejoin="round">
+          <rect x="2" y="16" width="6" height="10" rx="1.6" fill="#ef8da6" />
+          <rect x="8" y="16" width="5" height="10" fill="#c2c7cb" />
+          <line x1="9.7" y1="16.4" x2="9.7" y2="25.6" stroke="#7d848a" stroke-width="0.55" />
+          <line x1="11.3" y1="16.4" x2="11.3" y2="25.6" stroke="#7d848a" stroke-width="0.55" />
+          <rect x="13" y="16" width="17" height="10" fill="#f5c842" />
+          <polygon points="30,16 35,16 35,26 30,26" fill="#d4a373" />
+          <polygon points="35,16 40,21 35,26" fill="#2a2a2e" />
+        </g>
+      </svg>
+      pencil.nu
+    </div>
+  </div>
+
+</div></div>
+</body></html>

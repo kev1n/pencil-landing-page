@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8" />
+<title>pencil.nu — LinkedIn hero A</title>
+<link rel="stylesheet" href="common.css" />
+<style>
+  html, body { background: var(--paper); }
+  body { width: 1200px; height: 627px; margin: 0; overflow: hidden; }
+  .canvas { width: 1200px; height: 627px; }
+  .inner {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    grid-template-rows: 1fr;
+    padding: 44px 64px 36px;
+    gap: 40px;
+    align-items: stretch;
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  .canvas::before {
+    background-image:
+      linear-gradient(rgba(38,30,20,0.09) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(38,30,20,0.09) 1px, transparent 1px) !important;
+  }
+  .canvas::after { opacity: 0.65 !important; }
+
+  .left {
+    position: relative;
+    display: block;
+    height: 100%;
+    align-self: stretch;
+  }
+  .left-top { display: block; }
+  .canvas > .footer-brand-anchor {
+    position: absolute;
+    left: 64px;
+    bottom: 36px;
+    z-index: 2;
+  }
+
+  .tag-line {
+    font-family: var(--font-hand);
+    font-size: 26px;
+    color: var(--accent);
+    transform: rotate(-2deg);
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+
+  h1.title {
+    font-family: var(--font-pencil);
+    font-weight: 400;
+    font-size: 60px;
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+    margin-bottom: 16px;
+    max-width: 14ch;
+  }
+  h1.title .marker {
+    background: linear-gradient(transparent 56%, rgba(245,200,66,0.7) 56%);
+    padding: 0 4px;
+  }
+  h1.title .frac {
+    font-style: italic;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .free-pill {
+    position: absolute;
+    top: -2px;
+    left: 360px;
+    font-family: var(--font-hand);
+    font-size: 28px;
+    color: var(--accent);
+    background: var(--paper);
+    border: 1.6px solid var(--accent);
+    border-radius: 999px;
+    padding: 0 12px 2px;
+    transform: rotate(6deg);
+    box-shadow: 1.5px 1.5px 0 var(--accent);
+  }
+
+  .lede {
+    font-family: var(--font-body);
+    font-size: 19px;
+    line-height: 1.4;
+    color: var(--ink-2);
+    max-width: 600px;
+    margin-bottom: 20px;
+  }
+  .lede b { color: var(--ink); font-weight: 600; }
+
+  .footer-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-pencil);
+    font-size: 26px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .footer-brand svg { display: block; }
+
+  .right {
+    position: relative;
+    height: 100%;
+  }
+
+  .plane {
+    position: absolute;
+    top: -28px;
+    right: -10px;
+    transform: rotate(-12deg);
+    filter: drop-shadow(3px 4px 0 rgba(229,122,144,0.4));
+  }
+
+  .chip-card {
+    position: absolute;
+    top: 96px;
+    right: 8px;
+    width: 380px;
+    background: #fffaf3;
+    border: 1px solid #d9cab4;
+    border-radius: 14px;
+    box-shadow: 7px 7px 0 var(--ink);
+    transform: rotate(-3deg);
+    padding: 16px 16px 18px;
+  }
+  .chip-card .frame-bar {
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid #e3d6c4;
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 9px;
+  }
+  .chip-card .frame-dots { display: flex; gap: 5px; }
+  .chip-card .frame-dots span { width: 9px; height: 9px; border-radius: 50%; background: #e3d6c4; }
+  .chip-card .frame-url {
+    flex: 1; background: #f7f1ea; border-radius: 6px;
+    padding: 5px 10px;
+    font-family: var(--font-mono); font-size: 11px; color: var(--ink-3);
+  }
+  .sched-id { font-family: var(--font-display); font-weight: 600; font-size: 19px; color: var(--ink); }
+  .sched-id .meta-mono { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); font-weight: 400; }
+  .sched-title { font-family: var(--font-body); font-size: 13px; color: var(--ink-2); margin-top: 3px; }
+
+  .chip-row {
+    display: flex; gap: 6px; margin-top: 14px; flex-wrap: wrap;
+  }
+  .chip {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 9px;
+    border-radius: 999px;
+    display: inline-flex; gap: 5px; align-items: center;
+    background: #fdf6ec;
+  }
+  .chip .l { font-weight: 500; opacity: 0.7; }
+  .chip.green { color: #1c6b3a; border: 1px solid #1c6b3a33; }
+  .chip.amber { color: #a85a14; border: 1px solid #a85a1433; }
+  .chip.maroon { color: #66023c; border: 1px solid #66023c33; }
+</style></head>
+<body>
+<div class="canvas"><div class="inner">
+
+  <div class="left">
+    <div class="left-top">
+    <div class="tag-line">— we were too —</div>
+    <h1 class="title">Tired of <span class="marker">squinting</span> at <span class="frac">0.5 / 6</span> ratings on a Bluera popup?</h1>
+    <span class="free-pill">free!</span>
+    <p class="lede">
+      <b>pencil.nu</b> — a free Chrome extension that rebuilds CTEC for paper.nu and ships a sharper class search inside CAESAR. Built by NU students.
+    </p>
+    </div>
+  </div>
+
+  <div class="right">
+    <svg class="plane" width="118" height="118" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+      <path d="M14 44 L88 18 L70 84 L46 60 L36 68 L36 52 L70 28 L42 52 Z"
+            stroke="#2a2a2e" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" fill="none" />
+    </svg>
+
+    <div class="chip-card">
+      <div class="frame-bar">
+        <div class="frame-dots"><span></span><span></span><span></span></div>
+        <div class="frame-url">paper.nu › schedule</div>
+      </div>
+      <div class="sched-id">COMP_SCI 311 <span class="meta-mono">· 21 · LEC</span></div>
+      <div class="sched-title">Theory of Computation · Riedl</div>
+      <div class="chip-row">
+        <span class="chip green"><span class="l">Instr</span><span>5.4</span></span>
+        <span class="chip green"><span class="l">Crse</span><span>5.1</span></span>
+        <span class="chip green"><span class="l">Lect</span><span>5.3</span></span>
+        <span class="chip amber"><span class="l">Stim</span><span>4.8</span></span>
+        <span class="chip maroon"><span class="l">Hours</span><span>9.2</span></span>
+      </div>
+    </div>
+  </div>
+
+</div></div>
+</body></html>

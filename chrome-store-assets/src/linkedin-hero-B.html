@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8" />
+<link rel="stylesheet" href="common.css" />
+<style>
+  html, body { width: 1200px; height: 627px; margin: 0; padding: 0; overflow: hidden; background: var(--paper); }
+  .canvas { width: 1200px; height: 627px; position: relative; overflow: hidden; }
+  .canvas::before {
+    background-image:
+      linear-gradient(rgba(38,30,20,0.09) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(38,30,20,0.09) 1px, transparent 1px) !important;
+  }
+  .canvas::after { opacity: 0.65 !important; }
+  .inner { display: grid; grid-template-columns: 1.05fr 1fr; grid-template-rows: auto 1fr auto; padding: 28px 56px 16px; gap: 18px 36px; height: 540px; box-sizing: border-box; }
+
+  .left { grid-column: 1; grid-row: 1 / 3; position: relative; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+  .left .brand { font-size: 40px; display: flex; align-items: center; gap: 10px; margin-bottom: 2px; }
+  .pencil { width: 14px; height: 40px; }
+
+  .tag { font-family: var(--font-hand); font-size: 22px; color: var(--accent); transform: rotate(-1.5deg); display: inline-block; }
+
+  h1 { font-family: var(--font-pencil); font-size: 60px; line-height: 1.0; letter-spacing: -0.04em; max-width: 14ch; margin: 4px 0 6px; color: var(--ink); }
+  h1 em { font-style: italic; color: var(--accent); }
+  h1 .marker { background: linear-gradient(transparent 56%, rgba(245,200,66,0.7) 56%); padding: 0 4px; }
+
+  .lede { font-family: var(--font-body); font-size: 16px; line-height: 1.4; color: var(--ink-2); max-width: 560px; margin-bottom: 6px; }
+
+  .meta-row { display: inline-flex; gap: 16px; align-items: center; }
+  .free-pill { font-family: var(--font-hand); font-size: 24px; padding: 0 14px 2px; transform: rotate(6deg); }
+
+  .footer-line {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    z-index: 100;
+    text-align: center;
+    border-top: 1px dashed var(--rule);
+    padding-top: 8px;
+    align-self: end;
+  }
+
+  .right { grid-column: 2; grid-row: 1 / 3; position: relative; height: 100%; min-height: 520px; }
+  .right .paper-plane { position: absolute; top: 4px; right: 4px; transform: rotate(-12deg); filter: drop-shadow(3px 4px 0 rgba(229,122,144,0.35)); }
+
+  .chip-card { position: absolute; top: 14px; left: 4px; width: 300px; background: #fffaf3; border: 1px solid #d9cab4; border-radius: 14px; box-shadow: 6px 6px 0 var(--ink); transform: rotate(-3deg); padding: 12px; z-index: 2; }
+  .frame-bar { padding-bottom: 5px; border-bottom: 1px solid #e3d6c4; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+  .frame-dots { display: flex; gap: 4px; } .frame-dots span { width: 6px; height: 6px; border-radius: 50%; background: #e3d6c4; }
+  .frame-url { flex: 1; background: #f7f1ea; border-radius: 6px; padding: 3px 7px; font-family: var(--font-mono); font-size: 9px; color: var(--ink-3); }
+  .sched-id { font-family: var(--font-display); font-weight: 600; font-size: 14px; }
+  .sched-title { font-size: 11px; color: var(--ink-2); margin-top: 1px; }
+  .chip-row { display: flex; gap: 4px; margin-top: 6px; flex-wrap: wrap; }
+  .chip { font-family: var(--font-mono); font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 999px; display: inline-flex; gap: 4px; align-items: center; background: #fdf6ec; }
+  .chip .l { font-weight: 500; opacity: 0.7; }
+  .chip.green { color: #1c6b3a; border: 1px solid #1c6b3a33; }
+  .chip.amber { color: #a85a14; border: 1px solid #a85a1433; }
+  .chip.maroon { color: #66023c; border: 1px solid #66023c33; }
+
+  .kpi-card { position: absolute; top: 188px; left: 200px; background: #fffaf3; border: 1px solid #d9cab4; border-radius: 12px; box-shadow: 4px 4px 0 var(--ink); transform: rotate(1.5deg); padding: 6px 8px; display: flex; gap: 5px; z-index: 3; }
+  .kpi { background: #f7f1ea; border: 1px solid #e3d6c4; border-radius: 8px; padding: 5px 7px; text-align: center; min-width: 38px; }
+  .kpi .v { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: #1c6b3a; }
+  .kpi .l { font-family: var(--font-mono); font-size: 8px; color: var(--ink-3); margin-top: 1px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  .trend-card { position: absolute; top: 296px; right: 8px; width: 320px; background: #fffaf3; border: 1px solid #d9cab4; border-radius: 14px; box-shadow: 6px 6px 0 var(--accent); transform: rotate(2deg); padding: 12px; z-index: 1; }
+  .trend-h { font-family: var(--font-pencil); font-size: 13px; margin-bottom: 2px; }
+  .trend-sub { font-family: var(--font-mono); font-size: 9px; color: var(--ink-3); margin-bottom: 4px; }
+</style></head>
+<body>
+<div class="canvas">
+<div class="inner">
+  <div class="left">
+    <div class="brand">
+      <svg class="pencil" viewBox="14 0 14 42" fill="none">
+        <g transform="rotate(90 21 21)" stroke="#2a2a2e" stroke-width="1.2" stroke-linejoin="round">
+          <rect x="2" y="16" width="6" height="10" rx="1.6" fill="#ef8da6" />
+          <rect x="8" y="16" width="5" height="10" fill="#c2c7cb" />
+          <line x1="9.7" y1="16.4" x2="9.7" y2="25.6" stroke="#7d848a" stroke-width="0.55" />
+          <line x1="11.3" y1="16.4" x2="11.3" y2="25.6" stroke="#7d848a" stroke-width="0.55" />
+          <rect x="13" y="16" width="17" height="10" fill="#f5c842" />
+          <polygon points="30,16 35,16 35,26 30,26" fill="#d4a373" />
+          <polygon points="35,16 40,21 35,26" fill="#2a2a2e" />
+        </g>
+      </svg>
+      pencil.nu
+    </div>
+    <div class="tag">— for shopping week —</div>
+    <h1>paper.nu and CAESAR, <em><span class="marker">sharpened.</span></em></h1>
+    <p class="lede">A free Chrome extension that bolts a more powerful CTEC viewer into paper.nu — ratings, trends, heatmaps, sentiment-tagged comments — and a sharper class search straight inside CAESAR.</p>
+    <div class="meta-row">
+      <span class="free-pill">free!</span>
+    </div>
+  </div>
+  <div class="right">
+    <svg class="paper-plane" width="110" height="110" viewBox="0 0 100 100" fill="none">
+      <path d="M14 44 L88 18 L70 84 L46 60 L36 68 L36 52 L70 28 L42 52 Z" stroke="#2a2a2e" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" fill="none" />
+    </svg>
+    <div class="chip-card">
+      <div class="frame-bar"><div class="frame-dots"><span></span><span></span><span></span></div><div class="frame-url">paper.nu › schedule</div></div>
+      <div class="sched-id">COMP_SCI 311 <span style="font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); font-weight: 400;">· 21 · LEC</span></div>
+      <div class="sched-title">Theory of Computation · Riedl</div>
+      <div class="chip-row">
+        <span class="chip green"><span class="l">Instr</span><span>5.4</span></span>
+        <span class="chip green"><span class="l">Crse</span><span>5.1</span></span>
+        <span class="chip green"><span class="l">Lect</span><span>5.3</span></span>
+        <span class="chip amber"><span class="l">Stim</span><span>4.8</span></span>
+        <span class="chip maroon"><span class="l">Hours</span><span>9.2</span></span>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi"><div class="v">5.4</div><div class="l">Instr</div></div>
+      <div class="kpi"><div class="v" style="color:#a85a14">4.8</div><div class="l">Stim</div></div>
+      <div class="kpi"><div class="v" style="color:#66023c">9.2</div><div class="l">Hours</div></div>
+    </div>
+    <div class="trend-card">
+      <div class="trend-h">Instructor rating · 9 terms</div>
+      <div class="trend-sub">weighted by responses · zones shaded</div>
+      <svg viewBox="0 0 360 80" style="width:100%; display:block;">
+        <rect x="0" y="6" width="360" height="36" fill="#1c6b3a" fill-opacity="0.08" />
+        <line x1="22" y1="82" x2="354" y2="82" stroke="#c8c0a4" stroke-width="1" />
+        <line x1="22" y1="42" x2="354" y2="42" stroke="#c8c0a4" stroke-width="0.6" stroke-dasharray="3 3" />
+        <text x="4" y="45" font-family="ui-monospace" font-size="9" fill="#7d8088">5.0</text>
+        <path d="M22,60 L62,64 L102,54 L142,36 L182,24 L222,42 L262,36 L302,14 L342,36 L342,82 L22,82 Z" fill="#1c6b3a" fill-opacity="0.15" />
+        <path d="M22,60 L62,64 L102,54 L142,36 L182,24 L222,42 L262,36 L302,14 L342,36" fill="none" stroke="#1c6b3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <g fill="#1c6b3a">
+          <circle cx="22" cy="60" r="2.6" /><circle cx="62" cy="64" r="2.6" /><circle cx="102" cy="54" r="2.6" />
+          <circle cx="142" cy="36" r="2.6" /><circle cx="182" cy="24" r="2.6" /><circle cx="222" cy="42" r="2.6" />
+          <circle cx="262" cy="36" r="2.6" /><circle cx="302" cy="14" r="2.6" /><circle cx="342" cy="36" r="2.6" />
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div class="footer-line">BY NU STUDENTS · MIT · OPEN SOURCE · NO SERVERS</div>
+</div></div>
+</body></html>

@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8" />
+<link rel="stylesheet" href="common.css" />
+<style>
+  body { width: 1080px; height: 1350px; overflow: hidden; }
+  .canvas { width: 1080px; height: 1350px; overflow: hidden; }
+
+  .canvas::before {
+    background-image:
+      linear-gradient(rgba(38,30,20,0.09) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(38,30,20,0.09) 1px, transparent 1px) !important;
+  }
+  .canvas::after { opacity: 0.65 !important; }
+
+  .inner {
+    padding: 44px 64px 44px;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: 22px;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .main { min-height: 0; display: grid; align-content: center; gap: 14px; }
+  .footer { align-self: end; }
+
+  .top-tag {
+    font-family: var(--font-hand);
+    font-size: 26px;
+    color: var(--accent);
+    transform: rotate(-3deg);
+    display: inline-block;
+    margin-bottom: 4px;
+  }
+
+  h1.title {
+    font-family: var(--font-pencil);
+    font-size: 50px;
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  h1.title em { font-style: italic; color: var(--accent); }
+  h1.title .marker {
+    background: linear-gradient(transparent 56%, rgba(245,200,66,0.7) 56%);
+    padding: 0 6px;
+  }
+
+  .lede {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.4;
+    color: var(--ink-2);
+    max-width: 900px;
+    margin-bottom: 10px;
+  }
+
+  .stage { display: flex; align-items: center; justify-content: center; position: relative; margin: 0; }
+
+  .frame.explorer {
+    width: 100%;
+    max-width: 940px;
+    transform: rotate(1deg);
+    box-shadow: 8px 10px 0 var(--ink), 0 30px 50px -38px rgba(26,20,22,0.45);
+  }
+  .frame.explorer .frame-bar { padding: 8px 14px; }
+  .frame-bar { padding: 12px 16px; }
+  .frame-dots span { width: 10px; height: 10px; }
+  .frame-url { font-size: 13px; padding: 7px 12px; }
+
+  .explorer-body {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 0;
+  }
+
+  .rail {
+    border-right: 1px solid #e3d6c4;
+    padding: 12px 16px 12px;
+    background: #fbf5e9;
+  }
+  .rail-head {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ink-3);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .sent-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 3px 10px;
+    border-radius: 6px;
+    margin-bottom: 2px;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+  }
+  .sent-row .l { display: flex; align-items: center; gap: 9px; }
+  .sent-row .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .sent-row .n { font-weight: 700; }
+  .sent-row.on { background: #fff; border: 1px solid #d9cab4; }
+
+  .rail-divider {
+    border: 0; border-top: 1px dashed #d9cab4;
+    margin: 8px 0 6px;
+  }
+
+  .topic-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 3px;
+    margin-bottom: 5px;
+  }
+  .topic-label {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--ink);
+  }
+  .topic-label .count { color: var(--ink-3); margin-left: 6px; font-size: 11px; }
+  .topic-bar {
+    grid-column: 1 / -1;
+    height: 8px;
+    border-radius: 3px;
+    overflow: hidden;
+    display: flex;
+    border: 1px solid #e3d6c4;
+  }
+  .topic-bar span { display: block; height: 100%; }
+
+  .comments {
+    padding: 12px 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .comments-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 2px;
+  }
+  .comments-h {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--ink);
+  }
+  .comments-h .small {
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 11px;
+    color: var(--ink-3);
+    margin-left: 6px;
+  }
+  .filter-strip {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--ink-3);
+    letter-spacing: 0.05em;
+  }
+  .filter-strip .pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #fff;
+    border: 1px solid #d9cab4;
+    margin-right: 4px;
+    color: var(--ink-2);
+  }
+
+  .cmt {
+    border: 1px solid #e3d6c4;
+    border-left-width: 4px;
+    border-radius: 8px;
+    background: #fff;
+    padding: 8px 12px;
+  }
+  .cmt-head {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 4px;
+  }
+  .cmt-badge {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+    padding: 2px 7px;
+    border-radius: 3px;
+  }
+  .cmt-term {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-3);
+  }
+  .cmt-topics {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ink-3);
+  }
+  .cmt-topics em { color: var(--accent); font-style: normal; font-weight: 700; }
+  .cmt-body {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--ink-2);
+  }
+
+  .cmt.positive { border-left-color: #1c6b3a; }
+  .cmt.positive .cmt-badge { color: #1c6b3a; background: #e6f4ec; }
+  .cmt.mixed { border-left-color: #a85a14; }
+  .cmt.mixed .cmt-badge { color: #a85a14; background: #faecd6; }
+  .cmt.critical { border-left-color: #7c2d12; }
+  .cmt.critical .cmt-badge { color: #7c2d12; background: #f7e0d4; }
+
+  .bullet-row {
+    font-family: var(--font-pencil);
+    font-size: 16px;
+    color: var(--ink-2);
+    text-align: center;
+    letter-spacing: 0.01em;
+  }
+  .bullet-row .check { color: var(--accent); font-weight: 700; margin-right: 8px; }
+
+  .footer {
+    border-top: 1.5px dashed #c8c0a4;
+    padding-top: 10px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer .brand-mark {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--font-pencil);
+    font-size: 22px;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .footer .pageno {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--ink-3);
+    letter-spacing: 0.18em;
+    line-height: 1;
+  }
+</style></head>
+<body>
+<div class="canvas"><div class="inner">
+
+  <div class="top-tag">— on paper.nu —</div>
+
+  <div class="main">
+  <h1 class="title">Comments, by <em><span class="marker">sentiment.</span></em></h1>
+  <p class="lede">Three rails — Sentiment, Frequent topics, Term — cross-filter so you find the comment you actually want to read. All classification runs locally, cached per course.</p>
+
+  <div class="stage">
+    <div class="frame explorer">
+      <div class="frame-bar">
+        <div class="frame-dots"><span></span><span></span><span></span></div>
+        <div class="frame-url">paper.nu › CTEC › COMP_SCI 311 › comments</div>
+      </div>
+      <div class="explorer-body">
+
+        <aside class="rail">
+          <div class="rail-head">Sentiment</div>
+          <div class="sent-row on">
+            <span class="l"><span class="dot" style="background:#1c6b3a"></span>Positive</span>
+            <span class="n" style="color:#1c6b3a">91</span>
+          </div>
+          <div class="sent-row">
+            <span class="l"><span class="dot" style="background:#a85a14"></span>Mixed</span>
+            <span class="n" style="color:#a85a14">28</span>
+          </div>
+          <div class="sent-row">
+            <span class="l"><span class="dot" style="background:#4a4d52"></span>Neutral</span>
+            <span class="n" style="color:#4a4d52">12</span>
+          </div>
+          <div class="sent-row">
+            <span class="l"><span class="dot" style="background:#7c2d12"></span>Critical</span>
+            <span class="n" style="color:#7c2d12">11</span>
+          </div>
+
+          <hr class="rail-divider" />
+          <div class="rail-head">Frequent topics</div>
+
+          <div class="topic-row">
+            <div class="topic-label">"problem sets"<span class="count">38</span></div>
+            <div class="topic-bar">
+              <span style="background:#1c6b3a; width:62%"></span>
+              <span style="background:#a85a14; width:22%"></span>
+              <span style="background:#4a4d52; width:8%"></span>
+              <span style="background:#7c2d12; width:8%"></span>
+            </div>
+          </div>
+          <div class="topic-row">
+            <div class="topic-label">"office hours"<span class="count">27</span></div>
+            <div class="topic-bar">
+              <span style="background:#1c6b3a; width:78%"></span>
+              <span style="background:#a85a14; width:14%"></span>
+              <span style="background:#4a4d52; width:5%"></span>
+              <span style="background:#7c2d12; width:3%"></span>
+            </div>
+          </div>
+          <div class="topic-row">
+            <div class="topic-label">"the midterm"<span class="count">21</span></div>
+            <div class="topic-bar">
+              <span style="background:#1c6b3a; width:36%"></span>
+              <span style="background:#a85a14; width:30%"></span>
+              <span style="background:#4a4d52; width:8%"></span>
+              <span style="background:#7c2d12; width:26%"></span>
+            </div>
+          </div>
+          <div class="topic-row">
+            <div class="topic-label">"lecture pace"<span class="count">18</span></div>
+            <div class="topic-bar">
+              <span style="background:#1c6b3a; width:42%"></span>
+              <span style="background:#a85a14; width:34%"></span>
+              <span style="background:#4a4d52; width:6%"></span>
+              <span style="background:#7c2d12; width:18%"></span>
+            </div>
+          </div>
+        </aside>
+
+        <section class="comments">
+          <div class="comments-head">
+            <div class="comments-h">142 comments<span class="small">12 terms</span></div>
+            <div class="filter-strip"><span class="pill">Positive</span> <span style="opacity:.6">filtered</span></div>
+          </div>
+
+          <article class="cmt positive">
+            <div class="cmt-head">
+              <span class="cmt-badge">POSITIVE</span>
+              <span class="cmt-term">Fall 2024 · sec 21</span>
+              <span class="cmt-topics"><em>office hours</em> · <em>problem sets</em></span>
+            </div>
+            <div class="cmt-body">"Riedl is a phenomenal lecturer — every proof felt motivated, and office hours were genuinely fun. The problem sets are hard but fair."</div>
+          </article>
+
+          <article class="cmt mixed">
+            <div class="cmt-head">
+              <span class="cmt-badge">MIXED</span>
+              <span class="cmt-term">Winter 2024 · sec 22</span>
+              <span class="cmt-topics"><em>the midterm</em> · <em>lecture pace</em></span>
+            </div>
+            <div class="cmt-body">"Loved the material, but the midterm felt disconnected from the psets. Pace in week 6 was brutal."</div>
+          </article>
+
+          <article class="cmt critical">
+            <div class="cmt-head">
+              <span class="cmt-badge">CRITICAL</span>
+              <span class="cmt-term">Spring 2024 · sec 21</span>
+              <span class="cmt-topics"><em>problem sets</em></span>
+            </div>
+            <div class="cmt-body">"Problem sets took 15+ hours each. Cool topic, brutal workload — would not recommend if you're taking 4 classes."</div>
+          </article>
+
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="bullet-row"><span class="check">✓</span>Local classification · cached per course · no comment leaves your browser</div>
+  </div>
+
+  <footer class="footer">
+    <div class="brand-mark">
+      <svg width="22" height="42" viewBox="14 0 14 42" fill="none" aria-hidden="true">
+        <g transform="rotate(90 21 21)" stroke="#2a2a2e" stroke-width="1.2" stroke-linejoin="round">
+          <rect x="2" y="16" width="6" height="10" rx="1.6" fill="#ef8da6" />
+          <rect x="8" y="16" width="5" height="10" fill="#c2c7cb" />
+          <line x1="9.7" y1="16.4" x2="9.7" y2="25.6" stroke="#7d848a" stroke-width="0.55" />
+          <line x1="11.3" y1="16.4" x2="11.3" y2="25.6" stroke="#7d848a" stroke-width="0.55" />
+          <rect x="13" y="16" width="17" height="10" fill="#f5c842" />
+          <polygon points="30,16 35,16 35,26 30,26" fill="#d4a373" />
+          <polygon points="35,16 40,21 35,26" fill="#2a2a2e" />
+        </g>
+      </svg>
+      pencil.nu
+    </div>
+    <div class="pageno">5 / 8</div>
+  </footer>
+
+</div></div>
+</body></html>

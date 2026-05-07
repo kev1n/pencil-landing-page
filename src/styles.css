@@ -237,6 +237,19 @@ section[id] { scroll-margin-top: 72px; }
   box-shadow: 3px 3px 0 var(--accent);
 }
 
+.top-actions {
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.top-discord {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px;
+  color: var(--ink);
+  text-decoration: none;
+  border-radius: 4px;
+  transition: color 120ms ease, transform 120ms ease;
+}
+.top-discord:hover { color: #5865F2; transform: translateY(-1px); }
+
 /* Compact mobile CTAs — sit between the brand and the hamburger on phones.
    Hidden on desktop (the full .top-cta carries the action there). */
 .top-cta-mobile,

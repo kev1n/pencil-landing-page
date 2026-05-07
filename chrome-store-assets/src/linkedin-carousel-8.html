@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8" />
+<title>pencil.nu — LinkedIn carousel · 8 / 8</title>
+<link rel="stylesheet" href="common.css" />
+<style>
+  html, body { width: 1080px; height: 1350px; margin: 0; padding: 0; overflow: hidden; }
+  .canvas { width: 1080px; height: 1350px; position: relative; }
+
+  .canvas::before {
+    background-image:
+      linear-gradient(rgba(38,30,20,0.09) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(38,30,20,0.09) 1px, transparent 1px) !important;
+  }
+  .canvas::after { opacity: 0.65 !important; }
+
+  .inner {
+    position: absolute; inset: 0;
+    padding: 64px 72px;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: 32px;
+    justify-items: center;
+    z-index: 1;
+  }
+
+  .main {
+    min-height: 0;
+    display: grid;
+    align-content: center;
+    gap: 28px;
+    justify-items: center;
+    width: 100%;
+  }
+
+  .footer { align-self: end; }
+
+  .top-tag {
+    font-family: var(--font-hand);
+    font-size: 36px;
+    color: var(--accent);
+    transform: rotate(-2deg);
+    letter-spacing: 0.01em;
+  }
+
+  .hero {
+    text-align: center;
+    position: relative;
+  }
+
+  .hero .plane {
+    display: block;
+    margin: 0 auto 12px;
+    transform: rotate(-14deg);
+    filter: drop-shadow(6px 8px 0 rgba(229, 122, 144, 0.45));
+  }
+
+  .url {
+    font-family: var(--font-pencil);
+    font-size: 180px;
+    line-height: 0.92;
+    letter-spacing: -0.045em;
+    color: var(--ink);
+    white-space: nowrap;
+    margin-top: 30px;
+  }
+  .url .dot { color: var(--accent); }
+
+  .underline {
+    display: block;
+    margin: 0 auto;
+  }
+
+  .sub {
+    font-family: var(--font-pencil);
+    font-size: 44px;
+    color: var(--ink-2);
+    letter-spacing: -0.01em;
+    text-align: center;
+  }
+
+  .cta-block {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta-pill {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 26px 56px;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-pencil);
+    font-size: 42px;
+    letter-spacing: -0.01em;
+    border-radius: 999px;
+    box-shadow: 6px 6px 0 var(--accent);
+  }
+  .cta-pill .free-badge {
+    position: absolute;
+    top: -28px; right: -22px;
+    font-family: var(--font-hand);
+    font-size: 32px;
+    color: var(--accent);
+    background: var(--paper);
+    border: 1.5px dashed var(--accent);
+    border-radius: 999px;
+    padding: 2px 18px 4px;
+    transform: rotate(6deg);
+    box-shadow: 2px 2px 0 var(--accent);
+  }
+  .arrow-doodle {
+    position: absolute;
+    left: -200px; top: 18px;
+  }
+
+  .signature {
+    font-family: var(--font-hand);
+    font-size: 44px;
+    color: var(--ink-2);
+    transform: rotate(-1deg);
+    text-align: center;
+  }
+  .signature em { color: var(--accent); font-style: normal; }
+
+  .trust {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding-top: 8px;
+    border-top: 1.5px dashed var(--rule);
+    width: 540px;
+  }
+  .trust .line {
+    font-family: var(--font-mono);
+    font-size: 19px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .trust .sep { color: var(--accent); margin: 0 10px; }
+
+  .footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 2;
+  }
+  .brand-mark { display: flex; align-items: center; gap: 10px; }
+  .brand-mark .word {
+    font-family: var(--font-pencil);
+    font-size: 22px; color: var(--ink); letter-spacing: -0.01em;
+  }
+  .pageno {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    color: var(--ink-3);
+  }
+</style></head>
+<body>
+<div class="canvas">
+  <div class="inner">
+
+    <div class="top-tag">— install in two clicks —</div>
+
+    <div class="main">
+      <div class="hero">
+        <svg class="plane" width="140" height="140" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <path d="M14 44 L88 18 L70 84 L46 60 L36 68 L36 52 L70 28 L42 52 Z"
+                stroke="#2a2a2e" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" fill="none" />
+        </svg>
+        <h1 class="url">pencil<span class="dot">.</span>nu</h1>
+        <svg class="underline" width="600" height="20" viewBox="0 0 600 20" fill="none" aria-hidden="true">
+          <path d="M6 12 C 90 2, 180 20, 270 8 S 460 2, 540 12 S 590 6, 594 10"
+                stroke="#e57a90" stroke-width="3.5" stroke-linecap="round" fill="none" />
+        </svg>
+      </div>
+
+      <div class="sub">Add to Chrome →</div>
+
+      <div class="cta-block">
+        <svg class="arrow-doodle" width="180" height="120" viewBox="0 0 180 120" fill="none" aria-hidden="true">
+          <path d="M14 22 C 50 14, 88 40, 110 64 S 150 100, 168 96"
+                stroke="#e57a90" stroke-width="3.5" stroke-linecap="round" fill="none" />
+          <path d="M154 80 L170 96 L150 102"
+                stroke="#e57a90" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+          <text x="6" y="14" font-family="Caveat, cursive" font-size="28" fill="#e57a90" transform="rotate(-6 6 14)">tap me</text>
+        </svg>
+        <div class="cta-pill">
+          → Add to Chrome
+          <span class="free-badge">free!</span>
+        </div>
+      </div>
+
+      <div class="signature">— sharpen your <em>shopping week</em> —</div>
+
+      <div class="trust">
+        <div class="line">BY NU STUDENTS <span class="sep">·</span> MIT LICENSED</div>
+        <div class="line">OPEN SOURCE <span class="sep">·</span> NO SERVERS</div>
+        <div class="line">RUNS IN YOUR BROWSER</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="brand-mark">
+        <svg width="20" height="58" viewBox="14 0 14 42" fill="none" aria-hidden="true">
+          <g transform="rotate(90 21 21)" stroke="#2a2a2e" stroke-width="1.2" stroke-linejoin="round">
+            <rect x="2" y="16" width="6" height="10" rx="1.6" fill="#ef8da6" />
+            <rect x="8" y="16" width="5" height="10" fill="#c2c7cb" />
+            <line x1="9.7" y1="16.4" x2="9.7" y2="25.6" stroke="#7d848a" stroke-width="0.55" />
+            <line x1="11.3" y1="16.4" x2="11.3" y2="25.6" stroke="#7d848a" stroke-width="0.55" />
+            <rect x="13" y="16" width="17" height="10" fill="#f5c842" />
+            <polygon points="30,16 35,16 35,26 30,26" fill="#d4a373" />
+            <polygon points="35,16 40,21 35,26" fill="#2a2a2e" />
+          </g>
+        </svg>
+        <span class="word">pencil.nu</span>
+      </div>
+      <div class="pageno">8 / 8</div>
+    </div>
+
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8" />
+<title>pencil.nu — slide 3 / 8</title>
+<link rel="stylesheet" href="common.css" />
+<style>
+  body { width: 1080px; height: 1350px; overflow: hidden; }
+  .canvas { width: 1080px; height: 1350px; overflow: hidden; }
+  .canvas::before {
+    background-image:
+      linear-gradient(rgba(38,30,20,0.09) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(38,30,20,0.09) 1px, transparent 1px) !important;
+  }
+  .canvas::after { opacity: 0.65 !important; }
+  .inner {
+    padding: 56px 64px;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: 28px;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .main { min-height: 0; display: grid; align-content: center; gap: 20px; }
+  .footer { align-self: end; }
+
+  .tag {
+    font-family: var(--font-hand);
+    font-size: 32px;
+    color: var(--accent);
+    transform: rotate(-3deg);
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+
+  h1.title {
+    font-family: var(--font-pencil);
+    font-size: 64px;
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+  }
+  h1.title em { font-style: italic; color: var(--accent); }
+  h1.title .marker {
+    background: linear-gradient(transparent 56%, rgba(245, 200, 66, 0.7) 56%);
+    padding: 0 6px;
+  }
+
+  .lede {
+    font-family: var(--font-body);
+    font-size: 20px;
+    line-height: 1.4;
+    color: var(--ink-2);
+    max-width: 920px;
+  }
+
+  .mock-wrap { display: flex; justify-content: center; }
+  .mock { transform: rotate(1deg); width: 940px; }
+  .mock .frame { box-shadow: 6px 6px 0 var(--accent); border-radius: 14px; }
+
+  .frame-bar { padding: 10px 14px; }
+  .frame-dots span { width: 9px; height: 9px; }
+  .frame-url { font-size: 12px; padding: 6px 10px; }
+
+  .m-head {
+    padding: 12px 20px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px dashed #d9cab4;
+  }
+  .m-h-title { font-family: var(--font-display); font-weight: 700; font-size: 24px; }
+  .m-h-sub { font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); margin-top: 4px; letter-spacing: 0.04em; }
+  .m-tabs { display: flex; gap: 5px; font-family: var(--font-pencil); font-size: 12px; }
+  .m-tab { padding: 5px 11px; border-radius: 4px; border: 1px solid #d9cab4; }
+  .m-tab.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  .m-kpi { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; padding: 10px 18px; }
+  .m-kpi-cell { background: #f7f1ea; border: 1px solid #e3d6c4; border-radius: 8px; padding: 8px 6px; text-align: center; }
+  .m-kpi-v { font-family: var(--font-display); font-size: 24px; font-weight: 700; color: #1c6b3a; line-height: 1; }
+  .m-kpi-l { font-family: var(--font-mono); font-size: 9px; color: var(--ink-3); margin-top: 4px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  .heat-wrap { padding: 0 18px 10px; }
+  .heat-h { font-family: var(--font-mono); font-size: 10px; color: var(--ink-3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 5px; }
+  .heat-groups { display: grid; grid-template-columns: 60px 1fr 3fr 2fr 1fr; gap: 4px; margin-bottom: 3px; }
+  .heat-group { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); text-align: center; padding: 3px 0; background: #f1e0c9; border-radius: 3px; }
+  .heat-group.workload { background: #e9dff1; }
+  .heat-grid { display: grid; grid-template-columns: 60px repeat(7, 1fr); gap: 3px; font-family: var(--font-mono); font-size: 10px; }
+  .heat-grid .lab { text-align: center; color: var(--ink-3); padding-bottom: 2px; }
+  .heat-grid .row-lab { color: var(--ink-2); text-align: right; padding-right: 6px; align-self: center; font-size: 10px; }
+  .heat-grid .cell { height: 20px; border-radius: 3px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 600; font-size: 10px; }
+
+  .density {
+    background: #f7f1ea; border: 1px solid #e3d6c4; border-radius: 8px;
+    padding: 8px 14px 10px; margin: 0 18px 12px;
+  }
+  .density-h { font-family: var(--font-mono); font-size: 10px; color: var(--ink-3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+
+  .bullets {
+    list-style: none;
+    font-family: var(--font-pencil);
+    font-size: 17px;
+    color: var(--ink-2);
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .bullets li { padding-left: 22px; position: relative; line-height: 1.3; }
+  .bullets li::before { content: "✓"; color: var(--accent); position: absolute; left: 0; font-weight: 700; }
+
+  .footer {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 10px;
+    border-top: 1.5px dashed var(--rule);
+  }
+  .footer .brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-pencil); font-size: 20px; }
+  .footer .pageno {
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--ink-3); letter-spacing: 0.1em;
+  }
+</style></head>
+<body>
+<div class="canvas"><div class="inner">
+
+  <div class="tag">— on paper.nu —</div>
+
+  <div class="main">
+  <h1 class="title">A more <em>powerful</em> <span class="marker">CTEC viewer.</span></h1>
+  <p class="lede">Click any chip on a schedule card &rarr; full analytics modal. KPIs, heatmap, density curve, sentiment-tagged comments.</p>
+
+  <div class="mock-wrap"><div class="mock"><div class="frame">
+    <div class="frame-bar">
+      <div class="frame-dots"><span></span><span></span><span></span></div>
+      <div class="frame-url">paper.nu &rsaquo; CTEC viewer &middot; COMP_SCI 311</div>
+    </div>
+    <div class="m-head">
+      <div>
+        <div class="m-h-title">COMP_SCI 311</div>
+        <div class="m-h-sub">Theory of Computation &middot; 12 terms &middot; 487 responses</div>
+      </div>
+      <div class="m-tabs">
+        <div class="m-tab on">Overview</div>
+        <div class="m-tab">Terms</div>
+        <div class="m-tab">Comments</div>
+      </div>
+    </div>
+    <div class="m-kpi">
+      <div class="m-kpi-cell"><div class="m-kpi-v">5.2</div><div class="m-kpi-l">Global</div></div>
+      <div class="m-kpi-cell"><div class="m-kpi-v">5.4</div><div class="m-kpi-l">Instructor</div></div>
+      <div class="m-kpi-cell"><div class="m-kpi-v">5.1</div><div class="m-kpi-l">Course</div></div>
+      <div class="m-kpi-cell"><div class="m-kpi-v" style="color:#a85a14">4.8</div><div class="m-kpi-l">Stim</div></div>
+      <div class="m-kpi-cell"><div class="m-kpi-v" style="color:#66023c">9.2</div><div class="m-kpi-l">Hours</div></div>
+    </div>
+    <div class="heat-wrap">
+      <div class="heat-h">term &times; metric</div>
+      <div class="heat-groups">
+        <div></div>
+        <div class="heat-group">Overall</div>
+        <div class="heat-group">Quality</div>
+        <div class="heat-group">Character</div>
+        <div class="heat-group workload">Workload</div>
+      </div>
+      <div class="heat-grid">
+        <div></div>
+        <div class="lab">Global</div><div class="lab">Instr</div><div class="lab">Crse</div><div class="lab">Learn</div><div class="lab">Chal</div><div class="lab">Int</div><div class="lab">Hours</div>
+        <div class="row-lab">F25</div>
+        <div class="cell" style="background:#66023c">5.4</div>
+        <div class="cell" style="background:#66023c">5.5</div>
+        <div class="cell" style="background:#66023c">5.4</div>
+        <div class="cell" style="background:#66023c">5.3</div>
+        <div class="cell" style="background:#dba0bc;color:#2a2a2e">4.4</div>
+        <div class="cell" style="background:#b75683">4.9</div>
+        <div class="cell" style="background:#5a3f86">9.2</div>
+        <div class="row-lab">S25</div>
+        <div class="cell" style="background:#66023c">5.3</div>
+        <div class="cell" style="background:#66023c">5.4</div>
+        <div class="cell" style="background:#66023c">5.3</div>
+        <div class="cell" style="background:#8a2654">5.2</div>
+        <div class="cell" style="background:#dba0bc;color:#2a2a2e">4.5</div>
+        <div class="cell" style="background:#dba0bc;color:#2a2a2e">4.8</div>
+        <div class="cell" style="background:#3b1f5e">9.6</div>
+        <div class="row-lab">W25</div>
+        <div class="cell" style="background:#8a2654">5.2</div>
+        <div class="cell" style="background:#66023c">5.3</div>
+        <div class="cell" style="background:#8a2654">5.1</div>
+        <div class="cell" style="background:#8a2654">5.2</div>
+        <div class="cell" style="background:#dba0bc;color:#2a2a2e">4.6</div>
+        <div class="cell" style="background:#dba0bc;color:#2a2a2e">4.7</div>
+        <div class="cell" style="background:#5a3f86">9.0</div>
+        <div class="row-lab">F24</div>
+        <div class="cell" style="background:#8a2654">5.1</div>
+        <div class="cell" style="background:#8a2654">5.2</div>
+        <div class="cell" style="background:#b75683">5.0</div>
+        <div class="cell" style="background:#b75683">5.0</div>
+        <div class="cell" style="background:#dba0bc;color:#2a2a2e">4.7</div>
+        <div class="cell" style="background:#dba0bc;color:#2a2a2e">4.6</div>
+        <div class="cell" style="background:#8770ad">8.4</div>
+        <div class="row-lab">S24</div>
+        <div class="cell" style="background:#b75683">4.95</div>
+        <div class="cell" style="background:#b75683">5.0</div>
+        <div class="cell" style="background:#dba0bc;color:#2a2a2e">4.9</div>
+        <div class="cell" style="background:#b75683">5.0</div>
+        <div class="cell" style="background:#dba0bc;color:#2a2a2e">4.8</div>
+        <div class="cell" style="background:#dba0bc;color:#2a2a2e">4.5</div>
+        <div class="cell" style="background:#b6a5cf;color:#2a2a2e">8.0</div>
+      </div>
+    </div>
+    <div class="density">
+      <div class="density-h">hours / week density</div>
+      <svg viewBox="0 0 280 50" style="width:100%; height:38px; display:block;" preserveAspectRatio="none">
+        <path d="M0,48 C30,46 50,40 70,30 C100,20 130,8 150,12 C180,16 210,28 240,38 C260,42 275,46 280,48 Z"
+              fill="#e57a90" fill-opacity="0.35" stroke="#e57a90" stroke-width="1.5" />
+        <line x1="135" y1="50" x2="135" y2="6" stroke="#66023c" stroke-width="1" stroke-dasharray="2 2" />
+      </svg>
+      <div style="display:flex; justify-content:space-between; margin-top:5px; font-family: var(--font-mono); font-size:10px; color: var(--ink-3);">
+        <span>0h</span><span style="color:#66023c">median 9h</span><span>20+h</span>
+      </div>
+    </div>
+  </div></div></div>
+
+  <ul class="bullets">
+    <li>12 terms &middot; 487 responses</li>
+    <li>Distributions extracted from Bluera PNGs locally</li>
+    <li>No server &mdash; runs in your browser</li>
+  </ul>
+  </div>
+
+  <footer class="footer">
+    <div class="brand">
+      <svg width="22" height="42" viewBox="14 0 14 42" fill="none" aria-hidden="true">
+        <g transform="rotate(90 21 21)" stroke="#2a2a2e" stroke-width="1.2" stroke-linejoin="round">
+          <rect x="2" y="16" width="6" height="10" rx="1.6" fill="#ef8da6" />
+          <rect x="8" y="16" width="5" height="10" fill="#c2c7cb" />
+          <line x1="9.7" y1="16.4" x2="9.7" y2="25.6" stroke="#7d848a" stroke-width="0.55" />
+          <line x1="11.3" y1="16.4" x2="11.3" y2="25.6" stroke="#7d848a" stroke-width="0.55" />
+          <rect x="13" y="16" width="17" height="10" fill="#f5c842" />
+          <polygon points="30,16 35,16 35,26 30,26" fill="#d4a373" />
+          <polygon points="35,16 40,21 35,26" fill="#2a2a2e" />
+        </g>
+      </svg>
+      <span>pencil.nu</span>
+    </div>
+    <div class="pageno">3 / 8</div>
+  </footer>
+
+</div></div>
+</body></html>

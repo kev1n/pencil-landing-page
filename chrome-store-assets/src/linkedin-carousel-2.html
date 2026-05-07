@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8" />
+<title>pencil.nu — LinkedIn carousel · 2/8</title>
+<link rel="stylesheet" href="common.css" />
+<style>
+  html, body { background: var(--paper); }
+  body { width: 1080px; height: 1350px; overflow: hidden; }
+  .canvas { width: 1080px; height: 1350px; overflow: hidden; position: relative; }
+
+  .inner {
+    padding: 38px 72px 120px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  .top-tag {
+    font-family: var(--font-hand);
+    font-size: 30px;
+    color: var(--accent);
+    transform: rotate(-2deg);
+    display: inline-block;
+    margin-bottom: 6px;
+    align-self: flex-start;
+  }
+
+  .headline {
+    font-family: var(--font-pencil);
+    font-size: 50px;
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+    margin-bottom: 14px;
+    max-width: 22ch;
+  }
+  .headline em { font-style: italic; color: var(--accent); }
+  .headline .marker {
+    background: linear-gradient(transparent 58%, rgba(245, 200, 66, 0.65) 58%);
+    padding: 0 4px;
+  }
+
+  .complaints {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 38px;
+    margin-top: 4px;
+  }
+
+  .card {
+    filter: grayscale(0.32) opacity(0.9);
+    background: #f3ead2;
+    border: 1px solid #c8bea0;
+    border-radius: 14px;
+    box-shadow: 0 24px 38px -32px rgba(26,20,22,0.45), 5px 5px 0 #6e6a5c;
+    overflow: hidden;
+  }
+  .card.left  { transform: rotate(-2deg); }
+  .card.right { transform: rotate( 2deg); }
+
+  .frame-bar {
+    background: #ece2c6;
+    border-bottom: 1px solid #c8bea0;
+    padding: 9px 12px;
+  }
+  .frame-dots span { background: #c8bea0; }
+  .frame-url {
+    background: #e2d8bb;
+    color: #5e5b4f;
+    font-size: 12.5px;
+  }
+
+  .ctec-pop {
+    padding: 14px 18px 16px;
+    color: #5e5b4f;
+  }
+  .ctec-pop .pop-title {
+    font-family: var(--font-pencil);
+    font-size: 18px;
+    color: #4a4a44;
+    margin-bottom: 3px;
+    letter-spacing: -0.01em;
+  }
+  .ctec-pop .pop-sub {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: #7a7766;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    border-bottom: 1px dashed #c8bea0;
+    padding-bottom: 7px;
+  }
+  .stat-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: #56544a;
+    padding: 3px 0;
+    border-bottom: 1px dotted #c8bea0;
+  }
+  .stat-line .l { letter-spacing: 0.02em; }
+  .stat-line .v { font-weight: 700; color: #3f3d36; }
+
+  .empty-block {
+    margin-top: 7px;
+    background: repeating-linear-gradient(
+      45deg,
+      #e2d8bb 0 6px,
+      #d8cdaf 6px 12px
+    );
+    border: 1px dashed #b8ad8e;
+    border-radius: 7px;
+    color: #8c8773;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    text-align: center;
+    padding: 7px 8px;
+    letter-spacing: 0.05em;
+  }
+
+  .caesar-pop {
+    padding: 14px 18px 14px;
+    color: #5e5b4f;
+  }
+  .caesar-pop .pop-title {
+    font-family: "Times New Roman", serif;
+    font-size: 20px;
+    color: #3f3d36;
+    margin-bottom: 3px;
+    font-weight: 700;
+  }
+  .caesar-pop .pop-sub {
+    font-family: "Times New Roman", serif;
+    font-size: 11.5px;
+    color: #7a7766;
+    margin-bottom: 7px;
+    border-bottom: 1px solid #c8bea0;
+    padding-bottom: 6px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 5px;
+    font-family: "Times New Roman", serif;
+    font-size: 13px;
+    color: #4a4842;
+  }
+  .form-row .lbl { text-align: right; }
+  .fake-select {
+    background: linear-gradient(#ece2c6, #ddd2b0);
+    border: 1px solid #b0a684;
+    border-radius: 2px;
+    padding: 5px 8px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: #4a4842;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: inset 0 1px 0 #f3ead2;
+  }
+  .fake-select.empty { color: #9c9680; font-style: italic; }
+  .fake-select .arr { color: #7a7766; font-size: 9px; }
+
+  .fake-btn {
+    margin-top: 8px;
+    display: inline-block;
+    background: linear-gradient(#d8cdaf, #b8ad8e);
+    border: 1px solid #8e856a;
+    border-radius: 2px;
+    padding: 5px 20px;
+    font-family: "Times New Roman", serif;
+    font-size: 12.5px;
+    color: #4a4842;
+    box-shadow: inset 0 1px 0 #ece2c6;
+  }
+
+  .step-trail {
+    margin-top: 8px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: #8c8773;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+    border-top: 1px dashed #b8ad8e;
+    padding-top: 6px;
+  }
+
+  .ugh {
+    position: absolute;
+    left: 50%;
+    top: 36%;
+    transform: translate(-50%, -50%) rotate(-6deg);
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .footer-wrap {
+    margin-top: auto;
+    padding-top: 14px;
+  }
+  .footer-caption {
+    text-align: center;
+  }
+  .footer-caption .we {
+    font-family: var(--font-hand);
+    font-size: 44px;
+    color: var(--accent);
+    transform: rotate(-1deg);
+    display: inline-block;
+    line-height: 1;
+  }
+
+  .bottom-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1.2px dashed #c8c0a4;
+  }
+  .brand-mark {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-pencil);
+    font-size: 22px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .brand-mark svg { display: block; }
+  .slide-num {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--ink-3);
+    letter-spacing: 0.18em;
+  }
+</style></head>
+<body>
+<div class="canvas"><div class="inner">
+
+  <div class="top-tag">— the status quo —</div>
+
+  <h1 class="headline">
+    The CTEC popup tells you almost <em>nothing.</em>
+    And CAESAR's class search is from <em><span class="marker">another decade.</span></em>
+  </h1>
+
+  <div class="complaints">
+
+    <div class="card left">
+      <div class="frame-bar" style="display:flex; align-items:center; gap:8px;">
+        <div class="frame-dots"><span></span><span></span><span></span></div>
+        <div class="frame-url">bluera &rsaquo; CTEC popup</div>
+      </div>
+      <div class="ctec-pop">
+        <div class="pop-title">COMP_SCI 311</div>
+        <div class="pop-sub">Course evaluation summary</div>
+        <div class="stat-line"><span class="l">Course Avg</span><span class="v">5.1 / 6</span></div>
+        <div class="stat-line"><span class="l">Instructor Avg</span><span class="v">5.4 / 6</span></div>
+        <div class="stat-line"><span class="l">Hours / Wk</span><span class="v">9.2</span></div>
+        <div class="empty-block">[ no comments ]</div>
+      </div>
+    </div>
+
+    <div class="card right">
+      <div class="frame-bar" style="display:flex; align-items:center; gap:8px;">
+        <div class="frame-dots"><span></span><span></span><span></span></div>
+        <div class="frame-url">caesar.northwestern.edu &rsaquo; Search for Classes</div>
+      </div>
+      <div class="caesar-pop">
+        <div class="pop-title">Search for Classes</div>
+        <div class="pop-sub">Enter Search Criteria</div>
+
+        <div class="form-row">
+          <span class="lbl">Subject:</span>
+          <span class="fake-select"><span>COMP_SCI</span><span class="arr">&#9660;</span></span>
+        </div>
+        <div class="form-row">
+          <span class="lbl">Catalog #:</span>
+          <span class="fake-select empty"><span>— select —</span><span class="arr">&#9660;</span></span>
+        </div>
+        <div class="form-row">
+          <span class="lbl">Term:</span>
+          <span class="fake-select empty"><span>— select —</span><span class="arr">&#9660;</span></span>
+        </div>
+
+        <div class="fake-btn">[ Search ]</div>
+
+        <div class="step-trail">
+          Search &rarr; Select &rarr; Confirm &rarr; Next page &rarr; Add
+        </div>
+      </div>
+    </div>
+
+    <svg class="ugh" width="150" height="120" viewBox="0 0 150 120" fill="none" aria-hidden="true">
+      <ellipse cx="75" cy="56" rx="58" ry="34"
+               fill="#fffaf3" stroke="#e57a90" stroke-width="2.4"
+               stroke-dasharray="5 4" />
+      <text x="75" y="64"
+            text-anchor="middle"
+            font-family="Caveat, cursive"
+            font-size="46"
+            font-weight="700"
+            fill="#e57a90"
+            stroke="#e57a90"
+            stroke-width="0.6"
+            style="paint-order: stroke fill;">ugh.</text>
+      <path d="M70 90 L58 110 L66 104 L62 116"
+            stroke="#e57a90" stroke-width="2.4"
+            stroke-linecap="round" stroke-linejoin="round"
+            fill="none" />
+    </svg>
+
+  </div>
+
+  <div class="footer-wrap">
+    <div class="footer-caption">
+      <span class="we">we wanted better.</span>
+    </div>
+
+    <div class="bottom-bar">
+      <div class="brand-mark">
+        <svg width="18" height="44" viewBox="14 0 14 42" fill="none" aria-hidden="true">
+          <g transform="rotate(90 21 21)" stroke="#2a2a2e" stroke-width="1.2" stroke-linejoin="round">
+            <rect x="2" y="16" width="6" height="10" rx="1.6" fill="#ef8da6" />
+            <rect x="8" y="16" width="5" height="10" fill="#c2c7cb" />
+            <line x1="9.7" y1="16.4" x2="9.7" y2="25.6" stroke="#7d848a" stroke-width="0.55" />
+            <line x1="11.3" y1="16.4" x2="11.3" y2="25.6" stroke="#7d848a" stroke-width="0.55" />
+            <rect x="13" y="16" width="17" height="10" fill="#f5c842" />
+            <polygon points="30,16 35,16 35,26 30,26" fill="#d4a373" />
+            <polygon points="35,16 40,21 35,26" fill="#2a2a2e" />
+          </g>
+        </svg>
+        pencil.nu
+      </div>
+      <div class="slide-num">2 / 8</div>
+    </div>
+  </div>
+
+</div></div>
+</body></html>
