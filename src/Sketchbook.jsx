@@ -235,7 +235,7 @@ export default function Sketchbook({ tweaks }) {
             Add to Chrome
             <span className="btn-pencil-free">free!</span>
           </a>
-          <a className="btn-ghost-pencil" href="#sched" onClick={() => posthog?.capture("schedule_section_viewed", { location: "hero" })}>when does mine unlock?</a>
+          <a className="btn-ghost-pencil" href="#sched" onClick={() => posthog?.capture("schedule_section_viewed", { location: "hero" })}>is it available?</a>
           <span className="scribble-arrow">↙ unlock by grad year</span>
         </div>
 
@@ -275,43 +275,16 @@ export default function Sketchbook({ tweaks }) {
         </div>
       </section>
 
-      {/* ── Rollout schedule ───────────────────────────────────────────── */}
+      {/* ── Generally available ────────────────────────────────────────── */}
       <section id="sched">
         <div className="wrap">
-          <div className="sec-mark">~ rollout ~</div>
-          <h2 className="sec-title">When does <i>your</i> grad year unlock?</h2>
+          <div className="sec-mark">~ availability ~</div>
+          <h2 className="sec-title">Pencil is <i>generally available.</i></h2>
           <p className="sec-blurb">
-            We release in waves so we don't drop a thousand students on Northwestern's
-            servers all at once. Each card has a live countdown. We figure out
-            your wave from your CAESAR grad year after you sign in.
+            No waitlist, no grad-year gate. Every Northwestern student — and the
+            global release — is live. Install the extension, sign into CAESAR,
+            and you're in.
           </p>
-
-          <div className="sb-rollout">
-            {tweaks.schedule.map((b, i) => {
-              const d = formatDate(b.iso);
-              const status = b.live ? "live" : i === 1 ? "next" : "queued";
-              const label = b.live ? "live ✓" : i === 1 ? "next up" : "queued";
-              return (
-                <div className="sb-card" key={i}>
-                  <div className="sb-bucket-h">
-                    <div className="sb-bucket">{b.label}</div>
-                    <div className={"sb-stamp " + status}>{label}</div>
-                  </div>
-                  <div className="sb-name">{b.name}</div>
-                  <div className="sb-date">
-                    {b.live ? "available now" : `${d.short} · ${d.time}`}
-                  </div>
-                  <Countdown iso={b.iso} live={b.live} />
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="sb-rollout-foot">
-            <span className="hand">↑</span> rising seniors and grad students already in ·
-            rising juniors wake Saturday morning · everyone else (incl. global
-            release) Monday morning, all Chicago time.
-          </div>
         </div>
       </section>
 
