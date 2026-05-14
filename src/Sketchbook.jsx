@@ -158,7 +158,7 @@ export default function Sketchbook({ tweaks }) {
             >
               <DiscordIcon />
             </a>
-            <a className="top-cta" href={tweaks.chromeUrl} target="_blank" rel="noopener noreferrer" onClick={() => posthog?.capture("chrome_install_clicked", { location: "top_nav" })}>add to chrome →</a>
+            <a className="top-cta" href={tweaks.installUrl} target="_blank" rel="noopener noreferrer" onClick={() => posthog?.capture("chrome_install_clicked", { location: "top_nav", browser: tweaks.browser })}>{tweaks.installLabelLower} →</a>
           </div>
           {/* Compact CTAs that stay visible alongside the hamburger on
               mobile — feedback (ghost) and add-to-chrome (filled). The
@@ -173,8 +173,8 @@ export default function Sketchbook({ tweaks }) {
           >
             feedback
           </a>
-          <a className="top-cta-mobile" href={tweaks.chromeUrl} target="_blank" rel="noopener noreferrer" onClick={() => posthog?.capture("chrome_install_clicked", { location: "top_nav_mobile" })}>
-            + chrome
+          <a className="top-cta-mobile" href={tweaks.installUrl} target="_blank" rel="noopener noreferrer" onClick={() => posthog?.capture("chrome_install_clicked", { location: "top_nav_mobile", browser: tweaks.browser })}>
+            {tweaks.installLabelShort}
           </a>
           <button
             type="button"
@@ -205,12 +205,12 @@ export default function Sketchbook({ tweaks }) {
             </a>
             <a
               className="mobile-cta"
-              href={tweaks.chromeUrl}
+              href={tweaks.installUrl}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => { posthog?.capture("chrome_install_clicked", { location: "mobile_menu" }); closeMenu(); }}
+              onClick={() => { posthog?.capture("chrome_install_clicked", { location: "mobile_menu", browser: tweaks.browser }); closeMenu(); }}
             >
-              add to chrome →
+              {tweaks.installLabelLower} →
             </a>
           </div>
         </div>
@@ -231,8 +231,8 @@ export default function Sketchbook({ tweaks }) {
           No new dashboard.
         </p>
         <div className="hero-ctas">
-          <a className="btn-pencil" href={tweaks.chromeUrl} target="_blank" rel="noopener noreferrer" onClick={() => posthog?.capture("chrome_install_clicked", { location: "hero" })}>
-            Add to Chrome
+          <a className="btn-pencil" href={tweaks.installUrl} target="_blank" rel="noopener noreferrer" onClick={() => posthog?.capture("chrome_install_clicked", { location: "hero", browser: tweaks.browser })}>
+            {tweaks.installLabelTitle}
             <span className="btn-pencil-free">free!</span>
           </a>
           <a className="btn-ghost-pencil" href="#sched" onClick={() => posthog?.capture("schedule_section_viewed", { location: "hero" })}>is it available?</a>
@@ -522,7 +522,7 @@ export default function Sketchbook({ tweaks }) {
               <p>free · MIT-licensed · open source. an unofficial extension drawn by NU students. not affiliated with the university. not affiliated with paper.nu either — we just love it.</p>
             </div>
             <div className="foot-col"><h5>get it</h5><ul>
-              <li><a href={tweaks.chromeUrl} target="_blank" rel="noopener noreferrer" onClick={() => posthog?.capture("chrome_install_clicked", { location: "footer" })}>chrome web store</a></li>
+              <li><a href={tweaks.installUrl} target="_blank" rel="noopener noreferrer" onClick={() => posthog?.capture("chrome_install_clicked", { location: "footer", browser: tweaks.browser })}>{tweaks.installStoreLabel}</a></li>
               <li><a href={tweaks.githubUrl} onClick={() => posthog?.capture("github_clicked", { location: "footer" })}>github</a></li>
               <li><a href={tweaks.feedbackUrl} target="_blank" rel="noopener noreferrer" onClick={() => posthog?.capture("feedback_clicked", { location: "footer" })}>leave feedback ↗</a></li>
             </ul></div>

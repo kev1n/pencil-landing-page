@@ -28,6 +28,7 @@ const TWEAKS = {
   ],
   chromeUrl:
     "https://chromewebstore.google.com/detail/pencilnu/klgfglapoogiaggfghlbcbfjhhgebahf",
+  firefoxUrl: "https://addons.mozilla.org/en-US/firefox/addon/pencil-nu/",
   githubUrl: "https://github.com/kev1n/better-caesar",
   discordUrl: "https://discord.gg/c5r8K2Ry",
   paperUrl: "https://paper.nu",
@@ -39,6 +40,25 @@ const TWEAKS = {
   ],
 };
 
+// Firefox is the only non-Chromium browser we ship a build for. Edge, Brave,
+// Arc, Opera, etc. all install from the Chrome Web Store, so a positive
+// Firefox sniff is enough — everything else falls through to chromeUrl.
+function detectBrowser() {
+  if (typeof navigator === "undefined") return "chrome";
+  return /firefox/i.test(navigator.userAgent) ? "firefox" : "chrome";
+}
+
 export default function App() {
-  return <Sketchbook tweaks={TWEAKS} />;
+  const browser = detectBrowser();
+  const isFirefox = browser === "firefox";
+  const tweaks = {
+    ...TWEAKS,
+    browser,
+    installUrl: isFirefox ? TWEAKS.firefoxUrl : TWEAKS.chromeUrl,
+    installLabelLower: isFirefox ? "add to firefox" : "add to chrome",
+    installLabelTitle: isFirefox ? "Add to Firefox" : "Add to Chrome",
+    installLabelShort: isFirefox ? "+ firefox" : "+ chrome",
+    installStoreLabel: isFirefox ? "firefox add-ons" : "chrome web store",
+  };
+  return <Sketchbook tweaks={tweaks} />;
 }
