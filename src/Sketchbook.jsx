@@ -448,8 +448,6 @@ export default function Sketchbook({ tweaks }) {
                   <li>Live status pills (open / waitlist / closed)</li>
                   <li>Filter by Foundational Discipline (Nat Sci, Soc Beh, Lit Arts, Hist, Ethics, Emp Ded) with icons on every card</li>
                   <li>Hide already-taken courses with one switch — repeatable classes (seminars, 396/397, independent study) always stay visible</li>
-                  <li>Add-to-cart in place — runs Search → Select → Next in the background</li>
-                  <li>Persistent "✓ In cart" / "Enrolled" badges so you don't double-add</li>
                 </ul>
               </div>
               <div><MockSearch /></div>
