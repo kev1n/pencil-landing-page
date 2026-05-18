@@ -447,7 +447,7 @@ export default function Sketchbook({ tweaks }) {
                   <li>Digit wildcards: <code>31x</code> matches 311, 314, 319…</li>
                   <li>Live status pills (open / waitlist / closed)</li>
                   <li>Filter by Foundational Discipline (Nat Sci, Soc Beh, Lit Arts, Hist, Ethics, Emp Ded) with icons on every card</li>
-                  <li>Hide already-taken courses with one switch — repeatable classes (seminars, 396/397, independent study) always stay visible</li>
+                  <li>Hide already-taken courses with one switch</li>
                 </ul>
               </div>
               <div><MockSearch /></div>
