@@ -319,7 +319,7 @@ export default function Sketchbook({ tweaks }) {
                   expands the full viewer.
                 </p>
                 <ul className="bullets">
-                  <li>Instructor · Course · Lecture · Stimulating · Hours</li>
+                  <li>Instructor · Course · Lecture · Hours</li>
                   <li>Response-weighted means across your most recent N terms</li>
                   <li>Three display modes: numeric /6, percent, or stars</li>
                   <li>Weekly study-load total at the top of paper.nu — hover for the per-class breakdown</li>
