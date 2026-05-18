@@ -524,7 +524,9 @@ export default function Sketchbook({ tweaks }) {
             <div className="foot-col"><h5>built by</h5><ul>
               {tweaks.creators.map((c) => (
                 <li key={c.email}>
-                  <span style={{ display: "block" }}>{c.name}</span>
+                  <a href={c.linkedin} target="_blank" rel="noopener noreferrer" style={{ display: "block", fontWeight: 700 }}>
+                    {c.name}
+                  </a>
                   <a href={`mailto:${c.email}`} style={{ fontSize: 12, color: "var(--ink-3)" }}>
                     {c.email}
                   </a>

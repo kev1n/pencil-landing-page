@@ -10,8 +10,16 @@ const TWEAKS = {
   feedbackUrl:
     "https://docs.google.com/forms/d/e/1FAIpQLSc34UX2cWyPx3jwgYDxyU7P7nx_--G91b1cepX1t1xS6tI7-w/viewform?usp=dialog",
   creators: [
-    { name: "Kevin Wang", email: "kevinwang2027@u.northwestern.edu" },
-    { name: "Jason Latz", email: "jasonlatz2027@u.northwestern.edu" },
+    {
+      name: "Kevin Wang",
+      email: "kevinwang2027@u.northwestern.edu",
+      linkedin: "https://www.linkedin.com/in/kevin-wang-08836a175/",
+    },
+    {
+      name: "Jason Latz",
+      email: "jasonlatz2027@u.northwestern.edu",
+      linkedin: "https://linkedin.com/in/jasonlatz",
+    },
   ],
 };
 
