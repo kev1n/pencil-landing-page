@@ -539,7 +539,7 @@ export default function Sketchbook({ tweaks }) {
           </div>
           <div className="foot-meta">
             <span>~ © 2026 pencil.nu · MIT ~</span>
-            <span>made in Evanston</span>
+            <span>made in Evanston with love :)</span>
           </div>
         </div>
       </footer>
