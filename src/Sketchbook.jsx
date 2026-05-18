@@ -259,8 +259,8 @@ export default function Sketchbook({ tweaks }) {
               <div className="pnum">3.</div>
               <div className="pillar-icon">{pillarIcons.check}</div>
             </div>
-            <h4>Respects "fill to view"</h4>
-            <p>NU only shows CTECs to students who've filled their own out. We respect that — if you can't see a CTEC in the portal, we can't either.</p>
+            <h4>Add directly to cart — from Paper</h4>
+            <p>One click on paper.nu and the section lands in your CAESAR cart. No detour through CAESAR search.</p>
           </div>
           <div className="pillar">
             <div className="pnum-row">
