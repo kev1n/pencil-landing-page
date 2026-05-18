@@ -490,12 +490,6 @@ export default function Sketchbook({ tweaks }) {
               <div className="ssc-num">0 req<small>on cache hit</small></div>
             </div>
             <div className="sb-safety-card sm">
-              <div className="ssc-h">staggered</div>
-              <h4>Waves by grad year.</h4>
-              <p>Rising seniors and grad first, rising juniors Saturday, everyone else Monday. We pause if anything looks off.</p>
-              <div className="ssc-num">3<small>release waves</small></div>
-            </div>
-            <div className="sb-safety-card sm">
               <div className="ssc-h">no servers</div>
               <h4>NU and nowhere else.</h4>
               <p>No telemetry, no SDKs, no analytics.</p>
