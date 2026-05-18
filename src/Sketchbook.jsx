@@ -117,7 +117,6 @@ export default function Sketchbook({ tweaks }) {
   // navigation. The desktop topnav prepends `feedback` for parity, but
   // the mobile drawer renders the buttons in their own CTA row below.
   const sectionLinks = [
-    { href: "#sched",  label: "schedule" },
     { href: "#paper",  label: "paper.nu" },
     { href: "#caesar", label: "caesar" },
     { href: "#safe",   label: "safety" },
@@ -125,9 +124,9 @@ export default function Sketchbook({ tweaks }) {
     { href: tweaks.discordUrl, label: "discord" },
   ];
   const desktopNavLinks = [
-    ...sectionLinks.slice(0, 4),
+    ...sectionLinks.slice(0, 3),
     { href: tweaks.feedbackUrl, label: "feedback", external: true },
-    sectionLinks[4],
+    sectionLinks[3],
   ];
   return (
     <>
@@ -217,7 +216,7 @@ export default function Sketchbook({ tweaks }) {
       </header>
 
       <section className="hero wrap">
-        <div className="tag">— free, open-source · a small project for shopping week —</div>
+        <div className="tag">— free, open-source · built by and for northwestern students —</div>
         <h1>
           paper.nu and CAESAR,{" "}
           <span className="circle">sharpened</span>
@@ -235,8 +234,7 @@ export default function Sketchbook({ tweaks }) {
             {tweaks.installLabelTitle}
             <span className="btn-pencil-free">free!</span>
           </a>
-          <a className="btn-ghost-pencil" href="#sched" onClick={() => posthog?.capture("schedule_section_viewed", { location: "hero" })}>is it available?</a>
-          <span className="scribble-arrow">↙ unlock by grad year</span>
+          <span className="hero-cta-note">← install the extension, sign into CAESAR, and you're in.</span>
         </div>
 
         <div className="pillars-margin">
@@ -261,8 +259,8 @@ export default function Sketchbook({ tweaks }) {
               <div className="pnum">3.</div>
               <div className="pillar-icon">{pillarIcons.check}</div>
             </div>
-            <h4>Respects "fill to view"</h4>
-            <p>NU only shows CTECs to students who've filled their own out. We respect that — if you can't see a CTEC in the portal, we can't either.</p>
+            <h4>Add directly to cart — from Paper</h4>
+            <p>One click on paper.nu and the section lands in your CAESAR cart. No detour through CAESAR search.</p>
           </div>
           <div className="pillar">
             <div className="pnum-row">
@@ -272,19 +270,6 @@ export default function Sketchbook({ tweaks }) {
             <h4>Your session, not our keys</h4>
             <p>Uses the CAESAR session already in your browser. We never see your NetID, password, or any credentials.</p>
           </div>
-        </div>
-      </section>
-
-      {/* ── Generally available ────────────────────────────────────────── */}
-      <section id="sched">
-        <div className="wrap">
-          <div className="sec-mark">~ availability ~</div>
-          <h2 className="sec-title">Pencil is <i>generally available.</i></h2>
-          <p className="sec-blurb">
-            No waitlist, no grad-year gate. Every Northwestern student — and the
-            global release — is live. Install the extension, sign into CAESAR,
-            and you're in.
-          </p>
         </div>
       </section>
 
@@ -307,6 +292,8 @@ export default function Sketchbook({ tweaks }) {
               Paper.nu is great for sketching out a quarter. We graft Northwestern's
               entire CTEC archive onto its class drawer — so you never tab away to
               decide if you actually want to take the class you just dragged in.
+              Plus schedule combinations, calendar export, and eligibility badges,
+              all inlined into the page.
             </p>
           </div>
 
@@ -321,9 +308,10 @@ export default function Sketchbook({ tweaks }) {
                   expands the full viewer.
                 </p>
                 <ul className="bullets">
-                  <li>Instructor · Course · Lecture · Stimulating · Hours</li>
+                  <li>Instructor · Course · Lecture · Hours</li>
                   <li>Response-weighted means across your most recent N terms</li>
                   <li>Three display modes: numeric /6, percent, or stars</li>
+                  <li>Weekly study-load total at the top of paper.nu — hover for the per-class breakdown</li>
                   <li>Dense-card layout for tight Sunday-night schedules</li>
                 </ul>
               </div>
@@ -341,6 +329,7 @@ export default function Sketchbook({ tweaks }) {
                   from Bluera's distribution images.
                 </p>
                 <ul className="bullets">
+                  <li>Pivot by prof (every course they've taught) or by course (every prof who's taught it) — remembered per section</li>
                   <li>Heatmap rows are terms; columns grouped by metric family — two shading scales (rating + hours)</li>
                   <li>Hours density shows the median and the long tail</li>
                   <li>Distribution counts pulled from Bluera PNGs via local pixel-scan — no server</li>
@@ -364,7 +353,6 @@ export default function Sketchbook({ tweaks }) {
                   <li>Frequent topics: bigrams like "problem sets" or "office hours" with mini sentiment bars</li>
                   <li>Term rail: filter to a specific quarter, counts respect the other rails</li>
                   <li>Search inside comments, sort by newest or by tone</li>
-                  <li>Cached per-course so reopening costs zero requests</li>
                 </ul>
               </div>
               <div><MockComments /></div>
@@ -380,12 +368,42 @@ export default function Sketchbook({ tweaks }) {
                   "fine" and a 5.4 reads as "rare air."
                 </p>
                 <ul className="bullets">
-                  <li>One trend per metric: instructor, course, hours, stimulating</li>
-                  <li>Response-count weighting so a tiny term doesn't yank the line</li>
-                  <li>Resize-aware SVGs that fit the modal at any width</li>
+                  <li>One trend per metric: instructor, course, hours</li>
                 </ul>
               </div>
               <div><MockTrend /></div>
+            </div>
+          </div>
+
+          <div className="sb-extra">
+            <div className="sb-extra-mark">— now also on paper.nu —</div>
+            <div className="sb-extra-grid">
+              <div className="sb-extra-card">
+                <h4>Schedule combinations</h4>
+                <p>
+                  Cycle every non-overlapping schedule of your classes — pin sections
+                  you've decided on, cap the credit range, and sort by CTEC rating or
+                  <strong> Lazy mode</strong> (lightest workload first).
+                </p>
+              </div>
+              <div className="sb-extra-card">
+                <h4>Schedule → your calendar</h4>
+                <p>
+                  Click Paper.nu's glowing Export button and we walk you through
+                  importing the <code>.ics</code> into <strong>Google Calendar</strong>,
+                  <strong> Apple Calendar</strong>, or <strong>Outlook</strong> —
+                  one-click jumps to each provider's import page.
+                </p>
+              </div>
+              <div className="sb-extra-card">
+                <h4>Eligibility, at a glance</h4>
+                <p>
+                  Paper.nu search results and schedule cards pick up
+                  ✓/? badges read from your cached CAESAR course history. Hide
+                  ineligible classes with one switch, or view your history under
+                  <em> My courses</em> in the popup.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -416,8 +434,8 @@ export default function Sketchbook({ tweaks }) {
                   <li>Subject shortcuts: <code>cs</code> → COMP_SCI, <code>bme</code> → BMD_ENG</li>
                   <li>Digit wildcards: <code>31x</code> matches 311, 314, 319…</li>
                   <li>Live status pills (open / waitlist / closed)</li>
-                  <li>Add-to-cart in place — runs Search → Select → Next in the background</li>
-                  <li>Persistent "✓ In cart" / "Enrolled" badges so you don't double-add</li>
+                  <li>Filter by Foundational Discipline (Nat Sci, Soc Beh, Lit Arts, Hist, Ethics, Emp Ded) with icons on every card</li>
+                  <li>Hide already-taken courses with one switch</li>
                 </ul>
               </div>
               <div><MockSearch /></div>
@@ -430,6 +448,7 @@ export default function Sketchbook({ tweaks }) {
                 <p>CAESAR tells you almost nothing about what's already in your cart. We fix that — with notes, requirements, attributes, and live seat counts.</p>
                 <ul className="bullets">
                   <li>Live counts in under a second</li>
+                  <li>Real per-section seat counts for cross-listed courses (e.g. COMP_SCI 346 / COMP_ENG 346) instead of the pooled total</li>
                   <li>Color-coded urgency</li>
                   <li>Updates after every CAESAR action</li>
                 </ul>
@@ -458,11 +477,12 @@ export default function Sketchbook({ tweaks }) {
       <section id="safe">
         <div className="wrap">
           <div className="sec-mark">— a note for NU IT —</div>
-          <h2 className="sec-title">We're trying really hard not to be a problem.</h2>
+          <h2 className="sec-title">We are doing everything we can to not be a problem.</h2>
           <p className="sec-blurb">
-            Every student-built extension fails the same way — a thundering herd during
-            shopping week. Here's exactly how we engineered against that, with the numbers
-            from our source.
+            We are 100% committed to respecting the privacy and security of the
+            Northwestern community. Read below about the intentional choices we made
+            to support that. If you have concerns, please feel free to{" "}
+            <a href={`mailto:${tweaks.creators.map((c) => c.email).join(",")}`}>contact us</a>.
           </p>
 
           <div className="sb-safety">
@@ -493,16 +513,16 @@ export default function Sketchbook({ tweaks }) {
               <div className="ssc-num">0 req<small>on cache hit</small></div>
             </div>
             <div className="sb-safety-card sm">
-              <div className="ssc-h">staggered</div>
-              <h4>Waves by grad year.</h4>
-              <p>Rising seniors and grad first, rising juniors Saturday, everyone else Monday. We pause if anything looks off.</p>
-              <div className="ssc-num">3<small>release waves</small></div>
+              <div className="ssc-h">private</div>
+              <h4>We can't see anything you do.</h4>
+              <p>No telemetry, no SDKs, no analytics. We run no servers — there's nothing to log, nothing to leak.</p>
+              <div className="ssc-num">0<small>servers of ours</small></div>
             </div>
             <div className="sb-safety-card sm">
-              <div className="ssc-h">no servers</div>
-              <h4>NU and nowhere else.</h4>
-              <p>No telemetry, no SDKs, no analytics.</p>
-              <div className="ssc-num">0<small>servers of ours</small></div>
+              <div className="ssc-h">NU only</div>
+              <h4>Only works inside CAESAR.</h4>
+              <p>Pencil rides on your existing CAESAR session. If Northwestern doesn't let you in, neither does Pencil — no NetID, no extension.</p>
+              <div className="ssc-num">NU<small>or nothing</small></div>
             </div>
             <div className="sb-safety-card sm">
               <div className="ssc-h">open source</div>
@@ -534,7 +554,9 @@ export default function Sketchbook({ tweaks }) {
             <div className="foot-col"><h5>built by</h5><ul>
               {tweaks.creators.map((c) => (
                 <li key={c.email}>
-                  <span style={{ display: "block" }}>{c.name}</span>
+                  <a href={c.linkedin} target="_blank" rel="noopener noreferrer" style={{ display: "block", fontWeight: 700 }}>
+                    {c.name}
+                  </a>
                   <a href={`mailto:${c.email}`} style={{ fontSize: 12, color: "var(--ink-3)" }}>
                     {c.email}
                   </a>
@@ -547,7 +569,7 @@ export default function Sketchbook({ tweaks }) {
           </div>
           <div className="foot-meta">
             <span>~ © 2026 pencil.nu · MIT ~</span>
-            <span>made in Evanston</span>
+            <span>made in Evanston with love :)</span>
           </div>
         </div>
       </footer>

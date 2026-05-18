@@ -639,7 +639,7 @@ export function MockTrend() {
         ))}
       </svg>
       <div style={{ marginTop: 4, fontFamily: "var(--font-mono)", fontSize: 9, color: "#66023c", letterSpacing: ".06em" }}>
-        ↳ also: course rating, hours, stimulating
+        ↳ also: course rating, hours
       </div>
     </div>
   );

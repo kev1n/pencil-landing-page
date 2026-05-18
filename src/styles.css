@@ -357,6 +357,13 @@ h1 .circle::before {
   font-size: 20px;
 }
 
+.hero-cta-note {
+  font-family: var(--font-hand); color: var(--ink-2);
+  font-size: 18px; line-height: 1.2;
+  max-width: 280px;
+  margin-left: 20px;
+}
+
 .pillars-margin {
   margin-top: 40px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
   border-top: 2px dashed var(--rule); padding-top: 24px;
@@ -411,6 +418,8 @@ section { padding-top: 56px; padding-bottom: 56px; position: relative; z-index: 
   font-size: 16px; color: var(--ink-2); margin: 0 0 32px;
   max-width: 680px; line-height: 1.5;
 }
+.sec-blurb a { color: var(--accent); text-decoration: none; }
+.sec-blurb a:hover { text-decoration: underline; }
 
 /* Sketchbook rollout */
 .sb-rollout {
@@ -508,6 +517,42 @@ section { padding-top: 56px; padding-bottom: 56px; position: relative; z-index: 
   flex-shrink: 0; line-height: 1.45;
 }
 
+.sb-extra {
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px dashed var(--rule);
+}
+.sb-extra-mark {
+  font-family: var(--font-hand); font-size: 18px; color: var(--accent);
+  margin-bottom: 16px;
+}
+.sb-extra-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+.sb-extra-card {
+  padding: 20px 22px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+}
+.sb-extra-card h4 {
+  font-family: var(--font-pencil); font-weight: 400;
+  font-size: 20px; line-height: 1.15; letter-spacing: -0.01em;
+  margin: 0 0 10px; color: var(--ink);
+}
+.sb-extra-card p {
+  font-family: var(--font-pencil); font-size: 14px; line-height: 1.5;
+  color: var(--ink-2); margin: 0;
+}
+.sb-extra-card code {
+  font-family: var(--font-mono); font-size: 12px;
+  background: var(--pencil-yellow-soft);
+  padding: 1px 5px; border-radius: 3px;
+}
+@media (max-width: 880px) {
+  .sb-extra-grid { grid-template-columns: 1fr; }
+}
+
 /* Paper.nu section — distinct visual treatment so the dedicated paper
    integration block reads as its own chapter. Slightly cooler paper tint,
    paper-plane logo flush-left in the section header. */
@@ -583,6 +628,7 @@ footer { padding: 40px 0 24px; border-top: 2px dashed var(--rule); position: rel
 .foot-col h5 { margin: 0 0 12px; font-family: var(--font-hand); font-size: 18px; color: var(--accent); }
 .foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; font-family: var(--font-pencil); font-size: 14px; }
 .foot-col a { text-decoration: none; color: var(--ink); }
+.foot-col a:hover { text-decoration: underline; }
 .foot-meta {
   margin-top: 40px; padding-top: 20px; border-top: 1px dashed var(--rule);
   display: flex; justify-content: space-between;
@@ -664,6 +710,7 @@ footer { padding: 40px 0 24px; border-top: 2px dashed var(--rule); position: rel
   .btn-pencil { justify-content: center; padding: 12px 18px; }
   .btn-ghost-pencil { text-align: center; }
   .scribble-arrow { font-size: 16px; align-self: center; }
+  .hero-cta-note { font-size: 15px; text-align: center; max-width: 100%; margin-left: 0; }
   .tag { font-size: 16px; margin-bottom: 6px; }
   .lede { font-size: 15px; line-height: 1.5; margin-bottom: 18px; }
 
