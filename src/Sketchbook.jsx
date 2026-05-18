@@ -217,7 +217,7 @@ export default function Sketchbook({ tweaks }) {
       </header>
 
       <section className="hero wrap">
-        <div className="tag">— free, open-source · a small project for shopping week —</div>
+        <div className="tag">— free, open-source · built by and for northwestern students —</div>
         <h1>
           paper.nu and CAESAR,{" "}
           <span className="circle">sharpened</span>
