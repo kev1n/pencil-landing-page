@@ -454,7 +454,7 @@ export default function Sketchbook({ tweaks }) {
       <section id="safe">
         <div className="wrap">
           <div className="sec-mark">— a note for NU IT —</div>
-          <h2 className="sec-title">We're trying really hard not to be a problem.</h2>
+          <h2 className="sec-title">We are doing everything we can to not be a problem.</h2>
           <p className="sec-blurb">
             Every student-built extension fails the same way — a thundering herd during
             shopping week. Here's exactly how we engineered against that, with the numbers
