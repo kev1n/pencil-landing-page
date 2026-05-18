@@ -353,7 +353,6 @@ export default function Sketchbook({ tweaks }) {
                   <li>Frequent topics: bigrams like "problem sets" or "office hours" with mini sentiment bars</li>
                   <li>Term rail: filter to a specific quarter, counts respect the other rails</li>
                   <li>Search inside comments, sort by newest or by tone</li>
-                  <li>Cached per-course so reopening costs zero requests</li>
                 </ul>
               </div>
               <div><MockComments /></div>
