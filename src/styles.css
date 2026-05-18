@@ -418,6 +418,8 @@ section { padding-top: 56px; padding-bottom: 56px; position: relative; z-index: 
   font-size: 16px; color: var(--ink-2); margin: 0 0 32px;
   max-width: 680px; line-height: 1.5;
 }
+.sec-blurb a { color: var(--accent); text-decoration: none; }
+.sec-blurb a:hover { text-decoration: underline; }
 
 /* Sketchbook rollout */
 .sb-rollout {
