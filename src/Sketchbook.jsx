@@ -514,9 +514,9 @@ export default function Sketchbook({ tweaks }) {
             </div>
             <div className="sb-safety-card sm">
               <div className="ssc-h">private</div>
-              <h4>We can't see anything you do.</h4>
-              <p>No telemetry, no SDKs, no analytics. We run no servers — there's nothing to log, nothing to leak.</p>
-              <div className="ssc-num">0<small>servers of ours</small></div>
+              <h4>Your CAESAR activity stays in your browser.</h4>
+              <p>Pencil has no backend for class loads or CTEC fetches. This site uses lightweight click analytics, but your authenticated CAESAR traffic stays between your browser and Northwestern.</p>
+              <div className="ssc-num">0<small>Pencil servers in the loop</small></div>
             </div>
             <div className="sb-safety-card sm">
               <div className="ssc-h">NU only</div>
