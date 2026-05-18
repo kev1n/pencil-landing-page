@@ -278,11 +278,9 @@ export default function Sketchbook({ tweaks }) {
       <section id="sched">
         <div className="wrap">
           <div className="sec-mark">~ availability ~</div>
-          <h2 className="sec-title">Pencil is <i>generally available.</i></h2>
+          <h2 className="sec-title">Pencil is <i>available to everyone!</i></h2>
           <p className="sec-blurb">
-            No waitlist, no grad-year gate. Every Northwestern student — and the
-            global release — is live. Install the extension, sign into CAESAR,
-            and you're in.
+            Install the extension, sign into CAESAR, and you're in.
           </p>
         </div>
       </section>
