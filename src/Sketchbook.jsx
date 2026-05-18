@@ -380,9 +380,7 @@ export default function Sketchbook({ tweaks }) {
                   "fine" and a 5.4 reads as "rare air."
                 </p>
                 <ul className="bullets">
-                  <li>One trend per metric: instructor, course, hours, stimulating</li>
-                  <li>Response-count weighting so a tiny term doesn't yank the line</li>
-                  <li>Resize-aware SVGs that fit the modal at any width</li>
+                  <li>One trend per metric: instructor, course, hours</li>
                 </ul>
               </div>
               <div><MockTrend /></div>
