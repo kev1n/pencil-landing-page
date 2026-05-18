@@ -513,10 +513,16 @@ export default function Sketchbook({ tweaks }) {
               <div className="ssc-num">0 req<small>on cache hit</small></div>
             </div>
             <div className="sb-safety-card sm">
-              <div className="ssc-h">no servers</div>
-              <h4>NU and nowhere else.</h4>
-              <p>No telemetry, no SDKs, no analytics.</p>
+              <div className="ssc-h">private</div>
+              <h4>We can't see anything you do.</h4>
+              <p>No telemetry, no SDKs, no analytics. We run no servers — there's nothing to log, nothing to leak.</p>
               <div className="ssc-num">0<small>servers of ours</small></div>
+            </div>
+            <div className="sb-safety-card sm">
+              <div className="ssc-h">NU only</div>
+              <h4>Only works inside CAESAR.</h4>
+              <p>Pencil rides on your existing CAESAR session. If Northwestern doesn't let you in, neither does Pencil — no NetID, no extension.</p>
+              <div className="ssc-num">NU<small>or nothing</small></div>
             </div>
             <div className="sb-safety-card sm">
               <div className="ssc-h">open source</div>
