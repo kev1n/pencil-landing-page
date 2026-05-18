@@ -117,7 +117,6 @@ export default function Sketchbook({ tweaks }) {
   // navigation. The desktop topnav prepends `feedback` for parity, but
   // the mobile drawer renders the buttons in their own CTA row below.
   const sectionLinks = [
-    { href: "#sched",  label: "schedule" },
     { href: "#paper",  label: "paper.nu" },
     { href: "#caesar", label: "caesar" },
     { href: "#safe",   label: "safety" },
@@ -125,9 +124,9 @@ export default function Sketchbook({ tweaks }) {
     { href: tweaks.discordUrl, label: "discord" },
   ];
   const desktopNavLinks = [
-    ...sectionLinks.slice(0, 4),
+    ...sectionLinks.slice(0, 3),
     { href: tweaks.feedbackUrl, label: "feedback", external: true },
-    sectionLinks[4],
+    sectionLinks[3],
   ];
   return (
     <>
@@ -235,6 +234,7 @@ export default function Sketchbook({ tweaks }) {
             {tweaks.installLabelTitle}
             <span className="btn-pencil-free">free!</span>
           </a>
+          <span className="hero-cta-note">← install the extension, sign into CAESAR, and you're in.</span>
         </div>
 
         <div className="pillars-margin">
@@ -270,17 +270,6 @@ export default function Sketchbook({ tweaks }) {
             <h4>Your session, not our keys</h4>
             <p>Uses the CAESAR session already in your browser. We never see your NetID, password, or any credentials.</p>
           </div>
-        </div>
-      </section>
-
-      {/* ── Generally available ────────────────────────────────────────── */}
-      <section id="sched">
-        <div className="wrap">
-          <div className="sec-mark">~ availability ~</div>
-          <h2 className="sec-title">Pencil is <i>available to everyone!</i></h2>
-          <p className="sec-blurb">
-            Install the extension, sign into CAESAR, and you're in.
-          </p>
         </div>
       </section>
 

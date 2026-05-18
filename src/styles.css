@@ -357,6 +357,12 @@ h1 .circle::before {
   font-size: 20px;
 }
 
+.hero-cta-note {
+  font-family: var(--font-hand); color: var(--ink-2);
+  font-size: 18px; line-height: 1.2;
+  max-width: 280px;
+}
+
 .pillars-margin {
   margin-top: 40px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
   border-top: 2px dashed var(--rule); padding-top: 24px;
@@ -701,6 +707,7 @@ footer { padding: 40px 0 24px; border-top: 2px dashed var(--rule); position: rel
   .btn-pencil { justify-content: center; padding: 12px 18px; }
   .btn-ghost-pencil { text-align: center; }
   .scribble-arrow { font-size: 16px; align-self: center; }
+  .hero-cta-note { font-size: 15px; text-align: center; max-width: 100%; }
   .tag { font-size: 16px; margin-bottom: 6px; }
   .lede { font-size: 15px; line-height: 1.5; margin-bottom: 18px; }
 
