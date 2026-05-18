@@ -236,7 +236,6 @@ export default function Sketchbook({ tweaks }) {
             <span className="btn-pencil-free">free!</span>
           </a>
           <a className="btn-ghost-pencil" href="#sched" onClick={() => posthog?.capture("schedule_section_viewed", { location: "hero" })}>is it available?</a>
-          <span className="scribble-arrow">↙ unlock by grad year</span>
         </div>
 
         <div className="pillars-margin">
