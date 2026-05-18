@@ -508,6 +508,42 @@ section { padding-top: 56px; padding-bottom: 56px; position: relative; z-index: 
   flex-shrink: 0; line-height: 1.45;
 }
 
+.sb-extra {
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px dashed var(--rule);
+}
+.sb-extra-mark {
+  font-family: var(--font-hand); font-size: 18px; color: var(--accent);
+  margin-bottom: 16px;
+}
+.sb-extra-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+.sb-extra-card {
+  padding: 20px 22px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+}
+.sb-extra-card h4 {
+  font-family: var(--font-pencil); font-weight: 400;
+  font-size: 20px; line-height: 1.15; letter-spacing: -0.01em;
+  margin: 0 0 10px; color: var(--ink);
+}
+.sb-extra-card p {
+  font-family: var(--font-pencil); font-size: 14px; line-height: 1.5;
+  color: var(--ink-2); margin: 0;
+}
+.sb-extra-card code {
+  font-family: var(--font-mono); font-size: 12px;
+  background: var(--pencil-yellow-soft);
+  padding: 1px 5px; border-radius: 3px;
+}
+@media (max-width: 880px) {
+  .sb-extra-grid { grid-template-columns: 1fr; }
+}
+
 /* Paper.nu section — distinct visual treatment so the dedicated paper
    integration block reads as its own chapter. Slightly cooler paper tint,
    paper-plane logo flush-left in the section header. */

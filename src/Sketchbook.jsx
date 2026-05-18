@@ -303,6 +303,8 @@ export default function Sketchbook({ tweaks }) {
               Paper.nu is great for sketching out a quarter. We graft Northwestern's
               entire CTEC archive onto its class drawer — so you never tab away to
               decide if you actually want to take the class you just dragged in.
+              Plus schedule combinations, calendar export, and eligibility badges,
+              all inlined into the page.
             </p>
           </div>
 
@@ -320,6 +322,7 @@ export default function Sketchbook({ tweaks }) {
                   <li>Instructor · Course · Lecture · Stimulating · Hours</li>
                   <li>Response-weighted means across your most recent N terms</li>
                   <li>Three display modes: numeric /6, percent, or stars</li>
+                  <li>Weekly study-load total at the top of paper.nu — hover for the per-class breakdown</li>
                   <li>Dense-card layout for tight Sunday-night schedules</li>
                 </ul>
               </div>
@@ -337,6 +340,7 @@ export default function Sketchbook({ tweaks }) {
                   from Bluera's distribution images.
                 </p>
                 <ul className="bullets">
+                  <li>Pivot by prof (every course they've taught) or by course (every prof who's taught it) — remembered per section</li>
                   <li>Heatmap rows are terms; columns grouped by metric family — two shading scales (rating + hours)</li>
                   <li>Hours density shows the median and the long tail</li>
                   <li>Distribution counts pulled from Bluera PNGs via local pixel-scan — no server</li>
@@ -384,6 +388,38 @@ export default function Sketchbook({ tweaks }) {
               <div><MockTrend /></div>
             </div>
           </div>
+
+          <div className="sb-extra">
+            <div className="sb-extra-mark">— now also on paper.nu —</div>
+            <div className="sb-extra-grid">
+              <div className="sb-extra-card">
+                <h4>Schedule combinations</h4>
+                <p>
+                  Cycle every non-overlapping schedule of your classes — pin sections
+                  you've decided on, cap the credit range, and sort by CTEC rating or
+                  <strong> Lazy mode</strong> (lightest workload first).
+                </p>
+              </div>
+              <div className="sb-extra-card">
+                <h4>Schedule → your calendar</h4>
+                <p>
+                  Click Paper.nu's glowing Export button and we walk you through
+                  importing the <code>.ics</code> into <strong>Google Calendar</strong>,
+                  <strong> Apple Calendar</strong>, or <strong>Outlook</strong> —
+                  one-click jumps to each provider's import page.
+                </p>
+              </div>
+              <div className="sb-extra-card">
+                <h4>Eligibility, at a glance</h4>
+                <p>
+                  Paper.nu search results and schedule cards pick up
+                  ✓/? badges read from your cached CAESAR course history. Hide
+                  ineligible classes with one switch, or view your history under
+                  <em> My courses</em> in the popup.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -412,6 +448,8 @@ export default function Sketchbook({ tweaks }) {
                   <li>Subject shortcuts: <code>cs</code> → COMP_SCI, <code>bme</code> → BMD_ENG</li>
                   <li>Digit wildcards: <code>31x</code> matches 311, 314, 319…</li>
                   <li>Live status pills (open / waitlist / closed)</li>
+                  <li>Filter by Foundational Discipline (Nat Sci, Soc Beh, Lit Arts, Hist, Ethics, Emp Ded) with icons on every card</li>
+                  <li>Hide already-taken courses with one switch — repeatable classes (seminars, 396/397, independent study) always stay visible</li>
                   <li>Add-to-cart in place — runs Search → Select → Next in the background</li>
                   <li>Persistent "✓ In cart" / "Enrolled" badges so you don't double-add</li>
                 </ul>
@@ -426,6 +464,7 @@ export default function Sketchbook({ tweaks }) {
                 <p>CAESAR tells you almost nothing about what's already in your cart. We fix that — with notes, requirements, attributes, and live seat counts.</p>
                 <ul className="bullets">
                   <li>Live counts in under a second</li>
+                  <li>Real per-section seat counts for cross-listed courses (e.g. COMP_SCI 346 / COMP_ENG 346) instead of the pooled total</li>
                   <li>Color-coded urgency</li>
                   <li>Updates after every CAESAR action</li>
                 </ul>
