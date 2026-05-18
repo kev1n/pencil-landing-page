@@ -492,7 +492,7 @@ export default function Sketchbook({ tweaks }) {
           <h2 className="sec-title">We are doing everything we can to not be a problem.</h2>
           <p className="sec-blurb">
             Every student-built extension fails the same way — a thundering herd during
-            shopping week. Here's exactly how we engineered against that, with the numbers
+            registration week. Here's exactly how we engineered against that, with the numbers
             from our source.
           </p>
 
