@@ -479,9 +479,10 @@ export default function Sketchbook({ tweaks }) {
           <div className="sec-mark">— a note for NU IT —</div>
           <h2 className="sec-title">We are doing everything we can to not be a problem.</h2>
           <p className="sec-blurb">
-            Every student-built extension fails the same way — a thundering herd during
-            registration week. Here's exactly how we engineered against that, with the numbers
-            from our source.
+            We are 100% committed to respecting the privacy and security of the
+            Northwestern community. Read below about the intentional choices we made
+            to support that. If you have concerns, please feel free to{" "}
+            <a href={`mailto:${tweaks.creators.map((c) => c.email).join(",")}`}>contact us</a>.
           </p>
 
           <div className="sb-safety">
