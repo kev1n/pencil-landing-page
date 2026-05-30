@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 /* Mocks aim to match the real extension UI:
    - MockSearch: replicates the bc-cs-shell layout from
      class-search/views/{search-form,course-card,section-row}.ts.
@@ -16,8 +18,12 @@ const cellPaper = {
   borderRadius: 8,
 };
 
+// The header owns the only live UI state on this page. These mocks are static
+// fixtures after mount, so memoizing them keeps menu toggles from rebuilding
+// the entire marketing gallery below the fold.
+
 // Stylized paper-plane outline matching paper.nu's icon-borderless.png.
-export function PaperLogo({ size = 28 }) {
+export const PaperLogo = memo(function PaperLogo({ size = 28 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 100 100" fill="none" aria-hidden="true">
       <path
@@ -30,11 +36,11 @@ export function PaperLogo({ size = 28 }) {
       />
     </svg>
   );
-}
+});
 
 // ── CAESAR mocks ───────────────────────────────────────────────────────────
 
-export function MockSearch() {
+export const MockSearch = memo(function MockSearch() {
   const sections = [
     { id: "21", comp: "LEC", time: "MoWeFr 10:00am–10:50am", who: "Riedl",    room: "TECH L160", status: "OPEN",     cart: "in-cart" },
     { id: "22", comp: "LEC", time: "MoWeFr 1:00pm–1:50pm",   who: "Pardo",    room: "TECH LR3",  status: "WAITLIST", cart: null },
@@ -147,9 +153,9 @@ export function MockSearch() {
       </div>
     </div>
   );
-}
+});
 
-export function MockSeats() {
+export const MockSeats = memo(function MockSeats() {
   const rows = [
     { c: "COMP_SCI 311",  t: "Theory of Computation",     s: 17, max: 30 },
     { c: "ENGLISH 270-2", t: "American Lit Traditions",   s: 3,  max: 25 },
@@ -195,9 +201,9 @@ export function MockSeats() {
       </div>
     </div>
   );
-}
+});
 
-export function MockNav() {
+export const MockNav = memo(function MockNav() {
   const rows = [{ t: "Spring 2026", on: true }, { t: "Winter 2026", on: false }, { t: "Fall 2025", on: false }];
   return (
     <div className="mock-frame">
@@ -232,13 +238,13 @@ export function MockNav() {
       </div>
     </div>
   );
-}
+});
 
 // ── Paper.nu mocks ─────────────────────────────────────────────────────────
 
 // Schedule card with the CTEC chip strip overlaid (the most visible
 // paper-ctec surface on schedule cards).
-export function MockChip() {
+export const MockChip = memo(function MockChip() {
   return (
     <div className="mock-frame" style={{ padding: 12 }}>
       <div className="mock-bar">
@@ -294,10 +300,10 @@ export function MockChip() {
       </div>
     </div>
   );
-}
+});
 
 // CTEC analytics modal — KPI strip + heatmap + density chart.
-export function MockModal() {
+export const MockModal = memo(function MockModal() {
   return (
     <div className="mock-frame" style={{ padding: 12 }}>
       <div className="mock-bar">
@@ -434,10 +440,10 @@ export function MockModal() {
       </div>
     </div>
   );
-}
+});
 
 // Comments tab with sentiment rail (positive / mixed / neutral / critical).
-export function MockComments() {
+export const MockComments = memo(function MockComments() {
   const comments = [
     { tone: "pos", body: "Riedl is the best lecturer I've had at NU. Be ready to think hard, but lectures are gold.", term: "F25" },
     { tone: "mix", body: "Conceptually beautiful. Workload uneven — some weeks light, others brutal. Pick your study group well.", term: "S25" },
@@ -494,7 +500,6 @@ export function MockComments() {
             { l: "lecture pace", n: 18, on: false, s: { pos: 11, mix: 4,  neu: 2, neg: 1 } },
             { l: "study group",  n: 14, on: false, s: { pos: 12, mix: 1,  neu: 1, neg: 0 } },
           ].map((t) => {
-            const total = t.s.pos + t.s.mix + t.s.neu + t.s.neg;
             return (
               <div key={t.l} style={{
                 padding: "4px 8px", marginBottom: 2, borderRadius: 4,
@@ -591,10 +596,10 @@ export function MockComments() {
       </div>
     </div>
   );
-}
+});
 
 // Trend chart — instructor rating over loaded terms.
-export function MockTrend() {
+export const MockTrend = memo(function MockTrend() {
   const points = [
     { t: "F22", v: 5.1 }, { t: "W23", v: 5.0 }, { t: "S23", v: 5.2 },
     { t: "F23", v: 5.4 }, { t: "W24", v: 5.5 }, { t: "S24", v: 5.3 },
@@ -643,7 +648,9 @@ export function MockTrend() {
       </div>
     </div>
   );
-}
+});
 
 // Backwards-compat: legacy pre-paper-section CTEC mock.
-export function MockCtec() { return <MockModal />; }
+export const MockCtec = memo(function MockCtec() {
+  return <MockModal />;
+});
