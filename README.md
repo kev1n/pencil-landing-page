@@ -1,5 +1,9 @@
 # React + Vite
 
+Project note: see `docs/frontend-performance.md` for the render-shaping rule
+that keeps static landing-page mocks from re-rendering on header/menu state
+changes.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
