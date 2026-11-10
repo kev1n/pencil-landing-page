@@ -119,14 +119,15 @@ export default function Sketchbook({ tweaks }) {
   const sectionLinks = [
     { href: "#paper",  label: "paper.nu" },
     { href: "#caesar", label: "caesar" },
+    { href: "/guide/", label: "user guide" },
     { href: "#safe",   label: "safety" },
     { href: tweaks.githubUrl, label: "github" },
     { href: tweaks.discordUrl, label: "discord" },
   ];
   const desktopNavLinks = [
-    ...sectionLinks.slice(0, 3),
+    ...sectionLinks.slice(0, 4),
     { href: tweaks.feedbackUrl, label: "feedback", external: true },
-    sectionLinks[3],
+    sectionLinks[4],
   ];
   return (
     <>
@@ -547,6 +548,7 @@ export default function Sketchbook({ tweaks }) {
               <li><a href={tweaks.feedbackUrl} target="_blank" rel="noopener noreferrer" onClick={() => posthog?.capture("feedback_clicked", { location: "footer" })}>leave feedback ↗</a></li>
             </ul></div>
             <div className="foot-col"><h5>trust</h5><ul>
+              <li><a href="/guide/">user guide</a></li>
               <li><a href="#safe">safety mechanisms</a></li>
               <li><a href={tweaks.githubUrl + "/issues"}>report an issue</a></li>
               <li><a href={tweaks.paperUrl} target="_blank" rel="noopener noreferrer" onClick={() => posthog?.capture("paper_nu_link_clicked", { location: "footer" })}>paper.nu ↗</a></li>
