@@ -57,9 +57,9 @@ const chapters = [
 ];
 
 function GuideVideo({ id, title }) {
-  const video = `/guide-media/${id}.mp4`;
+  const video = `/guide-media/${id}.mp4?v=2`;
   return (
-    <video className="guide-video" controls playsInline preload="none" poster={`/guide-media/${id}.jpg`} aria-label={title}>
+    <video className="guide-video" controls playsInline preload="none" poster={`/guide-media/${id}.jpg?v=2`} aria-label={title}>
       <source src={video} type="video/mp4" />
       <a href={video}>Download the walkthrough</a>
     </video>
@@ -80,7 +80,7 @@ export default function UserGuide() {
         <div className="guide-hero">
           <p className="guide-kicker">The Pencil field guide</p>
           <h1>Plan your quarter<br />with <em>Pencil.</em></h1>
-          <p>Start with CTECs on Paper.nu, then try the tools for planning and registration. Each short video shows where to click and has instructions on screen.</p>
+          <p>Start with CTECs on Paper.nu, then try the tools for planning and registration. Each video keeps the full Paper.nu or CAESAR screen in view and highlights where to click. The clips use sample data.</p>
         </div>
         <div className="guide-layout">
           <nav className="guide-index" aria-label="Guide chapters">

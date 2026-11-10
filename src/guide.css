@@ -24,7 +24,7 @@
 .guide-video {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 10;
   margin: 0 0 22px;
   border: 1px solid var(--rule);
   border-radius: 10px;
