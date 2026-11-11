@@ -1,0 +1,105 @@
+/* Promo pinboards. Same language as the site hero (src/styles.css): warm
+   paper, ink, pencil yellow, eraser pink used sparingly, scraps of real UI
+   fastened with tape, tacks, clips and staples. Every page is a fixed-size
+   canvas that render.mjs screenshots at 1x. */
+
+:root {
+  --font: "Geist", ui-sans-serif, -apple-system, "Segoe UI", sans-serif;
+  --bg: #fbfaf7;
+  --board: #f3f0e8;
+  --paper: #ffffff;
+  --cream: #fdfbf4;
+  --ink: #17171a;
+  --ink-2: #53545c;
+  --ink-3: #85868e;
+  --line: #e5e2d9;
+  --line-strong: #cfcbc0;
+  --yellow: #f5c842;
+  --pink: #d6456a;
+  --pink-soft: #f5a9bb;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+img { display: block; }
+p, h1, h2 { margin: 0; }
+
+.canvas { position: relative; overflow: hidden; background: var(--bg); }
+
+/* ── A piece of paper ─────────────────────────────────────────────────── */
+.tile {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--paper);
+  box-shadow: 0 1px 1px rgba(30, 25, 10, .07), 0 12px 22px -14px rgba(30, 25, 10, .32);
+  rotate: var(--r, 0deg);
+  translate: var(--dx, 0) var(--dy, 0);
+}
+.tile.cream { background: var(--cream); }
+.tile.ink { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+/* ── Type ─────────────────────────────────────────────────────────────── */
+.say { font-weight: 650; letter-spacing: -.03em; line-height: 1.06; text-wrap: balance; }
+.cap { margin-top: 6px; font-size: 18px; line-height: 1.25; font-weight: 500; letter-spacing: -.01em; color: var(--ink-2); }
+.big { font-weight: 650; letter-spacing: -.05em; line-height: .9; font-variant-numeric: tabular-nums; }
+.big small { font-size: .42em; letter-spacing: -.02em; color: var(--ink-3); font-weight: 600; margin-left: .06em; }
+
+/* A strip of highlighter behind the key words, laid on slightly crooked. */
+.hl { position: relative; z-index: 0; white-space: nowrap; }
+.hl::before {
+  content: ""; position: absolute; z-index: -1;
+  left: -.1em; right: -.12em; top: .36em; bottom: -.04em;
+  background: var(--yellow);
+  opacity: .9;
+  border-radius: 2px 5px 3px 6px;
+  rotate: var(--hr, -1.6deg);
+}
+.hl.pink::before { background: var(--pink-soft); }
+.hl.r::before { rotate: 1.2deg; }
+
+/* The site's wordmark: the drawn pencil and pencil.nu */
+.wordmark { display: inline-flex; align-items: center; gap: .22em; font-weight: 650; letter-spacing: -.035em; line-height: 1; }
+.wordmark svg { width: 1.05em; height: 1.05em; flex: none; }
+
+/* Real UI scraps sit on the paper with a hairline, like a cut-out. */
+.shot { border-radius: 6px; box-shadow: 0 0 0 1px var(--line); background: #fff; }
+.shot.bare { box-shadow: none; background: none; }
+
+/* ── Fasteners (from the site hero) ───────────────────────────────────── */
+.pin { position: absolute; z-index: 3; pointer-events: none; }
+/* Tape crosses a corner and runs well past the edge, onto the board. */
+.tape {
+  width: 96px; height: 28px; opacity: .82;
+  box-shadow: 0 1px 1px rgba(30, 25, 10, .16);
+  -webkit-mask: linear-gradient(90deg, #0000 0 1px, #000 1px 3px, #0000 3px 4px, #000 4px calc(100% - 4px), #0000 calc(100% - 4px) calc(100% - 3px), #000 calc(100% - 3px) calc(100% - 1px), #0000 0);
+}
+.tape.yellow { background: #f5c842; }
+.tape.blue { background: #9cc3ee; }
+.tape.tl { top: 0; left: -30px; rotate: -40deg; }
+.tape.tr { top: 0; right: -30px; rotate: 40deg; }
+.tape.br { bottom: 0; right: -30px; rotate: -40deg; }
+.tape.bl { bottom: 0; left: -30px; rotate: 40deg; }
+.tape.short { width: 76px; height: 24px; }
+.tape.short.tl { left: -22px; } .tape.short.tr { right: -22px; }
+.tape.top { top: -14px; left: 50%; margin-left: -48px; rotate: -3deg; }
+/* A tack through the paper, with the shadow it throws. */
+.tack { top: 8px; left: 50%; width: 22px; height: 22px; margin-left: -11px; }
+.tack::before { content: ""; position: absolute; left: 11px; top: 11px; width: 26px; height: 9px; border-radius: 50%; background: rgba(30, 25, 10, .3); filter: blur(2.5px); rotate: 38deg; transform-origin: 0 50%; }
+.tack i { position: absolute; inset: 0; border-radius: 50%; box-shadow: inset -2px -3px 3px rgba(0, 0, 0, .28), 0 1px 1px rgba(0, 0, 0, .35); }
+.tack.red i { background: radial-gradient(circle at 34% 30%, #ffb3b3, #df3540 50%, #a3161f); }
+.tack.yellow i { background: radial-gradient(circle at 34% 30%, #fff5c8, #f2bd1d 50%, #b98600); }
+/* A paperclip slid over the top edge. */
+.clip { top: -24px; left: 22px; width: 19px; height: 44px; rotate: 6deg; filter: drop-shadow(0 1px 1px rgba(30, 25, 10, .35)); }
+.clip svg { width: 100%; height: 100%; display: block; }
+.clip.right { left: auto; right: 22px; rotate: -6deg; }
+/* A staple across the top edge. */
+.staple { top: -5px; left: 18px; width: 5px; height: 24px; border-radius: 2px; background: linear-gradient(90deg, #dfe2e6, #868c94); box-shadow: 1px 1px 1px rgba(0, 0, 0, .3); rotate: 14deg; }

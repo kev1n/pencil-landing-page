@@ -1,4 +1,4 @@
-import Sketchbook from "./Sketchbook.jsx";
+import Home from "./Home.jsx";
 
 const TWEAKS = {
   chromeUrl:
@@ -23,12 +23,13 @@ const TWEAKS = {
   ],
 };
 
-// Firefox is the only non-Chromium browser we ship a build for. Edge, Brave,
-// Arc, Opera, etc. all install from the Chrome Web Store, so a positive
-// Firefox sniff is enough — everything else falls through to chromeUrl.
+// Chrome, Edge, Brave, Arc, Opera and the rest of the Chromium family install
+// from the Chrome Web Store. Every other browser gets the Firefox add-on.
 function detectBrowser() {
   if (typeof navigator === "undefined") return "chrome";
-  return /firefox/i.test(navigator.userAgent) ? "firefox" : "chrome";
+  const brands = navigator.userAgentData?.brands;
+  if (brands) return brands.some((b) => /chrom/i.test(b.brand)) ? "chrome" : "firefox";
+  return /chrome|chromium|crios|edg/i.test(navigator.userAgent) ? "chrome" : "firefox";
 }
 
 export default function App() {
@@ -41,7 +42,7 @@ export default function App() {
     installLabelLower: isFirefox ? "add to firefox" : "add to chrome",
     installLabelTitle: isFirefox ? "Add to Firefox" : "Add to Chrome",
     installLabelShort: isFirefox ? "+ firefox" : "+ chrome",
-    installStoreLabel: isFirefox ? "firefox add-ons" : "chrome web store",
+    installStoreLabel: isFirefox ? "Firefox Add-ons" : "Chrome Web Store",
   };
-  return <Sketchbook tweaks={tweaks} />;
+  return <Home tweaks={tweaks} />;
 }

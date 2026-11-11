@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pencil launch board, alternative</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="promo.css">
+<style>
+  /* The product large on the left with the headline written on the board
+     above it; the facts pinned up in two loose columns on the right. */
+  .canvas { width: 1600px; height: 900px; }
+  .a { position: absolute; }
+  .tile { padding: 18px 20px; }
+  .say { font-size: 27px; }
+  .cap { font-size: 17px; }
+  .head { left: 44px; top: 34px; width: 920px; }
+  .head .wordmark { font-size: 34px; }
+  .head h1 { margin-top: 16px; font-size: 60px; font-weight: 650; letter-spacing: -.04em; line-height: 1.04; }
+  .hero { left: 40px; top: 204px; width: 920px; padding: 10px; }
+  .hero img { width: 900px; border-radius: 3px; box-shadow: 0 0 0 1px var(--line); }
+  .labels { left: 44px; top: 818px; display: flex; gap: 14px; align-items: center; }
+  .labels .tile { padding: 10px 16px; display: flex; gap: 9px; align-items: center; font-size: 21px; font-weight: 650; letter-spacing: -.02em; }
+  .labels img { width: 24px; height: 24px; }
+  .labels .free { background: var(--yellow); border-color: #e2b42c; }
+  .terms { left: 30px; top: 676px; width: 312px; }
+  .terms img { width: 232px; margin: 8px 0 0 -10px; }
+
+  /* Right, two columns of 270 */
+  .A { left: 1004px; width: 270px; }
+  .B { left: 1294px; width: 270px; }
+  .combos img { width: 232px; margin-top: 12px; }
+  .big { font-size: 64px; }
+  .sort img { width: 168px; margin: 8px 0 0 -24px; }
+  .n553 .big { font-size: 80px; }
+  .search .row { width: 400px; margin: 12px 0 0 -2px; }
+  .search { overflow: hidden; }
+  .prereq img { width: 232px; margin-top: 12px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="pencil" viewBox="0 0 64 64">
+    <g transform="rotate(135 32 32)" stroke="#2a2a2e" stroke-width="2" stroke-linejoin="round">
+      <rect x="4" y="22" width="10" height="20" rx="3" fill="#ef8da6"/>
+      <rect x="14" y="22" width="9" height="20" fill="#c2c7cb"/>
+      <line x1="17" y1="23" x2="17" y2="41" stroke="#7d848a" stroke-width="1"/>
+      <line x1="20" y1="23" x2="20" y2="41" stroke="#7d848a" stroke-width="1"/>
+      <rect x="23" y="22" width="26" height="20" fill="#f5c842"/>
+      <polygon points="49,22 56,22 56,42 49,42" fill="#d4a373"/>
+      <polygon points="56,22 64,32 56,42" fill="#2a2a2e"/>
+    </g>
+  </symbol>
+  <symbol id="clip" viewBox="0 0 26 58"><g fill="none" stroke="#8b929b" stroke-width="2.4" stroke-linecap="round"><path d="M1 30V18"/><path d="M17 16V41a5 5 0 0 1-10 0V11a8 8 0 0 1 16 0V30"/></g></symbol>
+</svg>
+
+<main class="canvas">
+  <div class="a head">
+    <span class="wordmark"><svg><use href="#pencil"/></svg>pencil.nu</span>
+    <h1>CTECs, prereqs and seats,<br><span class="hl">right on your schedule</span></h1>
+  </div>
+
+  <div class="a tile hero">
+    <span class="pin tape yellow tl"></span>
+    <span class="pin tape yellow tr"></span>
+    <img src="assets/hero-wide.png" alt="">
+  </div>
+
+  <div class="a tile terms cream" style="--r:-2.5deg">
+    <span class="pin tape blue tl short"></span>
+    <p class="say">Every term, <span class="hl">one click</span></p>
+    <img src="assets/seasons.png" alt="">
+  </div>
+
+  <div class="a labels">
+    <div class="tile free">Free</div>
+    <div class="tile"><img src="../public/logos/chrome.svg" alt=""><img src="../public/logos/firefox.svg" alt="">Chrome and Firefox</div>
+    <div class="tile"><img src="../public/logos/github.svg" alt="">Open source</div>
+    <div class="tile">No Pencil servers</div>
+  </div>
+
+  <!-- Column A -->
+  <div class="a A tile combos" style="top:34px; height:150px">
+    <p class="say">Every schedule <span class="hl">that fits</span></p>
+    <img class="shot" src="assets/combos-counter.png" alt="">
+  </div>
+  <div class="a A tile n553" style="top:202px; height:180px; --r:-1.5deg">
+    <span class="pin tack red" style="left:76%"><i></i></span>
+    <p class="big">553</p>
+    <p class="say" style="margin-top:6px">prereqs <span class="hl">corrected</span></p>
+  </div>
+  <div class="a A tile search" style="top:400px; height:186px">
+    <p class="say">Add to cart <span class="hl">without leaving</span></p>
+    <img class="row shot" src="assets/search-row.png" alt="">
+  </div>
+  <div class="a A tile" style="top:604px; height:126px" data-unreleased>
+    <p class="say">CAESAR's <span class="hl">Back</span> button works</p>
+  </div>
+  <div class="a A tile cream" style="top:748px; height:118px; --r:1.5deg">
+    <span class="pin staple"></span>
+    <p class="say">Course History</p>
+    <p class="cap">by term, to CSV</p>
+  </div>
+
+  <!-- Column B -->
+  <div class="a B tile sort" style="top:34px; height:150px">
+    <p class="big">8</p>
+    <p class="cap">ways to sort</p>
+    <img src="assets/combos-sort.png" alt="">
+  </div>
+  <div class="a B tile cream" style="top:202px; height:150px; --r:1.5deg">
+    <p class="big">27<small>hrs</small></p>
+    <p class="cap">a week outside class</p>
+  </div>
+  <div class="a B tile prereq" style="top:370px; height:216px">
+    <span class="pin clip"><svg><use href="#clip"/></svg></span>
+    <p class="say">What you <span class="hl">can take</span></p>
+    <img src="assets/prereq-208.png" alt="">
+  </div>
+  <div class="a B tile" style="top:604px; height:126px">
+    <p class="say">Enrollment Dates</p>
+    <p class="cap">from any CAESAR page</p>
+  </div>
+  <div class="a B tile" style="top:748px; height:118px">
+    <p class="say">Calendar export</p>
+    <div style="display:flex; gap:10px; margin-top:10px"><img src="../public/logos/google-calendar.svg" width="30" height="30" alt=""><img src="../public/logos/apple-calendar.svg" width="30" height="30" alt=""><img src="../public/logos/outlook.svg" width="30" height="30" alt=""></div>
+  </div>
+</main>
+</body>
+</html>

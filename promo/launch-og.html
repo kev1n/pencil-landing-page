@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pencil link preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="promo.css">
+<style>
+  .canvas { width: 1200px; height: 630px; }
+  .copy { position: absolute; left: 56px; top: 50px; width: 520px; }
+  .copy .wordmark { font-size: 40px; }
+  .copy .say { margin-top: 64px; font-size: 60px; line-height: 1.04; }
+  .chips { position: absolute; left: 56px; bottom: 52px; display: flex; gap: 10px; }
+  .chips span { display: inline-flex; align-items: center; gap: 8px; height: 46px; padding: 0 16px; border-radius: 8px; background: #fff; border: 1px solid var(--line); font-size: 21px; font-weight: 600; letter-spacing: -.01em; }
+  .chips span.y { background: var(--yellow); border-color: var(--yellow); }
+  .chips img { width: 24px; height: 24px; }
+  .tile { position: absolute; padding: 9px; }
+  .tile img { display: block; width: 100%; border-radius: 3px; }
+  .a { left: 640px; top: 70px; width: 800px; --r: -1.5deg; }
+  .n { left: 560px; top: 420px; width: 290px; --r: 2.2deg; padding: 16px 20px; }
+  .n .big { font-size: 70px; } .n .say { font-size: 23px; margin-top: 4px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="pencil" viewBox="0 0 64 64">
+    <g transform="rotate(135 32 32)" stroke="#2a2a2e" stroke-width="2" stroke-linejoin="round">
+      <rect x="4" y="22" width="10" height="20" rx="3" fill="#ef8da6"/>
+      <rect x="14" y="22" width="9" height="20" fill="#c2c7cb"/>
+      <line x1="17" y1="23" x2="17" y2="41" stroke="#7d848a" stroke-width="1"/>
+      <line x1="20" y1="23" x2="20" y2="41" stroke="#7d848a" stroke-width="1"/>
+      <rect x="23" y="22" width="26" height="20" fill="#f5c842"/>
+      <polygon points="49,22 56,22 56,42 49,42" fill="#d4a373"/>
+      <polygon points="56,22 64,32 56,42" fill="#2a2a2e"/>
+    </g>
+  </symbol>
+  <symbol id="clip" viewBox="0 0 26 58"><g fill="none" stroke="#8b929b" stroke-width="2.4" stroke-linecap="round"><path d="M1 30V18"/><path d="M17 16V41a5 5 0 0 1-10 0V11a8 8 0 0 1 16 0V30"/></g></symbol>
+</svg>
+<main class="canvas">
+  <div class="copy"><span class="wordmark"><svg><use href="#pencil"/></svg>pencil.nu</span><p class="say">CTECs, prereqs and seats <span class="hl">on your schedule</span></p></div>
+  <div class="chips"><span class="y">Free</span><span><img src="../public/logos/chrome.svg" alt=""><img src="../public/logos/firefox.svg" alt="">Chrome and Firefox</span></div>
+  <div class="tile a"><span class="pin tape yellow tl"></span><img src="assets/hero.png" alt=""></div>
+  <div class="tile n cream"><span class="pin tack red" style="left:82%"><i></i></span><p class="big">553</p><p class="say">prereqs <span class="hl">corrected</span></p></div>
+</main>
+</body>
+</html>

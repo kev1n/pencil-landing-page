@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>Pencil CTEC report demo</title>
+<style>
+  html, body { margin: 0; background: transparent; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif; }
+  /* The frame holds a copy of Paper.nu's Section Info panel with the sheet
+     inside it; the site draws the page behind it. */
+  /* Same tint the site lays over the page beside the frame, so the gap
+     around the panel does not read as a lighter strip. */
+  body { box-sizing: border-box; height: 100vh; padding: 16px; background: rgba(17, 24, 39, .1); }
+  .si-panel { box-sizing: border-box; height: 100%; overflow-y: scroll; scrollbar-width: none; border-radius: 12px; background: #fff; padding: 16px; box-shadow: 0 12px 28px -8px rgba(0, 0, 0, .22); }
+  .si-panel::-webkit-scrollbar { display: none; }
+  .si-head { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; }
+  .si-head p { flex-grow: 1; margin: 0; font-size: 14px; font-weight: 700; letter-spacing: .05em; color: #4b5563; }
+  .si-head svg { width: 24px; height: 24px; color: #4b5563; }
+  .si-x { all: unset; display: grid; cursor: pointer; }
+  #bc-paper-ctec-analytics-modal { animation: none; }
+</style>
+<script>
+  // The sheet reads a few extension APIs; none are needed for the demo.
+  window.chrome = { runtime: { getURL: (p) => "fonts/" + p.split("/").pop(), getManifest: () => ({ version: "" }), sendMessage: async () => ({}), onMessage: { addListener() {} } }, storage: { local: { get: async () => ({}), set: async () => {} }, onChanged: { addListener() {} } } };
+</script>
+<body><script src="ctec.js"></script></body>
+</html>

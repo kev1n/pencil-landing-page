@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pencil launch board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="promo.css">
+<style>
+  /* 1600x900. Two narrow columns either side of the product. */
+  .canvas { width: 1600px; height: 900px; padding: 26px; display: grid; grid-template-columns: 378px 756px 378px; gap: 18px; }
+  .col { display: flex; flex-direction: column; gap: 18px; min-height: 0; }
+  .pair { display: flex; gap: 18px; }
+  .pair > .tile { flex: 1 1 0; min-width: 0; }
+  .tile { padding: 18px 20px; }
+  .say { font-size: 27px; }
+  .cap { font-size: 17px; }
+
+  /* Left */
+  .t-terms { height: 118px; }
+  .t-terms img { width: 232px; margin: 10px 0 0 -10px; }
+  .t-card { height: 174px; }
+  .t-card img { width: 330px; margin: 14px 0 0 -6px; border-radius: 4px; }
+  .t-com { height: 176px; }
+  .t-com img { width: 268px; margin: 12px 0 0 -4px; }
+  .t-faces, .t-free { height: 148px; }
+  .t-faces img { width: 160px; margin: -2px 0 8px -6px; }
+  .t-free .big { font-size: 50px; letter-spacing: -.045em; }
+  .t-free .logos { display: flex; gap: 7px; align-items: center; margin-top: 12px; }
+  .t-free .logos img { width: 26px; height: 26px; }
+  .t-free .logos span { font-size: 16px; font-weight: 550; color: var(--ink-2); }
+  .t-priv, .t-cal { height: 140px; }
+  .tile .art { display: block; max-width: 100%; max-height: 82px; margin-top: 10px; border-radius: 4px; }
+  .t-faces .say, .t-priv .say { font-size: 24px; }
+  .t-cal .logos { display: flex; gap: 10px; margin-top: 12px; }
+  .t-cal .logos img { width: 32px; height: 32px; }
+
+  /* Centre */
+  .t-head { height: 112px; display: flex; align-items: center; justify-content: space-between; padding: 0 30px; }
+  .t-head .wordmark { font-size: 52px; }
+  .t-head .say { font-size: 31px; text-align: right; }
+  /* The analytics panel, cut into pieces. */
+  .an { flex: 1; min-height: 0; display: grid; grid-template-columns: 436px minmax(0, 1fr); grid-template-rows: auto auto 1fr; gap: 18px; }
+  .an .tile { padding: 14px 16px; min-width: 0; }
+  .an .say { font-size: 23px; }
+  .an img { display: block; width: 100%; }
+  .a-top { padding: 6px !important; }
+  .a-top img { border-radius: 3px; }
+  .a-hours img, .a-rates img { margin-top: 8px; }
+  .a-hours img { margin-top: 18px; }
+  .a-com { grid-column: 1 / -1; }
+  .crop { overflow: hidden; margin-top: 8px; }
+  .a-topics .crop img { width: 310px; margin-left: -10px; }
+  .two { display: flex; gap: 22px; }
+  .two .crop { flex: 1; }
+  .two .crop img { width: 350px; margin-left: -10px; }
+
+  .t-search { flex: 1; min-height: 0; }
+  .t-search .row { width: 336px; margin-top: 12px; }
+  .t-search .seats { width: 336px; margin-top: 6px; }
+  .t-prereq { flex: 1; min-height: 0; }
+  .t-prereq img { width: 336px; margin-top: 12px; }
+  .t-prereq .n { display: flex; align-items: center; gap: 12px; margin-top: 12px; font-size: 17px; line-height: 1.2; font-weight: 550; color: var(--ink-2); }
+  .t-prereq .n .big { font-size: 46px; color: var(--ink); }
+
+  /* Right */
+  .t-combos { height: 142px; }
+  .t-combos img { width: 300px; margin: 12px 0 0 -6px; }
+  .t-sort, .t-hours { height: 172px; display: flex; flex-direction: column; }
+  .t-sort .big, .t-hours .big { font-size: 64px; }
+  .t-sort img { width: 150px; margin: auto 0 -4px -6px; }
+  .t-553 { height: 154px; display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: center; }
+  .t-553 .big { font-size: 76px; }
+  .t-553 .say { font-size: 24px; }
+  .t-back, .t-dates, .t-hist, .t-md { height: 152px; }
+  .t-back .say, .t-dates .say, .t-hist .say, .t-md .say { font-size: 22px; }
+
+  body.store { zoom: .8; }
+  body.store .canvas { height: 1000px; }
+  body.store .t-search .row, body.store .t-search .seats { width: 336px; }
+  body.store .two .crop { height: 250px !important; }
+  body.store .a-hours img { margin-top: 30px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="pencil" viewBox="0 0 64 64">
+    <g transform="rotate(135 32 32)" stroke="#2a2a2e" stroke-width="2" stroke-linejoin="round">
+      <rect x="4" y="22" width="10" height="20" rx="3" fill="#ef8da6"/>
+      <rect x="14" y="22" width="9" height="20" fill="#c2c7cb"/>
+      <line x1="17" y1="23" x2="17" y2="41" stroke="#7d848a" stroke-width="1"/>
+      <line x1="20" y1="23" x2="20" y2="41" stroke="#7d848a" stroke-width="1"/>
+      <rect x="23" y="22" width="26" height="20" fill="#f5c842"/>
+      <polygon points="49,22 56,22 56,42 49,42" fill="#d4a373"/>
+      <polygon points="56,22 64,32 56,42" fill="#2a2a2e"/>
+    </g>
+  </symbol>
+  <symbol id="clip" viewBox="0 0 26 58"><g fill="none" stroke="#8b929b" stroke-width="2.4" stroke-linecap="round"><path d="M1 30V18"/><path d="M17 16V41a5 5 0 0 1-10 0V11a8 8 0 0 1 16 0V30"/></g></symbol>
+</svg>
+
+<main class="canvas">
+  <section class="col">
+    <div class="tile t-terms">
+      <p class="say">Every term, <span class="hl">one click</span></p>
+      <img src="assets/seasons.png" alt="">
+    </div>
+    <div class="tile t-card cream" style="--r:1.2deg; --dx:4px">
+      <span class="pin tack yellow" style="left:86%"><i></i></span>
+      <p class="say">Rating and hours, <span class="hl">every card</span></p>
+      <img src="assets/card-line.png" alt="">
+    </div>
+    <div class="tile t-search">
+      <span class="pin clip right"><svg><use href="#clip"/></svg></span>
+      <p class="say">Add to cart <span class="hl">without leaving</span></p>
+      <img class="row shot" src="assets/search-row.png" alt="">
+      <img class="seats shot" src="assets/search-seats.png" alt="">
+    </div>
+    <div class="pair">
+      <div class="tile t-faces cream" style="--r:-2deg">
+        <span class="pin staple"></span>
+        <img src="assets/faces.png" alt="">
+        <p class="say" style="font-size:22px">Comments by tone</p>
+      </div>
+      <div class="tile t-free" style="--r:1.5deg; --dx:-3px">
+        <span class="pin tape blue tr"></span>
+        <p class="big">Free</p>
+        <p class="cap" style="margin-top:2px">and open source</p>
+        <div class="logos"><img src="../public/logos/chrome.svg" alt=""><img src="../public/logos/firefox.svg" alt=""><img src="../public/logos/github.svg" alt=""></div>
+      </div>
+    </div>
+    <div class="pair">
+      <div class="tile t-priv">
+        <p class="say">Private</p>
+        <img class="art" src="assets/art-zero.png" alt="">
+      </div>
+      <div class="tile t-cal">
+        <p class="say">Calendar export</p>
+        <div class="logos"><img src="../public/logos/google-calendar.svg" alt=""><img src="../public/logos/apple-calendar.svg" alt=""><img src="../public/logos/outlook.svg" alt=""></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="col">
+    <div class="tile t-head">
+      <span class="wordmark"><svg><use href="#pencil"/></svg>pencil.nu</span>
+      <p class="say">CTECs, prereqs and seats,<br><span class="hl">right on your schedule</span></p>
+    </div>
+    <div class="an">
+      <div class="tile a-top" style="--r:-.8deg">
+        <span class="pin tape yellow short tl"></span>
+        <img src="assets/sheet-top.png" alt="">
+      </div>
+      <div class="tile a-hours cream" style="--r:1.4deg">
+        <span class="pin tack red" style="left:84%"><i></i></span>
+        <p class="say">Hours a week</p>
+        <img src="assets/sheet-hours.png" alt="">
+      </div>
+      <div class="tile a-rates">
+        <p class="say">Five ratings, <span class="hl">every term</span></p>
+        <img src="assets/sheet-rates.png" alt="">
+      </div>
+      <div class="tile a-topics" style="--r:-1.2deg">
+        <span class="pin clip right"><svg><use href="#clip"/></svg></span>
+        <p class="say">What students <span class="hl">keep saying</span></p>
+        <div class="crop" style="height:72px;margin-top:14px"><img src="assets/panel-b.png" alt="" style="margin-top:-146px"></div>
+      </div>
+      <div class="tile a-com">
+        <span class="pin tape blue short tr"></span>
+        <p class="say">Search <span class="hl">every comment</span></p>
+        <div class="two">
+          <div class="crop" style="height:150px"><img src="assets/panel-b.png" alt="" style="margin-top:-108px"></div>
+          <div class="crop" style="height:150px"><img src="assets/panel-b.png" alt="" style="margin-top:-322px"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="col">
+    <div class="tile t-combos" style="--r:1deg">
+      <span class="pin clip"><svg><use href="#clip"/></svg></span>
+      <p class="say">Every schedule <span class="hl">that fits</span></p>
+      <img class="shot" src="assets/combos-counter.png" alt="">
+    </div>
+    <div class="pair">
+      <div class="tile t-sort">
+        <p class="big">8</p>
+        <p class="cap">ways to sort</p>
+        <img src="assets/combos-sort.png" alt="">
+      </div>
+      <div class="tile t-hours cream" style="--r:-1deg; --dy:3px">
+        <p class="big">27<small>hrs</small></p>
+        <img class="art" src="assets/art-workload.png" alt="" style="max-height:74px">
+      </div>
+    </div>
+    <div class="tile t-prereq" style="--r:-1deg">
+      <span class="pin tack red" style="left:90%"><i></i></span>
+      <p class="say">What you <span class="hl">can take</span></p>
+      <img src="assets/prereq-208.png" alt="">
+      <p class="n"><b class="big">553</b> prereqs corrected to current course numbers</p>
+    </div>
+    <div class="pair">
+      <!-- Unreleased (CAESAR back navigation branch). Delete this tile and
+           Enrollment Dates widens to fill the row. -->
+      <div class="tile t-back" data-unreleased style="--r:2deg">
+        <span class="pin tape yellow top"></span>
+        <p class="say"><span class="hl">Back</span> works in CAESAR</p>
+        <img class="art" src="assets/art-back.png" alt="">
+      </div>
+      <div class="tile t-dates">
+        <p class="say">CAESAR shortcuts</p>
+        <img class="art" src="assets/art-header.png" alt="">
+      </div>
+    </div>
+  </section>
+</main>
+<script>if (location.search.includes("store")) document.body.classList.add("store");</script>
+</body>
+</html>

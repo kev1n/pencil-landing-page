@@ -1,10 +1,12 @@
+import { PencilGlyph } from "./demo/Stage.jsx";
+
 const chapters = [
   {
     id: "ctec", site: "Paper.nu", title: "Compare instructors with CTECs",
     summary: "Read ratings, reported hours, and student feedback where you plan your schedule.",
     steps: [
-      <>Click <strong>Analytics</strong> or a CTEC rating chip on the section’s schedule card.</>,
-      <>Open <strong>Overview</strong> for ratings and reported hours. Use <strong>Comments</strong> for student feedback or <strong>Terms</strong> to see results by quarter.</>,
+      <>Click <strong>Analytics</strong> or a CTEC rating chip on the section’s schedule card. The report opens in the class’s Section Info panel, on the CTECs tab.</>,
+      <>Scroll for ratings, reported hours and student comments. Pick a quarter at the top to see just that term, or search the comments.</>,
     ],
   },
   {
@@ -13,10 +15,10 @@ const chapters = [
     steps: [
       <>Add every section you’d consider to your Paper.nu calendar, including alternatives for the same course. Then switch on <strong>Combinations</strong> above the grid.</>,
       <>Open <strong>Sort</strong> and choose <strong>Lazy mode (least hours/week)</strong>. Pencil puts the schedules with the lowest estimated out-of-class hours first.</>,
-      <>Set the <strong>Min</strong> and <strong>Max</strong> credit range. If a section is a must, click its pin on the schedule card.</>,
+      <>Set the <strong>Credits</strong> range. If a section is a must, click its pin on the schedule card.</>,
       <>Use the <strong>← / →</strong> arrows to compare schedules. Switch Combinations off to see all of your original sections again.</>,
     ],
-    note: "Lazy Mode uses reported CTEC workload. Check the Out of Class chip in the banner for the workload breakdown. Pencil estimates missing hours from the other classes in that combination. Schedules with no workload data go last.",
+    note: "Lazy Mode uses reported CTEC workload. Hover the hours outside class at the top of the page for the workload breakdown. Pencil estimates missing hours from the other classes in that combination. Schedules with no workload data go last.",
   },
   {
     id: "prerequisites", site: "Paper.nu", title: "Check prerequisites before enrolling",
@@ -72,14 +74,14 @@ export default function UserGuide() {
       <a className="guide-skip" href="#guide-main">Skip to the guide</a>
       <header className="guide-top">
         <div className="wrap guide-top-inner">
-          <a className="brand" href="/">pencil.nu</a>
-          <a href="/">Back to Pencil ↗</a>
+          <a className="brand" href="/"><PencilGlyph size={22} /> pencil.nu</a>
+          <a href="/">Back to Pencil</a>
         </div>
       </header>
       <main className="wrap" id="guide-main">
         <div className="guide-hero">
-          <p className="guide-kicker">The Pencil field guide</p>
-          <h1>Plan your quarter<br />with <em>Pencil.</em></h1>
+          <p className="guide-kicker">User guide</p>
+          <h1>Plan your quarter with Pencil.</h1>
           <p>Start with CTECs on Paper.nu, then try the tools for planning and registration. Each video keeps the full Paper.nu or CAESAR screen in view and highlights where to click. The clips use sample data.</p>
         </div>
         <div className="guide-layout">

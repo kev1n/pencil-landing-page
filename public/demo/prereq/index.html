@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>Pencil prerequisite tree demo</title>
+<style>
+  html, body { margin: 0; background: transparent; overflow: hidden; }
+  /* The extension pins its tooltip to the pointer; here the frame is the tooltip. */
+  html body #bc-prereq-filter-tooltip { position: static; display: inline-block; width: max-content; margin: 0 4px 4px 0; max-width: none; max-height: none; overflow: visible; }
+</style>
+<script>
+  window.chrome = { runtime: { getURL: (p) => "fonts/" + p.split("/").pop(), getManifest: () => ({ version: "" }), sendMessage: async () => ({}), onMessage: { addListener() {} } }, storage: { local: { get: async () => ({}), set: async () => {} }, onChanged: { addListener() {} } } };
+</script>
+<body><script src="prereq.js"></script></body>
+</html>
