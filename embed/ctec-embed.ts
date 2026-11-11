@@ -56,13 +56,13 @@ const data = buildModalDisplayData(snapshot, { subject, catalogNumber: number + 
 const termId = (i: string | number | null | undefined) => (i == null || i === "" ? null : data?.terms[+i]?.id ?? null);
 const view = createModalView({ doc: document });
 // On Paper.nu the sheet lives inside Paper.nu's own Section Info panel,
-// under a Paper.nu / CTECs tab pair. This is a copy of that panel's frame.
+// with a Paper.nu / CTECs tab pair in its header row. This is a copy of that panel's frame.
 const panel = document.createElement("div");
 panel.className = "si-panel";
 panel.innerHTML = `<div class="si-head"><p>SECTION INFO</p>
+  <div class="bc-paper-ctec-side-tabs"><button type="button" class="bc-paper-ctec-side-tab si-paper">Paper.nu</button><button type="button" class="bc-paper-ctec-side-tab is-active">CTECs</button></div>
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"/></svg>
   <button type="button" class="si-x" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 18 18 6M6 6l12 12"/></svg></button></div>
-  <div class="bc-paper-ctec-side-tabs"><button type="button" class="bc-paper-ctec-side-tab si-paper">Paper.nu</button><button type="button" class="bc-paper-ctec-side-tab is-active">CTECs</button></div>
   <section class="bc-paper-ctec-analytics-panel"></section>`;
 document.body.append(panel);
 view.setHost(panel.querySelector<HTMLElement>("section"));

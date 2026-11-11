@@ -10,6 +10,9 @@ function sampleCtec(course, s) {
   return { rating: 4.3 + (h % 14) / 10, hrs: 2.5 + (h % 9) * 0.8 };
 }
 
+// The same five seat tones the extension uses, by how full the class is.
+const seatTone = (s) => { const f = 1 - s.open / s.cap; return f >= 0.95 ? "full" : f >= 0.8 ? "warn" : f >= 0.6 ? "tight" : f >= 0.35 ? "room" : "open"; };
+
 function SectionRow({ course, s, showDetails = false }) {
   const [cart, setCart] = useState("idle");
   const [details, setDetails] = useState(showDetails);
@@ -35,27 +38,26 @@ function SectionRow({ course, s, showDetails = false }) {
         </span>
         <span>{s.who}</span>
         <span className="pd-sec-room">{s.room}</span>
-        <span className="pd-sec-ctec">
-          {ctec ? <><CtecLine rating={ctec.rating} hrs={ctec.hrs} /> <u>Analytics</u></> : <span className="pd-muted">No CTEC</span>}
-        </span>
         <span className={"pd-status " + s.status.toLowerCase()}><i />{s.status === "Waitlist" ? "Wait List" : s.status}</span>
+        <span className="pd-sec-ctec">
+          {ctec ? <span className="pd-chip"><Icon name="chart" size={11} stroke={2} /><CtecLine rating={ctec.rating} hrs={ctec.hrs} /></span> : <span className="pd-muted">No CTEC</span>}
+        </span>
         <span className="pd-sec-actions">
+          <button type="button" className={"pd-detail-btn" + (details ? " on" : "")} onClick={() => setDetails((v) => !v)} aria-expanded={details}>{details ? "Hide" : "Details"}</button>
           {s.status !== "Closed" && (
             cart === "done"
               ? <span className="pd-in-cart">In cart</span>
               : <button type="button" className={"pd-add " + cart} onClick={add} disabled={cart === "adding"} aria-label={`Add ${course.code} section ${s.n} to cart`}>{cart === "adding" ? "Adding…" : "Add to cart"}</button>
           )}
-          <button type="button" className={"pd-detail-btn" + (details ? " on" : "")} onClick={() => setDetails((v) => !v)} aria-expanded={details}>{details ? "Hide" : "Details"}</button>
         </span>
       </div>
       {details && (
         <div className="pd-details">
           <div className="pd-stats">
-            {[[s.cap, "Capacity"], [enrolled, "Enrolled"], [s.open, "Open seats"], [20, "Waitlist size"], [waitlist, "On waitlist"]].map(([n, label]) => (
-              <span key={label}><b>{n}</b>{label}</span>
+            {[[s.open, "Open seats"], [s.cap, "Capacity"], [enrolled, "Enrolled"], [20, "Waitlist size"], [waitlist, "On waitlist"]].map(([n, label], i) => (
+              <span key={label}><b className={i === 0 ? "pd-seat-chip " + seatTone(s) : undefined}>{n}</b>{label}</span>
             ))}
           </div>
-          <p className="pd-seats"><span className="pd-seatbar"><i style={{ width: `${(s.open / s.cap) * 100}%` }} /></span>{s.open} of {s.cap} seats left</p>
           <div className="pd-detail-part">
             <span>Enrollment requirements</span>
             <p>Reserved for majors and minors until the second day of registration.</p>
