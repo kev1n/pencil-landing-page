@@ -7,7 +7,8 @@ import "./demo.css";
 //
 // `view` crops to a sub-rectangle of the design canvas ({x, y, w, h});
 // `narrowView` replaces it when the container is phone-width, so the UI stays
-// legible instead of shrinking the whole screen.
+// legible instead of shrinking the whole screen. A stage showing its narrow
+// view carries the class `narrow`, so a scene can reflow to fit the crop.
 const NARROW = 620;
 const ViewContext = createContext(null);
 
@@ -30,12 +31,13 @@ export function Stage({ width = 1120, height = 700, className = "", label, child
     return () => ro.disconnect();
   }, []);
   const full = { x: 0, y: 0, w: width, h: height };
-  const v = (box !== null && box < NARROW && narrowView) || view || full;
+  const narrow = box !== null && box < NARROW && !!narrowView;
+  const v = (narrow && narrowView) || view || full;
   const scale = box ? box / v.w : 1;
   return (
     <div
       ref={ref}
-      className={"pd-stage " + className}
+      className={"pd-stage " + (narrow ? "narrow " : "") + className}
       style={{ aspectRatio: `${v.w} / ${v.h}` }}
       role="group"
       aria-label={label}
