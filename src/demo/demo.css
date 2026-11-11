@@ -253,3 +253,14 @@
 @media (prefers-reduced-motion: reduce) {
   .pd *, .pd *::after { transition: none !important; }
 }
+
+/* Phone crop of the class search: the page is as wide as the crop, and each
+   class stacks the way the extension stacks it in a narrow CAESAR window, so
+   the three chips stay in view. */
+.pd-stage.narrow .pd-caesar-body { width: 700px; margin: 0 0 0 120px; }
+.pd-stage.narrow .pd-sec-row { grid-template-columns: 20px 26px minmax(0, 1fr) auto auto; align-items: start; row-gap: 3px; padding: 9px 0; }
+.pd-stage.narrow .pd-sec-ctec { order: 1; grid-column: 4; min-height: 24px; }
+.pd-stage.narrow .pd-sec-actions { order: 2; grid-column: 5; }
+.pd-stage.narrow .pd-sec-row > span:nth-child(4) { order: 3; grid-column: 3; }
+.pd-stage.narrow .pd-status { order: 4; grid-column: 4 / -1; justify-self: end; padding-right: 10px; }
+.pd-stage.narrow .pd-sec-room { order: 5; grid-column: 3; }
