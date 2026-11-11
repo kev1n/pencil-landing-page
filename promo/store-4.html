@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sharper Search in CAESAR</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="promo.css">
+<style>
+  .canvas { width: 1280px; height: 800px; }
+  .copy { position: absolute; left: 56px; top: 52px; width: 400px; }
+  .copy .wordmark { font-size: 30px; }
+  .copy .say { margin-top: 150px; font-size: 58px; line-height: 1.04; }
+  .copy .cap { margin-top: 22px; font-size: 23px; line-height: 1.3; max-width: 360px; }
+  .tile img { display: block; width: 100%; border-radius: 3px; }
+  .tile { padding: 9px; position: absolute; }
+  .a { left: 480px; top: 70px; width: 1000px; --r: -1deg; padding: 20px 22px; }
+  .b { left: 520px; top: 300px; width: 960px; --r: 1.2deg; padding: 22px 24px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="pencil" viewBox="0 0 64 64">
+    <g transform="rotate(135 32 32)" stroke="#2a2a2e" stroke-width="2" stroke-linejoin="round">
+      <rect x="4" y="22" width="10" height="20" rx="3" fill="#ef8da6"/>
+      <rect x="14" y="22" width="9" height="20" fill="#c2c7cb"/>
+      <line x1="17" y1="23" x2="17" y2="41" stroke="#7d848a" stroke-width="1"/>
+      <line x1="20" y1="23" x2="20" y2="41" stroke="#7d848a" stroke-width="1"/>
+      <rect x="23" y="22" width="26" height="20" fill="#f5c842"/>
+      <polygon points="49,22 56,22 56,42 49,42" fill="#d4a373"/>
+      <polygon points="56,22 64,32 56,42" fill="#2a2a2e"/>
+    </g>
+  </symbol>
+  <symbol id="clip" viewBox="0 0 26 58"><g fill="none" stroke="#8b929b" stroke-width="2.4" stroke-linecap="round"><path d="M1 30V18"/><path d="M17 16V41a5 5 0 0 1-10 0V11a8 8 0 0 1 16 0V30"/></g></symbol>
+</svg>
+<main class="canvas">
+  <div class="copy">
+    <span class="wordmark"><svg><use href="#pencil"/></svg>pencil.nu</span>
+    <p class="say">CAESAR search, <span class="hl">sharper</span></p>
+    <p class="cap">One box. Seats, ratings and add to cart without leaving the page.</p>
+  </div>
+  <div class="tile a"><span class="pin tape yellow tl"></span><img src="assets/search-top.png" alt=""></div>
+  <div class="tile b cream"><span class="pin tack red" style="left:8%"><i></i></span><img src="assets/search-section.png" alt=""></div>
+</main>
+</body>
+</html>
