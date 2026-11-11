@@ -290,7 +290,7 @@ function Word({ children }) {
 // The five things the hero can show. Each is the live demo, not an image.
 const TOUR = [
   { id: "lazy", tab: "Schedules", site: PAPER, narrow: { x: 240, y: 44, w: 560, h: 540 }, render: () => <ScheduleScene autoplay /> },
-  { id: "ctec", tab: "CTEC reports", site: PAPER, narrow: { x: 656, y: 0, w: 464, h: 700 }, render: () => <ScheduleScene openCtec="stat210" /> },
+  { id: "ctec", tab: "CTEC reports", site: PAPER, narrow: { x: 600, y: 0, w: 520, h: 700 }, render: () => <ScheduleScene openCtec="stat210" /> },
   { id: "prereq", tab: "Prerequisites", site: PAPER, narrow: { x: 150, y: 40, w: 640, h: 420 }, render: () => <ScheduleScene sidebar="prereq" /> },
   { id: "search", tab: "Class search", site: CAESAR, narrow: { x: 110, y: 46, w: 720, h: 640 }, render: () => <SearchScene /> },
   { id: "enroll", tab: "Registration time", site: PAPER, narrow: { x: 440, y: 0, w: 560, h: 460 }, render: () => <ScheduleScene popover="enroll" /> },
@@ -349,7 +349,7 @@ function CtecSection() {
       </Reveal>
       <Reveal>
         <Frame site={PAPER}>
-          <StageView narrowView={{ x: 656, y: 0, w: 464, h: 700 }}>
+          <StageView narrowView={{ x: 600, y: 0, w: 520, h: 700 }}>
             <ScheduleScene openCtec="stat210" ctecView={pick < 0 ? null : CTEC_VIEWS[pick].view} onCtecTerm={onCtecTerm} label="CTEC report demo" />
           </StageView>
         </Frame>
