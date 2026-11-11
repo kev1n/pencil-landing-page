@@ -41,15 +41,25 @@
   .t-head .wordmark { font-size: 52px; }
   .t-head .say { font-size: 31px; text-align: right; }
   /* The analytics panel, cut into pieces. */
-  .an { flex: 1; min-height: 0; display: grid; grid-template-columns: 436px minmax(0, 1fr); grid-template-rows: auto auto 1fr; gap: 18px; }
+  .an { flex: 1; min-height: 0; display: grid; grid-template-columns: 356px minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr); gap: 18px; }
   .an .tile { padding: 14px 16px; min-width: 0; }
   .an .say { font-size: 23px; }
   .an img { display: block; width: 100%; }
   .a-top { padding: 6px !important; }
   .a-top img { border-radius: 3px; }
   .a-hours img, .a-rates img { margin-top: 8px; }
-  .a-hours img { margin-top: 18px; }
-  .a-com { grid-column: 1 / -1; }
+  .a-hours, .a-topics { display: flex; flex-direction: column; }
+  .a-hours, .a-topics { justify-content: space-between; }
+  .a-hours img { margin-top: 10px; }
+  .a-topics img { width: 100%; margin-top: 10px; }
+  .a-top { grid-area: 1 / 1; } .a-rates { grid-area: 2 / 1; }
+  .stack { grid-area: 1 / 2 / 3 / 3; display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+  .stack > .tile { flex: 1; }
+  .a-com { min-height: 0; grid-column: 1 / -1; display: flex; flex-direction: column; }
+  .a-com .two { flex: 1; min-height: 0; }
+  .a-com .two .crop { height: 100% !important; }
+  .a-com .two { overflow: hidden; }
+  .a-com .two .crop { -webkit-mask-image: linear-gradient(#000 82%, transparent); mask-image: linear-gradient(#000 82%, transparent); }
   .crop { overflow: hidden; margin-top: 8px; }
   .a-topics .crop img { width: 310px; margin-left: -10px; }
   .two { display: flex; gap: 22px; }
@@ -57,8 +67,9 @@
   .two .crop img { width: 350px; margin-left: -10px; }
 
   .t-search { flex: 1; min-height: 0; }
-  .t-search .row { width: 336px; margin-top: 12px; }
-  .t-search .seats { width: 336px; margin-top: 6px; }
+  .t-search { display: flex; flex-direction: column; }
+  .t-search .row { width: 338px; margin-top: auto; }
+  .t-search .seats { width: 338px; margin-top: 10px; }
   .t-prereq { flex: 1; min-height: 0; }
   .t-prereq img { width: 336px; margin-top: 12px; }
   .t-prereq .n { display: flex; align-items: center; gap: 12px; margin-top: 12px; font-size: 17px; line-height: 1.2; font-weight: 550; color: var(--ink-2); }
@@ -69,12 +80,28 @@
   .t-combos img { width: 300px; margin: 12px 0 0 -6px; }
   .t-sort, .t-hours { height: 172px; display: flex; flex-direction: column; }
   .t-sort .big, .t-hours .big { font-size: 64px; }
-  .t-sort img { width: 150px; margin: auto 0 -4px -6px; }
+  .t-sort { padding: 16px; }
+  .t-sort .head { display: flex; align-items: baseline; gap: 8px; }
+  .t-sort .big { font-size: 46px; }
+  .t-sort .cap { margin: 0; font-size: 16px; }
+  .menu { margin: 8px -2px 0; padding: 4px; border-radius: 8px; background: #fff; box-shadow: 0 0 0 1px var(--line), 0 8px 16px -8px rgba(30,25,10,.25); margin-top: auto; }
+  .menu li { list-style: none; display: flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 5px; font-size: 13px; font-weight: 550; letter-spacing: -.01em; color: var(--ink-2); white-space: nowrap; }
+  .menu li.on { background: var(--ink); color: #fff; }
+  .menu li.on::after { content: ""; margin-left: auto; width: 10px; height: 6px; border: solid #fff; border-width: 0 0 2px 2px; rotate: -45deg; translate: 0 -2px; }
+  .menu ul { margin: 0; padding: 0; }
+  .menu li svg { width: 14px; height: 14px; flex: none; }
+  .t-hours .art { width: 100%; max-height: none !important; margin-top: auto; }
   .t-553 { height: 154px; display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: center; }
   .t-553 .big { font-size: 76px; }
   .t-553 .say { font-size: 24px; }
   .t-back, .t-dates, .t-hist, .t-md { height: 152px; }
   .t-back .say, .t-dates .say, .t-hist .say, .t-md .say { font-size: 22px; }
+  .t-back { display: flex; flex-direction: column; }
+  .t-back .art { width: 100%; max-height: none; margin-top: auto; }
+  .t-dates { display: flex; flex-direction: column; }
+  .marks { margin-top: auto; display: flex; flex-wrap: wrap; gap: 5px; }
+  .marks span { font-size: 12px; font-weight: 600; padding: 3px 7px; border-radius: 6px; background: var(--board); color: var(--ink); }
+  .marks .cz { font-weight: 750; color: #6b1e45; background: none; padding-left: 0; font-size: 15px; width: 100%; }
 
   body.store { zoom: .8; }
   body.store .canvas { height: 1000px; }
@@ -151,19 +178,21 @@
         <span class="pin tape yellow short tl"></span>
         <img src="assets/sheet-top.png" alt="">
       </div>
+      <div class="tile a-rates">
+        <p class="say">Five ratings, <span class="hl">every term</span></p>
+        <img src="assets/sheet-rates.png" alt="">
+      </div>
+      <div class="stack">
       <div class="tile a-hours cream" style="--r:1.4deg">
         <span class="pin tack red" style="left:84%"><i></i></span>
         <p class="say">Hours a week</p>
         <img src="assets/sheet-hours.png" alt="">
       </div>
-      <div class="tile a-rates">
-        <p class="say">Five ratings, <span class="hl">every term</span></p>
-        <img src="assets/sheet-rates.png" alt="">
-      </div>
       <div class="tile a-topics" style="--r:-1.2deg">
         <span class="pin clip right"><svg><use href="#clip"/></svg></span>
         <p class="say">What students <span class="hl">keep saying</span></p>
-        <div class="crop" style="height:72px;margin-top:14px"><img src="assets/panel-b.png" alt="" style="margin-top:-146px"></div>
+        <img src="assets/topics-tight.png" alt="">
+      </div>
       </div>
       <div class="tile a-com">
         <span class="pin tape blue short tr"></span>
@@ -184,13 +213,16 @@
     </div>
     <div class="pair">
       <div class="tile t-sort">
-        <p class="big">8</p>
-        <p class="cap">ways to sort</p>
-        <img src="assets/combos-sort.png" alt="">
+        <div class="head"><p class="big">8</p><p class="cap">ways to sort</p></div>
+        <div class="menu"><ul>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5l1.7 3.5 3.8.5-2.8 2.6.7 3.8L8 11.1l-3.4 1.8.7-3.8L2.5 6.5l3.8-.5Z"/></svg>Top CTEC rating</li>
+          <li class="on"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.75a5.25 5.25 0 1 0 0 10.5a5.25 5.25 0 1 0 0-10.5ZM8 5.25V8l1.9 1.4"/></svg>Lazy mode</li>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12.9 9.6A5.25 5.25 0 0 1 6.4 3.1a5.25 5.25 0 1 0 6.5 6.5Z"/></svg>Latest start</li>
+        </ul></div>
       </div>
       <div class="tile t-hours cream" style="--r:-1deg; --dy:3px">
         <p class="big">27<small>hrs</small></p>
-        <img class="art" src="assets/art-workload.png" alt="" style="max-height:74px">
+        <img class="art" src="assets/art-workload.png" alt="">
       </div>
     </div>
     <div class="tile t-prereq" style="--r:-1deg">
@@ -209,7 +241,7 @@
       </div>
       <div class="tile t-dates">
         <p class="say">CAESAR shortcuts</p>
-        <img class="art" src="assets/art-header.png" alt="">
+        <div class="marks"><span>Class Search</span><span>Cart</span><span>Enrollment Dates</span><span>Course History</span></div>
       </div>
     </div>
   </section>
