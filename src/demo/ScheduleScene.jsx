@@ -148,9 +148,18 @@ function EnrollmentPopover() {
 // Analytics on each card, the Combinations bar, the workload total, prereq
 // badges in search and the Enrollment Dates popover. `ctecView` steers the
 // docked CTEC sheet ({ term, q, focus }); changing it reopens the sheet.
-export default function ScheduleScene({ sidebar = "idle", popover = null, initialSort = "lazy", autoplay = false, openCtec = null, ctecView = null, onCtecTerm, prereqOpen = "COMP_SCI 348", label = "Paper.nu schedule with Pencil" }) {
-  const [sortId, setSortId] = useState(initialSort);
+export default function ScheduleScene({ sidebar = "idle", popover = null, initialSort = "lazy", sort: sortProp = null, onSort, autoplay = false, openCtec = null, ctecView = null, onCtecTerm, prereqOpen = "COMP_SCI 348", label = "Paper.nu schedule with Pencil" }) {
+  // The sort can be driven from outside (`sort` + `onSort`); a change from
+  // outside starts again at the first schedule.
+  const [ownSort, setOwnSort] = useState(initialSort);
+  const sortId = sortProp ?? ownSort;
+  const setSortId = (id) => { setOwnSort(id); onSort?.(id); };
   const [index, setIndex] = useState(0);
+  const [lastSort, setLastSort] = useState(sortId);
+  if (sortId !== lastSort) {
+    setLastSort(sortId);
+    setIndex(0);
+  }
   const [pinned, setPinned] = useState(null);
   const [ctec, setCtec] = useState(openCtec);
   const [cart, setCart] = useState({});

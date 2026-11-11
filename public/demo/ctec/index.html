@@ -11,9 +11,8 @@
   /* Same tint the site lays over the page beside the frame, so the gap
      around the panel does not read as a lighter strip. */
   body { box-sizing: border-box; height: 100vh; padding: 16px; background: rgba(17, 24, 39, .1); }
-  .si-panel { box-sizing: border-box; height: 100%; overflow-y: scroll; scrollbar-width: none; border-radius: 12px; background: #fff; padding: 16px; box-shadow: 0 12px 28px -8px rgba(0, 0, 0, .22); }
-  .si-panel::-webkit-scrollbar { display: none; }
-  .si-head { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; }
+  .si-panel { box-sizing: border-box; height: 100%; overflow: hidden; border-radius: 12px; background: #fff; padding: 16px; box-shadow: 0 12px 28px -8px rgba(0, 0, 0, .22); }
+  .si-head { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
   .si-head p { flex-grow: 1; margin: 0; font-size: 14px; font-weight: 700; letter-spacing: .05em; color: #4b5563; }
   .si-head svg { width: 24px; height: 24px; color: #4b5563; }
   .si-x { all: unset; display: grid; cursor: pointer; }

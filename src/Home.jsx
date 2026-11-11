@@ -243,11 +243,42 @@ function Scrap({ scrap, index }) {
   );
 }
 
-function Scraps() {
+function Scraps({ list = SCRAPS }) {
   return (
     <div className="scraps" aria-hidden="true">
-      {SCRAPS.map((s, i) => <Scrap key={s.id} scrap={s} index={i} />)}
+      {list.map((s, i) => <Scrap key={s.id} scrap={s} index={i} />)}
     </div>
+  );
+}
+
+// A divider the pencil draws by hand (the wobble is deliberate: lines bow,
+// corners miss, the circle overlaps itself): the line is drawn the first time it scrolls
+// into view, with the pencil riding its tip, and the pencil stays where
+// the line ends.
+const STROKES = {
+  // One unbroken line that stops to doodle a star, a heart and a peace sign.
+  doodles: "M24 66 C 37.2 65.5, 76.9 64.2, 103.3 63.3 C 129.8 62.4, 156.2 61, 182.7 60.6 C 209.1 60.2, 248.8 60.9, 262 61 Q 242 48.7, 224 33.7 Q 247.7 33.4, 271.2 30.7 Q 253 45.4, 235.3 60.8 Q 242.8 37.4, 251 14.3 Q 258.7 38.2, 269.1 61 C 282.8 60.9, 324 60.5, 351.4 60.4 C 378.8 60.3, 406.3 59.8, 433.7 60.2 C 461.1 60.6, 502.3 62.5, 516 63 C 516.8 62.1, 519.1 59.9, 520.7 57.8 C 522.3 55.6, 523.2 52.5, 525.9 50.1 C 528.6 47.8, 533.4 46.5, 537 43.7 C 540.6 41, 545.2 36.9, 547.4 33.6 C 549.6 30.3, 550.9 26.8, 550.2 24 C 549.4 21.2, 545.6 18.6, 542.7 16.8 C 539.8 15.1, 535.8 13.2, 532.6 13.5 C 529.4 13.8, 525.4 16.9, 523.5 18.8 C 521.5 20.6, 521.8 23.6, 521.1 24.7 C 520.4 25.8, 520.2 26.4, 519.3 25.4 C 518.5 24.3, 517.7 20.5, 516.2 18.5 C 514.6 16.5, 512.9 13.8, 510.2 13.2 C 507.5 12.6, 502.4 12.9, 499.8 14.9 C 497.1 16.8, 495 21.4, 494.4 24.8 C 493.8 28.2, 494.6 31.9, 496.2 35.1 C 497.8 38.2, 501.1 41, 504.1 43.7 C 507.1 46.5, 511.7 49, 514.1 51.5 C 516.6 53.9, 517.2 56.4, 519 58.5 C 520.8 60.6, 524.1 63, 525.2 63.9 C 540.3 63.9, 585.8 64.7, 616.1 63.9 C 646.4 63.2, 676.7 59.8, 707.1 59.3 C 737.4 58.9, 782.8 60.7, 798 61 C 796.5 60.6, 792 60.3, 789.2 58.6 C 786.4 56.9, 783.5 53.6, 781.2 50.9 C 778.8 48.1, 776 45.2, 775.1 42.1 C 774.2 39, 775.1 35.5, 776 32.2 C 776.8 28.9, 778 25.1, 780.2 22.3 C 782.3 19.6, 785.6 17.6, 788.9 16 C 792.2 14.3, 796.3 12.6, 800 12.5 C 803.6 12.4, 807.5 13.9, 810.8 15.5 C 814.2 17.1, 817.6 19.3, 820.1 22.1 C 822.5 24.8, 824.5 28.6, 825.6 32 C 826.7 35.4, 827.7 39.3, 826.8 42.6 C 825.9 46, 822.8 49.2, 820.2 52 C 817.6 54.8, 814.5 57.8, 811.2 59.5 C 807.9 61.2, 802.1 61.8, 800.2 62.2 Q 800.7 37.5, 801.5 12.8 Q 800.9 25.6, 799.4 38.2 Q 791.1 47.1, 782.3 55.5 Q 791.1 45.5, 800.7 36.3 Q 809.2 45.2, 817.4 54.4 C 820.7 56.1, 826.6 62.8, 837.1 64.7 C 847.5 66.7, 873 66, 880.2 66.3 C 892.6 66, 929.5 64.7, 954.2 64.5 C 978.8 64.2, 1003.5 64.7, 1028.1 64.7 C 1052.8 64.7, 1077.4 64.5, 1102.1 64.5 C 1126.7 64.6, 1163.7 64.9, 1176 65",
+  // The same idea with a lightning bolt, a cube and a paper plane.
+  sketches: "M24 64 C 36.6 63.7, 74.2 61.9, 99.3 62.4 C 124.4 62.8, 149.6 66.5, 174.7 66.8 C 199.8 67, 237.4 64.5, 250 64 Q 265.6 48.3, 281.5 32.9 Q 272.7 32.8, 264 33.9 Q 268.7 21.9, 275.5 11 Q 267.8 11.2, 260.2 12.7 Q 253.5 26.5, 245.6 39.6 Q 254.2 38.7, 262.8 37.4 Q 257.1 51.7, 250.6 65.6 C 264.4 65.6, 305.8 65.9, 333.4 65.5 C 361 65.1, 388.6 63.8, 416.2 63.2 C 443.8 62.6, 485.2 62.2, 499 62 Q 500.7 45.6, 500 29.1 Q 508 22.8, 515.2 15.7 Q 534.8 17.3, 554.4 16.6 Q 547.1 24.7, 538.9 31.8 Q 520.3 29.4, 501.6 29.6 Q 521.8 28.8, 542 30 Q 540 46, 538 62.1 Q 518.3 63.1, 498.7 64.2 Q 519.6 61.3, 540.6 60.2 Q 546.8 53.1, 553.5 46.5 Q 554.5 31.1, 553.8 15.6 C 557.7 17.9, 570.9 22.1, 577.2 29 C 583.5 35.9, 581.1 50.9, 591.7 57 C 602.2 63.1, 632.4 64, 640.5 65.4 C 651.3 64.8, 683.7 62.5, 705.2 61.9 C 726.8 61.4, 759.2 62, 770 62 C 774.9 58.9, 794.7 46.5, 799.7 43.3 Q 802.9 52.7, 805.8 62.1 Q 811.4 54.5, 816.8 46.7 Q 828.6 31.4, 842.3 17.7 Q 809.2 27.1, 775.7 35.1 Q 788.7 40.5, 802 45 Q 821.8 30.7, 843.5 19.6 C 847.1 21.9, 858.1 26.8, 864.9 33.7 C 871.7 40.5, 871.8 55.3, 884.2 60.7 C 896.7 66.2, 930.3 65.5, 939.6 66.4 C 952.7 65.9, 992.1 63, 1018.4 63.3 C 1044.6 63.6, 1070.9 67.7, 1097.2 68.1 C 1123.5 68.6, 1162.9 66.4, 1176 66",
+};
+
+function Stroke({ shape }) {
+  const d = STROKES[shape];
+  return (
+    <Reveal className={`stroke stroke-${shape} wrap`} aria-hidden="true">
+      <svg viewBox="0 0 1200 80" fill="none">
+        <path className="stroke-line" d={d} pathLength="1" />
+        <g className="stroke-pencil" style={{ offsetPath: `path("${d}")` }}>
+          <g transform="rotate(-38) scale(.62) translate(-64 -32)" stroke="#2a2a2e" strokeWidth="2" strokeLinejoin="round">
+            <rect x="4" y="22" width="10" height="20" rx="3" fill="#ef8da6" />
+            <rect x="14" y="22" width="9" height="20" fill="#c2c7cb" />
+            <rect x="23" y="22" width="26" height="20" fill="#f5c842" />
+            <polygon points="49,22 56,22 56,42 49,42" fill="#d4a373" />
+            <polygon points="56,22 64,32 56,42" fill="#2a2a2e" />
+          </g>
+        </g>
+      </svg>
+    </Reveal>
   );
 }
 
@@ -309,7 +340,7 @@ function CtecSection() {
   return (
     <section id="paper" className="section wrap">
       <Reveal className="section-head row">
-        <h2>CTEC reports</h2>
+        <h2><Word>CTEC</Word> reports</h2>
         <div className="seg" role="tablist" aria-label="CTEC views">
           {CTEC_VIEWS.map((v, i) => (
             <button key={v.label} type="button" role="tab" aria-selected={pick === i} className={pick === i ? "on" : ""} onClick={() => setPick(i)}>{v.label}</button>
@@ -327,17 +358,34 @@ function CtecSection() {
   );
 }
 
+// The three ways to sort, as sticky notes tacked beside the heading. They
+// are the demo's sort control: picking one re-sorts the schedules below.
+const NOTES = [
+  { id: "lazy", tone: "yellow", tilt: -3, lines: ["lazy mode", "least hours a week"] },
+  { id: "rated", tone: "pink", tilt: 2, lines: ["top rated", "best CTECs first"] },
+  { id: "days", tone: "blue", tilt: -1.5, lines: ["fewest days", "on campus"] },
+];
+
 function LazySection() {
+  const [sort, setSort] = useState("lazy");
   return (
-    <section className="section wrap split">
-      <Reveal className="split-copy">
-        <h2>Every schedule that fits</h2>
-        <p>Sorted by workload, rating or days on campus. Pin the sections you won&rsquo;t give up.</p>
+    <section className="section wrap">
+      <Reveal className="section-head row board">
+        <h2>Every schedule that <Word>fits</Word></h2>
+        <div className="notes" role="tablist" aria-label="Sort schedules">
+          {NOTES.map((n) => (
+            <button key={n.id} type="button" role="tab" aria-selected={sort === n.id} className={`note note-${n.tone}${sort === n.id ? " on" : ""}`} style={{ "--r": `${n.tilt}deg` }} onClick={() => setSort(n.id)}>
+              <span className="pin pin-tack pin-tack-red"><i /></span>
+              <b>{n.lines[0]}</b>
+              <span>{n.lines[1]}</span>
+            </button>
+          ))}
+        </div>
       </Reveal>
-      <Reveal className="split-demo">
+      <Reveal>
         <Frame site={PAPER}>
-          <StageView view={{ x: 240, y: 0, w: 880, h: 700 }} narrowView={{ x: 240, y: 44, w: 560, h: 540 }}>
-            <ScheduleScene initialSort="lazy" label="Schedule combinations demo" />
+          <StageView narrowView={{ x: 240, y: 44, w: 560, h: 540 }}>
+            <ScheduleScene sort={sort} onSort={setSort} label="Schedule combinations demo" />
           </StageView>
         </Frame>
       </Reveal>
@@ -345,9 +393,30 @@ function LazySection() {
   );
 }
 
+// A student's own reminders, tacked up above the two things that answer them.
+const TODOS = [
+  { tone: "yellow", tack: "red", tilt: -3, lines: ["prereqs for", "CS 348?"] },
+  { tone: "blue", tack: "yellow", tilt: 2.5, lines: ["hide what I", "already took"] },
+  { tone: "pink", tack: "red", tilt: -1.5, lines: ["reg opens", "Wed 10:30 AM"] },
+  { tone: "green", tack: "yellow", tilt: 3, lines: ["put it in", "my calendar"] },
+];
+
 function BeforeSection() {
   return (
-    <section className="section wrap pair">
+    <section className="section wrap">
+      <Reveal className="section-head row board">
+        <h2>Before you <Word>register</Word></h2>
+        <div className="notes" aria-hidden="true">
+          {TODOS.map((n) => (
+            <div key={n.lines[0]} className={`note note-todo note-${n.tone}`} style={{ "--r": `${n.tilt}deg` }}>
+              <span className={`pin pin-tack pin-tack-${n.tack}`}><i /></span>
+              <b>{n.lines[0]}</b>
+              <b>{n.lines[1]}</b>
+            </div>
+          ))}
+        </div>
+      </Reveal>
+      <div className="pair">
       <Reveal as="article">
         <Frame site={PAPER}>
           <StageView view={{ x: 0, y: 0, w: 800, h: 520 }} narrowView={{ x: 150, y: 40, w: 640, h: 420 }}>
@@ -366,6 +435,7 @@ function BeforeSection() {
         <h3>Registration time</h3>
         <p>Yours, one click from Google Calendar.</p>
       </Reveal>
+      </div>
     </section>
   );
 }
@@ -519,7 +589,9 @@ export default function Home({ tweaks }) {
       <main id="top">
         <Hero tweaks={tweaks} />
         <p className="proof wrap">Free and open source<i />Built by Northwestern students</p>
+        <Stroke shape="sketches" />
         <CtecSection />
+        <Stroke shape="doodles" />
         <LazySection />
         <BeforeSection />
         <CaesarSection />
