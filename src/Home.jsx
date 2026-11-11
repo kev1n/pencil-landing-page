@@ -393,12 +393,13 @@ function LazySection() {
   );
 }
 
-// A student's own reminders, tacked up above the two things that answer them.
+// A student's own checklist on a taped-up strip of notebook paper, above the
+// two things that answer it.
 const TODOS = [
-  { tone: "yellow", tack: "red", tilt: -3, lines: ["prereqs for", "CS 348?"] },
-  { tone: "blue", tack: "yellow", tilt: 2.5, lines: ["hide what I", "already took"] },
-  { tone: "pink", tack: "red", tilt: -1.5, lines: ["reg opens", "Wed 10:30 AM"] },
-  { tone: "green", tack: "yellow", tilt: 3, lines: ["put it in", "my calendar"] },
+  { done: true, text: "prereqs for CS 348?" },
+  { done: true, text: "hide what I already took" },
+  { done: false, text: "reg opens Wed 10:30 AM" },
+  { done: false, text: "put it in my calendar" },
 ];
 
 function BeforeSection() {
@@ -406,14 +407,20 @@ function BeforeSection() {
     <section className="section wrap">
       <Reveal className="section-head row board">
         <h2>Before you <Word>register</Word></h2>
-        <div className="notes" aria-hidden="true">
-          {TODOS.map((n) => (
-            <div key={n.lines[0]} className={`note note-todo note-${n.tone}`} style={{ "--r": `${n.tilt}deg` }}>
-              <span className={`pin pin-tack pin-tack-${n.tack}`}><i /></span>
-              <b>{n.lines[0]}</b>
-              <b>{n.lines[1]}</b>
-            </div>
-          ))}
+        <div className="ruled" aria-hidden="true">
+          <span className="pin pin-tape pin-tape-yellow tl" />
+          <span className="pin pin-tape pin-tape-blue br" />
+          <ul>
+            {TODOS.map((t) => (
+              <li key={t.text} className={t.done ? "done" : ""}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4.5 5.2 C 9 4.4, 15 4.9, 19.4 4.6 C 19.9 9.5, 19.3 14.6, 19.7 19.3 C 14.8 19.9, 9.4 19.2, 4.4 19.6 C 4.9 14.7, 4.1 9.8, 4.5 5.2" />
+                  {t.done && <path className="tick" d="M7.2 12.4 C 8.6 14, 9.6 15.2, 10.6 16.8 C 13 12, 17 6.5, 22.5 2.2" />}
+                </svg>
+                {t.text}
+              </li>
+            ))}
+          </ul>
         </div>
       </Reveal>
       <div className="pair">

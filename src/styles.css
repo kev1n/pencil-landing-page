@@ -171,12 +171,14 @@ h3 { font-size: 18px; line-height: 1.3; letter-spacing: -.01em; font-weight: 600
 .note-yellow { background: linear-gradient(175deg, #fde68a, #fbd95a); }
 .note-pink { background: linear-gradient(175deg, #fbc6d3, #f5a9bb); color: #4a1626; }
 .note-blue { background: linear-gradient(175deg, #cfe2f8, #a9c9ee); color: #14304f; }
-.note-green { background: linear-gradient(175deg, #d6efc6, #b4dda0); color: #1f3d14; }
-/* Reminders are not buttons: they keep their tilt and their tack colour. */
-.note-todo { cursor: default; gap: 0; }
-.note-todo b { font-size: 23px; }
-.note-todo:hover { translate: none; }
-.note-todo .pin-tack { filter: none !important; }
+/* A strip of ruled notebook paper, taped at two corners, with a handwritten
+   checklist. The rules are 34px apart and each item sits on one. */
+.ruled { position: relative; flex: 0 1 560px; padding: 14px 22px 12px 54px; rotate: -1.2deg; background: linear-gradient(90deg, #0000 39px, #f0a3a8 39px 40.5px, #0000 40.5px), repeating-linear-gradient(#fffdf6 0 33px, #b9cfe6 33px 34px); box-shadow: 0 1px 1px rgba(30, 25, 10, .1), 0 14px 20px -14px rgba(30, 25, 10, .45); }
+.ruled ul { display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; margin: 0; padding: 0; list-style: none; }
+.ruled li { display: flex; align-items: center; gap: 8px; height: 34px; font: 600 23px/1 Caveat, cursive; color: #2c3550; white-space: nowrap; }
+.ruled svg { flex: none; width: 21px; height: 21px; overflow: visible; }
+.ruled .tick { stroke: #d2475a; stroke-width: 2.2; }
+.ruled li.done { color: #7b8296; }
 .board h2 mark { background: var(--yellow); }
 .board:has(.note.on) h2 mark { background: #f5a9bb; }
 .note:hover { rotate: 0deg; translate: 0 -3px; }
@@ -374,6 +376,9 @@ h3 { font-size: 18px; line-height: 1.3; letter-spacing: -.01em; font-weight: 600
   .cta .btn { flex: 1 1 100%; }
   .scrap:nth-child(n + 5) { display: none; }
   .hero .scraps { gap: 18px 14px; margin-top: 34px; }
+  .ruled { flex-basis: 100%; }
+  .ruled ul { grid-template-columns: 1fr; }
+  .ruled li { font-size: 21px; }
   .notes { gap: 10px; width: 100%; }
   .note { flex: 1; width: auto; height: 96px; padding: 20px 9px 8px; font-size: 15px; }
   .note b { font-size: 20px; }
