@@ -60,6 +60,7 @@ h3 { font-size: 18px; line-height: 1.3; letter-spacing: -.01em; font-weight: 600
 .btn-primary { background: var(--yellow); color: #201a02; box-shadow: inset 0 0 0 1px rgba(60, 45, 0, .16), 0 1px 0 rgba(60, 45, 0, .12); }
 .btn-primary:hover { background: var(--yellow-hover); }
 .btn-quiet { color: var(--ink); box-shadow: inset 0 0 0 1px var(--line-strong); background: var(--surface); }
+.btn-badge { padding: 2px 7px; border-radius: 999px; background: var(--tint); color: var(--ink-2); font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
 .cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 30px; }
 
 /* ── Nav ──────────────────────────────────────────────────────────────── */
