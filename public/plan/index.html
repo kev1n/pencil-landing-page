@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Open your plan in Pencil</title>
+    <style>
+      :root { color-scheme: light dark; }
+      body { margin: 0; min-height: 100vh; display: grid; place-items: center; font: 17px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; background: Canvas; color: CanvasText; }
+      main { max-width: 26rem; padding: 2rem 1.5rem; text-align: center; }
+      h1 { font-size: 1.6rem; margin: 0 0 0.5rem; }
+      p { margin: 0 0 1.25rem; opacity: 0.8; }
+      a.open { display: inline-block; padding: 0.8rem 1.4rem; border-radius: 10px; background: #f5c93f; color: #1c1a17; font-weight: 600; text-decoration: none; }
+      small { display: block; margin-top: 1.5rem; opacity: 0.65; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Open your plan in Pencil</h1>
+      <p id="about">This link carries a class plan. Open it in the Pencil app on this device.</p>
+      <a class="open" id="open" href="/">Open in Pencil</a>
+      <small>Don’t have the app yet? <a href="/">Get Pencil</a>, then come back to this link. Nothing in the link is sent to this website.</small>
+    </main>
+    <script>
+      // Everything after # stays in the browser; the app reads it from the
+      // address this button opens.
+      var plan = location.hash.slice(1);
+      var open = document.getElementById("open");
+      if (plan) open.href = "pencilnu://plan#" + plan;
+      else {
+        document.getElementById("about").textContent = "This link has no plan in it.";
+        open.textContent = "Go to Pencil";
+      }
+    </script>
+  </body>
+</html>
