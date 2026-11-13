@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Privacy · Pencil</title>
+    <meta name="description" content="What the Pencil apps and extension keep, where they keep it, and what leaves your device." />
+    <style>
+      :root { color-scheme: light dark; }
+      body { margin: 0; font: 17px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; background: Canvas; color: CanvasText; }
+      main { max-width: 40rem; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+      h1 { font-size: 2rem; margin: 0 0 0.25rem; }
+      h2 { font-size: 1.2rem; margin: 2.25rem 0 0.5rem; }
+      p, li { opacity: 0.88; }
+      ul { padding-left: 1.2rem; }
+      .date { opacity: 0.6; margin: 0 0 1.5rem; }
+      a { color: inherit; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p><a href="/">← Pencil</a></p>
+      <h1>Privacy</h1>
+      <p class="date">Covers the Pencil apps for Mac, iPhone and Android and the Pencil browser extension. Last updated November 12, 2026.</p>
+
+      <p>Pencil is built so that your Northwestern information stays on your own device. We have no accounts, and the apps and extension contain no advertising, analytics or tracking.</p>
+
+      <h2>Signing in to Northwestern</h2>
+      <p>You sign in on Northwestern’s own pages, shown inside the app or in your browser. Pencil never sees or stores your NetID password. The apps keep the signed-in session on your device (in the system keychain on iPhone) so you don’t have to sign in every time; signing out in the app removes it.</p>
+
+      <h2>What Pencil keeps, and where</h2>
+      <ul>
+        <li>Your planned classes, shopping cart, enrolled classes and course history, as read from CAESAR.</li>
+        <li>Course evaluations (CTECs) that your own Northwestern account is allowed to see.</li>
+        <li>The public course catalog.</li>
+      </ul>
+      <p>All of this is saved only on the device you are using. It is requested directly from Northwestern’s systems with your own session, and none of it is sent to us. Removing the app or extension, or clearing its data, deletes it.</p>
+
+      <h2>Syncing your devices (optional)</h2>
+      <p>Sync is off unless you turn it on. If you do, your list of planned classes is locked on your device with a key that only your paired devices hold, and the locked copy is stored on a small service we run on Cloudflare so your other devices can fetch it.</p>
+      <ul>
+        <li>We cannot read the stored copy, and it is not linked to your name, NetID or any account.</li>
+        <li>Only planned classes are synced. Your sign-in, cart, course history and CTECs are never sent.</li>
+        <li>A stored copy is deleted automatically after 400 days without a change.</li>
+        <li>Anyone who has your pairing link or QR code can read and change your plan, so share it only with your own devices.</li>
+      </ul>
+      <p>Like any internet service, the sync service and its host receive the internet address of a device that connects. We do not use it to identify you.</p>
+
+      <h2>Other services Pencil contacts</h2>
+      <ul>
+        <li>Northwestern’s systems (CAESAR, sign-in and course evaluations), with your own session.</li>
+        <li>Paper.nu’s public course data, to load the catalog. If you paste a Paper.nu share link, Pencil fetches that shared plan from Paper.nu.</li>
+      </ul>
+
+      <h2>This website</h2>
+      <p>The pencil.nu website measures visits with PostHog. The apps and extension do not. Plan and pairing links put their contents after the # in the address, which browsers do not send to the website.</p>
+
+      <h2>Children</h2>
+      <p>Pencil is made for Northwestern University students and is not directed at children under 13.</p>
+
+      <h2>Changes and contact</h2>
+      <p>If this page changes, the date above changes with it. Pencil is open source, so you can <a href="https://github.com/kev1n/pencil">read the code</a>. Questions: use the contact link in the <a href="/#safe">Privacy section of the home page</a>.</p>
+    </main>
+  </body>
+</html>
