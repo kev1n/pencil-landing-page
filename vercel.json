@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/sync/:path*", "destination": "https://pencil-sync.kwcol3333.workers.dev/:path*" }
+  ]
+}
