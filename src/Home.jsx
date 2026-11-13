@@ -73,11 +73,13 @@ function StoreButton({ store, tweaks, location, primary, large }) {
 // release's files (see vercel.json); the apps' updaters read the same addresses.
 const IS_MAC = typeof navigator !== "undefined" && /Mac/.test(navigator.platform) && !navigator.maxTouchPoints;
 const IS_WINDOWS = typeof navigator !== "undefined" && /Win/.test(navigator.platform);
+// Android phones cannot run the extension, so they are offered the app alone.
+const IS_ANDROID = typeof navigator !== "undefined" && /Android/.test(navigator.userAgent);
 
-function AppButton({ location, os, href }) {
+function AppButton({ location, os, href, primary }) {
   const posthog = usePostHog();
   return (
-    <a className="btn btn-quiet btn-lg" href={href} onClick={() => posthog?.capture(`${os.toLowerCase()}_download_clicked`, { location })}>
+    <a className={`btn ${primary ? "btn-primary" : "btn-quiet"} btn-lg`} href={href} onClick={() => posthog?.capture(`${os.toLowerCase()}_download_clicked`, { location })}>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
       </svg>
@@ -89,6 +91,13 @@ function AppButton({ location, os, href }) {
 
 // One install button, for the visitor's own browser.
 function InstallButtons({ tweaks, location }) {
+  if (IS_ANDROID) {
+    return (
+      <div className="cta">
+        <AppButton location={location} os="Android" href="/download/android" primary />
+      </div>
+    );
+  }
   return (
     <div className="cta">
       <StoreButton store={tweaks.browser} tweaks={tweaks} location={location} primary large />
@@ -602,7 +611,7 @@ export default function Home({ tweaks }) {
             <a className="nav-icon" href={tweaks.discordUrl} target="_blank" rel="noopener noreferrer" aria-label="Join our Discord" onClick={() => posthog?.capture("discord_clicked", { location: "top_nav" })}>
               <DiscordIcon />
             </a>
-            <StoreButton store={tweaks.browser} tweaks={tweaks} location="top_nav" primary />
+            {!IS_ANDROID && <StoreButton store={tweaks.browser} tweaks={tweaks} location="top_nav" primary />}
             <button type="button" className="nav-menu" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} aria-controls="mobile-menu" onClick={() => setMenuOpen((v) => !v)}>
               <span /><span />
             </button>
