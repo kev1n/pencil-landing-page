@@ -80,6 +80,7 @@ function MacButton({ location }) {
         <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
       </svg>
       Download for Mac
+      <span className="btn-badge">Beta</span>
     </a>
   );
 }
