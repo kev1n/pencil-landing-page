@@ -68,11 +68,28 @@ function StoreButton({ store, tweaks, location, primary, large }) {
   );
 }
 
+// The Mac app, offered beside the extension to visitors on a Mac. /download/mac
+// redirects to the current release's disk image (see vercel.json).
+const IS_MAC = typeof navigator !== "undefined" && /Mac/.test(navigator.platform) && !navigator.maxTouchPoints;
+
+function MacButton({ location }) {
+  const posthog = usePostHog();
+  return (
+    <a className="btn btn-quiet btn-lg" href="/download/mac" onClick={() => posthog?.capture("mac_download_clicked", { location })}>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+      </svg>
+      Download for Mac
+    </a>
+  );
+}
+
 // One install button, for the visitor's own browser.
 function InstallButtons({ tweaks, location }) {
   return (
     <div className="cta">
       <StoreButton store={tweaks.browser} tweaks={tweaks} location={location} primary large />
+      {IS_MAC && <MacButton location={location} />}
     </div>
   );
 }
