@@ -3,6 +3,6 @@
     { "source": "/sync/:path*", "destination": "https://pencil-sync.kwcol3333.workers.dev/:path*" }
   ],
   "redirects": [
-    { "source": "/download/mac", "destination": "https://github.com/kev1n/pencil/releases/download/mac-v0.1.1/Pencil.dmg", "permanent": false }
+    { "source": "/download/mac", "destination": "https://github.com/kev1n/pencil/releases/download/mac-v0.1.2/Pencil.dmg", "permanent": false }
   ]
 }
